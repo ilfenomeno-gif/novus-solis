@@ -1,0 +1,155 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:5px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ex{padding:6px 10px;background:var(--color-background-secondary);border-radius:5px;font-size:13px;margin:4px 0}
+.ex .it{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:13px;color:#533AB7;margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('rifl')">Riflessivo proprio</button>
+  <button class="tab-btn" onclick="show('recip')">Reciproco</button>
+  <button class="tab-btn" onclick="show('pron')">Intransitivo pronominale</button>
+  <button class="tab-btn" onclick="show('impers')">Passivante e impersonale</button>
+</div>
+
+<!-- RIFLESSIVO PROPRIO -->
+<div id="rifl">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Struttura del riflessivo proprio</div>
+<div class="rule-f">pronome riflessivo + verbo (soggetto = oggetto dell'azione)</div>
+</div>
+
+<div class="label">Pronomi riflessivi — paradigma completo</div>
+<table class="ct">
+<thead><tr><th>Persona</th><th>Pron. sogg.</th><th>Pron. rifl.</th><th>Esempio</th></tr></thead>
+<tbody>
+<tr><td>1ª sing.</td><td>je</td><td class="hl">me</td><td>Je <span class="hl">me</span> lav. (Mi lavo.)</td></tr>
+<tr><td>2ª sing.</td><td>te</td><td class="hl">te</td><td>Te <span class="hl">te</span> laves. (Ti lavi.)</td></tr>
+<tr><td>3ª sing. m/f</td><td>ez/za</td><td class="hl">se</td><td>Ez <span class="hl">se</span> lava. (Si lava.)</td></tr>
+<tr><td>1ª pl.</td><td>noz</td><td class="hl">noz</td><td>Noz <span class="hl">noz</span> lavom. (Ci laviamo.)</td></tr>
+<tr><td>2ª pl.</td><td>voz</td><td class="hl">voz</td><td>Voz <span class="hl">voz</span> lavez. (Vi lavate.)</td></tr>
+<tr><td>3ª pl.</td><td>lor</td><td class="hl">se</td><td>Lor <span class="hl">se</span> laven. (Si lavano.)</td></tr>
+</tbody></table>
+<div class="note">I pronomi riflessivi coincidono con i clitici OD/OI per tutte le persone. La 3ª persona (sing. e pl.) usa <b>se</b> — come IT/ES/FR/PT. 1ª e 2ª persona usano gli stessi pronomi del soggetto in funzione riflessiva.</div>
+
+<div class="label">Posizione del pronome riflessivo</div>
+<div class="ex">Je <span class="hl">me</span> lav. <div class="it">Mi lavo. — prima del verbo coniugato (standard)</div></div>
+<div class="ex">Je voler <span class="hl">me</span> lavar. <div class="it">Voglio lavarmi. — prima del verbo modale O enclisi sull'infinito</div></div>
+<div class="ex">Je voler lavar<span class="hl">me</span>. <div class="it">Voglio lavarmi. — enclisi sull'infinito (entrambe corrette)</div></div>
+<div class="ex">Lava<span class="hl">te</span>! <div class="it">Lavati! — imperativo: enclisi obbligatoria</div></div>
+<div class="note">Regola generale: pronome <b>prima del verbo finito</b>. Con infinito: libera scelta tra proclisi (<em>me lavar</em>) ed enclisi (<em>lavárme</em>). Con imperativo: enclisi obbligatoria.</div>
+
+<div class="label">Tempi composti dei riflessivi — ausiliare ez</div>
+<div class="ex">Je <span class="hl">me</span> son lavat. <div class="it">Mi sono lavato. — ausiliare sempre ez (come IT)</div></div>
+<div class="ex">Lor <span class="hl">se</span> son levats. <div class="it">Si sono alzati. — ez + PP invariabile (Core standard)</div></div>
+<div class="note">I verbi riflessivi formano sempre i tempi composti con <b>ez</b>, mai con <em>ver</em> — identico all'italiano. Il PP è invariabile nel Core standard.</div>
+</div>
+
+<!-- RECIPROCO -->
+<div id="recip" style="display:none">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Reciproco — struttura</div>
+<div class="rule-f">pronome rifl. pl. + verbo (soggetto plurale, azione mutua)</div>
+</div>
+
+<div class="label">Forme reciproche</div>
+<div class="ex">Noz <span class="hl">noz</span> amom. <div class="it">Ci amiamo (a vicenda). — 1ª pl.</div></div>
+<div class="ex">Voz <span class="hl">voz</span> conoissez. <div class="it">Vi conoscete (a vicenda). — 2ª pl.</div></div>
+<div class="ex">Lor <span class="hl">se</span> aiuden. <div class="it">Si aiutano (a vicenda). — 3ª pl.</div></div>
+
+<div class="label">Disambiguazione: riflessivo vs reciproco</div>
+<div class="ex">Lor <span class="hl">se</span> laven. <div class="it">Si lavano. — ambiguo: ognuno lava sé stesso, O si lavano a vicenda</div></div>
+<div class="ex">Lor <span class="hl">se</span> laven <span class="hl">l'un l'altr</span>. <div class="it">Si lavano a vicenda. — reciproco esplicito con «l'un l'altr»</div></div>
+<div class="ex">Lor <span class="hl">se</span> laven <span class="hl">mesm</span>. <div class="it">Si lavano da soli (ognuno sé stesso). — riflessivo esplicito con «mesm»</div></div>
+<div class="note">Quando c'è ambiguità, si usa <b>l'un l'altr</b> per il reciproco (IT l'un l'altro · ES el uno al otro) e <b>mesm</b> per il riflessivo puro (IT stesso/da sé · ES mismo).</div>
+
+<div class="label">Varianti di l'un l'altr</div>
+<table class="ct">
+<thead><tr><th>Struttura</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td class="hl">l'un l'altr</td><td>Lor se aiuden l'un l'altr.</td><td>Si aiutano a vicenda.</td></tr>
+<tr><td class="hl">mutualament</td><td>Lor se respecten mutualament.</td><td>Si rispettano reciprocamente.</td></tr>
+<tr><td class="hl">a vicenda</td><td>Lor parlen a vicenda.</td><td>Parlano a vicenda. (calco IT)</td></tr>
+</tbody></table>
+</div>
+
+<!-- INTRANSITIVO PRONOMINALE -->
+<div id="pron" style="display:none">
+<div class="label">Verbi intrinsecamente pronominali (il «se» è parte del verbo)</div>
+<table class="ct">
+<thead><tr><th>Infinito rifl.</th><th>Significato</th><th>IT</th><th>ES</th></tr></thead>
+<tbody>
+<tr><td class="hl">se levar</td><td>alzarsi</td><td>alzarsi</td><td>levantarse</td></tr>
+<tr><td class="hl">se sentar</td><td>sedersi</td><td>sedersi</td><td>sentarse</td></tr>
+<tr><td class="hl">se adormir</td><td>addormentarsi</td><td>addormentarsi</td><td>dormirse</td></tr>
+<tr><td class="hl">se recordar</td><td>ricordarsi</td><td>ricordarsi</td><td>recordarse</td></tr>
+<tr><td class="hl">se olvidar</td><td>dimenticarsi</td><td>dimenticarsi</td><td>olvidarse</td></tr>
+<tr><td class="hl">se enojiar</td><td>arrabbiarsi</td><td>arrabbiarsi</td><td>enojarse</td></tr>
+<tr><td class="hl">se alegrar</td><td>rallegrarsi</td><td>rallegrarsi</td><td>alegrarse</td></tr>
+<tr><td class="hl">se apercevar</td><td>accorgersi</td><td>accorgersi</td><td>darse cuenta</td></tr>
+<tr><td class="hl">se atrevar</td><td>osare/azzardarsi</td><td>azzardarsi</td><td>atreverse</td></tr>
+<tr><td class="hl">se queixar</td><td>lamentarsi</td><td>lamentarsi</td><td>quejarse</td></tr>
+</tbody></table>
+<div class="note">Questi verbi non hanno forma non-riflessiva con lo stesso significato — il pronome <em>se</em> è lessicalizzato. Corrispondono ai verbi pronominali dell'italiano (<em>sedersi, alzarsi</em>) e ai verbi pronominali dello spagnolo (<em>levantarse, sentarse</em>).</div>
+
+<div class="label">Verbi con doppia forma: riflessivo vs non-riflessivo</div>
+<table class="ct">
+<thead><tr><th>Non rifl.</th><th>Rifl.</th><th>Differenza</th></tr></thead>
+<tbody>
+<tr><td>lavar (lavare qc.)</td><td class="hl">se lavar (lavarsi)</td><td>transitivo → intransitivo</td></tr>
+<tr><td>lavar (lavare qc.)</td><td class="hl">se lavak (lavarsi)</td><td>transitivo → intransitivo (adattato)</td></tr>
+<tr><td>levar (alzare qc.)</td><td class="hl">se levar (alzarsi)</td><td>transitivo → intransitivo</td></tr>
+<tr><td>cambiar (cambiare qc.)</td><td class="hl">se cambiar (cambiarsi)</td><td>transitivo → intransitivo</td></tr>
+<tr><td>movar (muovere qc.)</td><td class="hl">se movar (muoversi)</td><td>transitivo → intransitivo</td></tr>
+<tr><td>adormir (addormentare)</td><td class="hl">se adormir (addormentarsi)</td><td>causativo → ingressivo</td></tr>
+</tbody></table>
+</div>
+
+<!-- PASSIVANTE E IMPERSONALE -->
+<div id="impers" style="display:none">
+<div class="label">se passivante (si passivo)</div>
+<div class="rule">
+<div class="rule-f">se + verbo (3ª sing. o pl.) — soggetto logico = oggetto grammaticale</div>
+</div>
+<div class="ex"><span class="hl">Se vend</span> librs aquí. <div class="it">Qui si vendono libri. — soggetto pl. → verbo pl.</div></div>
+<div class="ex"><span class="hl">Se parla</span> Solis. <div class="it">Si parla Solis. — soggetto sing. → verbo sing.</div></div>
+<div class="ex"><span class="hl">Se ver construït</span> molts edificis. <div class="it">Si sono costruiti molti edifici. — tempo composto passivante</div></div>
+<div class="note">Il <em>se</em> passivante funziona come in IT/ES: accordo del verbo col soggetto logico. È preferito alla passiva con <em>ez</em> nel registro colloquiale e con soggetti inanimati.</div>
+
+<div class="label">se impersonale (soggetto indefinito)</div>
+<div class="rule">
+<div class="rule-f">se + verbo (sempre 3ª sing.) — nessun soggetto identificabile</div>
+</div>
+<div class="ex"><span class="hl">Se diz</span> que ez ez rich. <div class="it">Si dice che sia ricco. — impersonale, sempre sing.</div></div>
+<div class="ex"><span class="hl">Se sab</span> que le problem ez grav. <div class="it">Si sa che il problema è grave.</div></div>
+<div class="ex"><span class="hl">Se podr</span> venir demà. <div class="it">Si potrà venire domani.</div></div>
+<div class="note">Il <em>se</em> impersonale usa sempre il verbo alla 3ª sing. Corrisponde al FR «on», all'IT «si» impersonale, all'ES «se». Diversamente dal <em>se</em> passivante, non implica un soggetto logico identificabile.</div>
+
+<div class="label">Costruzioni impersonali senza se</div>
+<table class="ct">
+<thead><tr><th>Struttura</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td class="hl">ez + verbo 3ª sing.</td><td>Ez pluve. · Ez neva.</td><td>Piove. · Nevica.</td></tr>
+<tr><td class="hl">ez + esser + agg.</td><td>Ez ez necessar de partir.</td><td>È necessario partire.</td></tr>
+<tr><td class="hl">ez + esser + N</td><td>Ez ez temp de partir.</td><td>È ora di partire.</td></tr>
+<tr><td class="hl">on (Fralis)</td><td>On va al mercat.</td><td>Si va al mercato.</td></tr>
+</tbody></table>
+<div class="note">I verbi meteorologici usano <b>ez</b> come soggetto espletivo (IT <em>it</em> in inglese, FR <em>il</em>): <em>ez pluve, ez neva, ez tona</em>. In Solis Fralis si usa anche <b>on</b> (← FR on) come soggetto impersonale indefinito.</div>
+</div>
+
+<script>
+function show(id){['rifl','recip','pron','impers'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>

@@ -1,0 +1,338 @@
+
+<style>
+.vtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.vtab{padding:4px 13px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:16px;background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.vtab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.tblock{border:0.5px solid var(--color-border-tertiary);border-radius:8px;overflow:hidden}
+.tblock-head{padding:5px 10px;font-size:11px;font-weight:500;background:var(--color-background-secondary);color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.ct{width:100%;border-collapse:collapse;font-size:12px}
+.ct td{padding:4px 10px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ct tr:last-child td{border-bottom:none}
+.p{color:var(--color-text-secondary);font-size:11px;width:36px}
+.irr{color:#3C3489;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 5px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.forms-row{display:flex;flex-wrap:wrap;gap:8px;margin:5px 0}
+.form-item{font-size:12px;padding:3px 9px;border:0.5px solid var(--color-border-tertiary);border-radius:12px;background:var(--color-background-secondary)}
+.form-item b{color:#3C3489}
+.etym{font-size:11px;color:var(--color-text-secondary);font-style:italic;margin-bottom:8px}
+</style>
+
+<div class="vtabs">
+  <button class="vtab active" onclick="sv('esser')">esser</button>
+  <button class="vtab" onclick="sv('aver')">aver</button>
+  <button class="vtab" onclick="sv('andar')">andar</button>
+  <button class="vtab" onclick="sv('venir')">venir</button>
+  <button class="vtab" onclick="sv('far')">far</button>
+  <button class="vtab" onclick="sv('dir')">dir</button>
+  <button class="vtab" onclick="sv('estar')">estar</button>
+  <button class="vtab" onclick="sv('poder')">poder</button>
+  <button class="vtab" onclick="sv('voler')">voler</button>
+  <button class="vtab" onclick="sv('saber')">saber</button>
+  <button class="vtab" onclick="sv('tener')">tener</button>
+  <button class="vtab" onclick="sv('meter')">meter</button>
+</div>
+
+<!-- ESSER -->
+<div id="esser">
+<div class="etym">esser — lat. ESSE + STARE · ausiliare di stato/moto/passiva · completamente irregolare · 3 radici: son-/er-/ser-</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">son</td></tr><tr><td class="p">te</td><td class="irr">ies</td></tr><tr><td class="p">ez/za</td><td class="irr">ez</td></tr><tr><td class="p">noz</td><td class="irr">esom</td></tr><tr><td class="p">voz</td><td class="irr">esez</td></tr><tr><td class="p">lor</td><td class="irr">son</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">erav</td></tr><tr><td class="p">te</td><td class="irr">eravas</td></tr><tr><td class="p">ez/za</td><td class="irr">erava</td></tr><tr><td class="p">noz</td><td class="irr">eravom</td></tr><tr><td class="p">voz</td><td class="irr">eravez</td></tr><tr><td class="p">lor</td><td class="irr">eraven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro semplice</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">seré</td></tr><tr><td class="p">te</td><td class="irr">serés</td></tr><tr><td class="p">ez/za</td><td class="irr">sere</td></tr><tr><td class="p">noz</td><td class="irr">serom</td></tr><tr><td class="p">voz</td><td class="irr">serez</td></tr><tr><td class="p">lor</td><td class="irr">seren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">seria</td></tr><tr><td class="p">te</td><td class="irr">serias</td></tr><tr><td class="p">ez/za</td><td class="irr">seria</td></tr><tr><td class="p">noz</td><td class="irr">seriom</td></tr><tr><td class="p">voz</td><td class="irr">seriez</td></tr><tr><td class="p">lor</td><td class="irr">serien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">eze</td></tr><tr><td class="p">te</td><td class="irr">ezes</td></tr><tr><td class="p">ez/za</td><td class="irr">eze</td></tr><tr><td class="p">noz</td><td class="irr">ezom</td></tr><tr><td class="p">voz</td><td class="irr">ezez</td></tr><tr><td class="p">lor</td><td class="irr">ezen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">ezze</td></tr><tr><td class="p">te</td><td class="irr">ezzes</td></tr><tr><td class="p">ez/za</td><td class="irr">ezze</td></tr><tr><td class="p">noz</td><td class="irr">ezzom</td></tr><tr><td class="p">voz</td><td class="irr">ezzez</td></tr><tr><td class="p">lor</td><td class="irr">ezzen</td></tr></table></div>
+</div>
+<div class="label">Forme non finite e tempi composti</div>
+<div class="forms-row">
+<span class="form-item">Inf. <b>esser</b></span>
+<span class="form-item">PP <b>estat</b></span>
+<span class="form-item">Gerundio <b>essend</b></span>
+<span class="form-item">PP fut. <b>je verer estat</b></span>
+<span class="form-item">Cond. pass. <b>je veria estat</b></span>
+<span class="form-item">Cong. pass. <b>que je eze estat</b></span>
+<span class="form-item">Cong. trapp. <b>que je ezze estat</b></span>
+<span class="form-item">Imperativo <b>es! · sez! · serom!</b></span>
+</div>
+<div class="note">IT sono/sei/è/siamo/siete/sono · ES soy/eres/es/somos/sois/son · FR suis/es/est/sommes/êtes/sont · PT sou/és/é/somos/sois/são — «son» (1ª e 3ª pl.) riflette il latino SUNT → italiano sono → Solis son.</div>
+</div>
+
+<!-- AVER -->
+<div id="aver" style="display:none">
+<div class="etym">aver / ver — lat. HABERE · ausiliare transitivo · «ver» usato nei tempi composti · irregolare a 1ª sing. (vey)</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vey</td></tr><tr><td class="p">te</td><td>aves</td></tr><tr><td class="p">ez/za</td><td>ave</td></tr><tr><td class="p">noz</td><td>avom</td></tr><tr><td class="p">voz</td><td>avez</td></tr><tr><td class="p">lor</td><td>aven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>avev</td></tr><tr><td class="p">te</td><td>avevas</td></tr><tr><td class="p">ez/za</td><td>aveva</td></tr><tr><td class="p">noz</td><td>avevom</td></tr><tr><td class="p">voz</td><td>avevez</td></tr><tr><td class="p">lor</td><td>aveven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro semplice</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">verer</td></tr><tr><td class="p">te</td><td class="irr">vereras</td></tr><tr><td class="p">ez/za</td><td class="irr">verera</td></tr><tr><td class="p">noz</td><td class="irr">vererom</td></tr><tr><td class="p">voz</td><td class="irr">vererez</td></tr><tr><td class="p">lor</td><td class="irr">vereren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">veria</td></tr><tr><td class="p">te</td><td class="irr">verias</td></tr><tr><td class="p">ez/za</td><td class="irr">veria</td></tr><tr><td class="p">noz</td><td class="irr">veriom</td></tr><tr><td class="p">voz</td><td class="irr">veriez</td></tr><tr><td class="p">lor</td><td class="irr">verien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">ver</td></tr><tr><td class="p">te</td><td class="irr">vers</td></tr><tr><td class="p">ez/za</td><td class="irr">ver</td></tr><tr><td class="p">noz</td><td class="irr">verom</td></tr><tr><td class="p">voz</td><td class="irr">verez</td></tr><tr><td class="p">lor</td><td class="irr">veren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">verss</td></tr><tr><td class="p">te</td><td class="irr">versses</td></tr><tr><td class="p">ez/za</td><td class="irr">versse</td></tr><tr><td class="p">noz</td><td class="irr">verssом</td></tr><tr><td class="p">voz</td><td class="irr">verssez</td></tr><tr><td class="p">lor</td><td class="irr">verssen</td></tr></table></div>
+</div>
+<div class="label">Forme non finite · Uso come ausiliare</div>
+<div class="forms-row">
+<span class="form-item">Inf. <b>aver</b></span>
+<span class="form-item">PP <b>avut</b></span>
+<span class="form-item">Gerundio <b>avend</b></span>
+<span class="form-item">Pass. prox. <b>je vey caminat</b></span>
+<span class="form-item">Trapp. <b>je avev caminat</b></span>
+<span class="form-item">Fut. ant. <b>je verer caminat</b></span>
+<span class="form-item">Cond. pass. <b>je veria caminat</b></span>
+<span class="form-item">Cong. pass. <b>que je ver caminat</b></span>
+<span class="form-item">Cong. trapp. <b>que je verss caminat</b></span>
+</div>
+<div class="note">«vey» (1ª sing.) ← HABEO + palatalizzazione (già nella Diacronia). Il futuro «verer» ← radice ver- + desinenze regolari. Il congiuntivo imperfetto «verss» usa il raddoppio del -ss- per distinguersi dal presente «vers».</div>
+</div>
+
+<!-- ANDAR -->
+<div id="andar" style="display:none">
+<div class="etym">andar — lat. AMBULARE/VADERE/IRE · supletismo totale · 3 radici: and-/vai-/ir- · ausiliare «ez» nei composti</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vai</td></tr><tr><td class="p">te</td><td class="irr">vas</td></tr><tr><td class="p">ez/za</td><td class="irr">va</td></tr><tr><td class="p">noz</td><td>andom</td></tr><tr><td class="p">voz</td><td>andez</td></tr><tr><td class="p">lor</td><td class="irr">van</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>andav</td></tr><tr><td class="p">te</td><td>andavas</td></tr><tr><td class="p">ez/za</td><td>andava</td></tr><tr><td class="p">noz</td><td>andavom</td></tr><tr><td class="p">voz</td><td>andavez</td></tr><tr><td class="p">lor</td><td>andaven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro (supletivo)</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">iré</td></tr><tr><td class="p">te</td><td class="irr">irés</td></tr><tr><td class="p">ez/za</td><td class="irr">ire</td></tr><tr><td class="p">noz</td><td class="irr">irom</td></tr><tr><td class="p">voz</td><td class="irr">irez</td></tr><tr><td class="p">lor</td><td class="irr">iren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">iria</td></tr><tr><td class="p">te</td><td class="irr">irias</td></tr><tr><td class="p">ez/za</td><td class="irr">iria</td></tr><tr><td class="p">noz</td><td class="irr">iriom</td></tr><tr><td class="p">voz</td><td class="irr">iriez</td></tr><tr><td class="p">lor</td><td class="irr">irien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vaie</td></tr><tr><td class="p">te</td><td class="irr">vaies</td></tr><tr><td class="p">ez/za</td><td class="irr">vaie</td></tr><tr><td class="p">noz</td><td>andom</td></tr><tr><td class="p">voz</td><td>andez</td></tr><tr><td class="p">lor</td><td class="irr">vaien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>andass</td></tr><tr><td class="p">te</td><td>andasses</td></tr><tr><td class="p">ez/za</td><td>andasse</td></tr><tr><td class="p">noz</td><td>andassom</td></tr><tr><td class="p">voz</td><td>andassez</td></tr><tr><td class="p">lor</td><td>andassen</td></tr></table></div>
+</div>
+<div class="forms-row">
+<span class="form-item">PP <b>andat</b></span>
+<span class="form-item">Gerundio <b>andand</b></span>
+<span class="form-item">Pass. prox. <b>ez ez andat</b></span>
+<span class="form-item">Imperativo <b>vai! · andem! · andez!</b></span>
+</div>
+<div class="note">IT vado/vai/va/andiamo/andate/vanno · ES voy/vas/va/vamos/vais/van · FR vais/vas/va/allons/allez/vont · PT vou/vais/vai/vamos. Il futuro su radice ir- è pan-romanzo (IT andrò ← AMBULARE+ir, ES iré, FR irai, PT irei).</div>
+</div>
+
+<!-- VENIR -->
+<div id="venir" style="display:none">
+<div class="etym">venir — lat. VENIRE · dittongazione e→ie sotto accento · 1ª sing. «vien» · PP irregolare «vengut»</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vien</td></tr><tr><td class="p">te</td><td class="irr">vienes</td></tr><tr><td class="p">ez/za</td><td class="irr">viene</td></tr><tr><td class="p">noz</td><td>venom</td></tr><tr><td class="p">voz</td><td>venez</td></tr><tr><td class="p">lor</td><td class="irr">vienen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>veniv</td></tr><tr><td class="p">te</td><td>veniyas</td></tr><tr><td class="p">ez/za</td><td>veniva</td></tr><tr><td class="p">noz</td><td>venivom</td></tr><tr><td class="p">voz</td><td>venivez</td></tr><tr><td class="p">lor</td><td>veniven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vendré</td></tr><tr><td class="p">te</td><td class="irr">vendrés</td></tr><tr><td class="p">ez/za</td><td class="irr">vendre</td></tr><tr><td class="p">noz</td><td class="irr">vendrom</td></tr><tr><td class="p">voz</td><td class="irr">vendrez</td></tr><tr><td class="p">lor</td><td class="irr">vendren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vendria</td></tr><tr><td class="p">te</td><td class="irr">vendrias</td></tr><tr><td class="p">ez/za</td><td class="irr">vendria</td></tr><tr><td class="p">noz</td><td class="irr">vendriom</td></tr><tr><td class="p">voz</td><td class="irr">vendriez</td></tr><tr><td class="p">lor</td><td class="irr">vendrien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">venge</td></tr><tr><td class="p">te</td><td class="irr">venges</td></tr><tr><td class="p">ez/za</td><td class="irr">venge</td></tr><tr><td class="p">noz</td><td class="irr">vengom</td></tr><tr><td class="p">voz</td><td class="irr">vengez</td></tr><tr><td class="p">lor</td><td class="irr">vengen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>veniss</td></tr><tr><td class="p">te</td><td>venisses</td></tr><tr><td class="p">ez/za</td><td>venisse</td></tr><tr><td class="p">noz</td><td>venissom</td></tr><tr><td class="p">voz</td><td>venissez</td></tr><tr><td class="p">lor</td><td>venissen</td></tr></table></div>
+</div>
+<div class="forms-row">
+<span class="form-item">PP <b>vengut</b></span>
+<span class="form-item">Gerundio <b>venind</b></span>
+<span class="form-item">Ausiliare <b>ez</b></span>
+<span class="form-item">Pass. prox. <b>ez ez vengut</b></span>
+<span class="form-item">Imperativo <b>vien! · vengom! · venez!</b></span>
+</div>
+<div class="note">Futuro con sincope «vendr-» ← IT verrò/verrai · ES vendré · FR viendrai · PT virei. Il congiuntivo presente «venge-» ← IT venga/venghi · ES venga · FR vienne.</div>
+</div>
+
+<!-- FAR -->
+<div id="far" style="display:none">
+<div class="etym">far — lat. FACERE → riduzione pan-romanza · completamente irregolare · radici fa-/faz-/fec-</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">faz</td></tr><tr><td class="p">te</td><td class="irr">fas</td></tr><tr><td class="p">ez/za</td><td class="irr">fa</td></tr><tr><td class="p">noz</td><td class="irr">fazom</td></tr><tr><td class="p">voz</td><td class="irr">fazez</td></tr><tr><td class="p">lor</td><td class="irr">fan</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">fazev</td></tr><tr><td class="p">te</td><td class="irr">fazevas</td></tr><tr><td class="p">ez/za</td><td class="irr">fazeva</td></tr><tr><td class="p">noz</td><td class="irr">fazevom</td></tr><tr><td class="p">voz</td><td class="irr">fazevez</td></tr><tr><td class="p">lor</td><td class="irr">fazeven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">faré</td></tr><tr><td class="p">te</td><td class="irr">farés</td></tr><tr><td class="p">ez/za</td><td class="irr">fare</td></tr><tr><td class="p">noz</td><td class="irr">farom</td></tr><tr><td class="p">voz</td><td class="irr">farez</td></tr><tr><td class="p">lor</td><td class="irr">faren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">faria</td></tr><tr><td class="p">te</td><td class="irr">farias</td></tr><tr><td class="p">ez/za</td><td class="irr">faria</td></tr><tr><td class="p">noz</td><td class="irr">fariom</td></tr><tr><td class="p">voz</td><td class="irr">fariez</td></tr><tr><td class="p">lor</td><td class="irr">farien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">faze</td></tr><tr><td class="p">te</td><td class="irr">fazes</td></tr><tr><td class="p">ez/za</td><td class="irr">faze</td></tr><tr><td class="p">noz</td><td class="irr">fazom</td></tr><tr><td class="p">voz</td><td class="irr">fazez</td></tr><tr><td class="p">lor</td><td class="irr">fazen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">feciss</td></tr><tr><td class="p">te</td><td class="irr">fecisses</td></tr><tr><td class="p">ez/za</td><td class="irr">fecisse</td></tr><tr><td class="p">noz</td><td class="irr">fecissom</td></tr><tr><td class="p">voz</td><td class="irr">fecissez</td></tr><tr><td class="p">lor</td><td class="irr">fecissen</td></tr></table></div>
+</div>
+<div class="forms-row">
+<span class="form-item">PP <b>fat</b></span>
+<span class="form-item">Gerundio <b>fazend</b></span>
+<span class="form-item">Ausiliare <b>ver</b></span>
+<span class="form-item">Pass. prox. <b>je vey fat</b></span>
+<span class="form-item">Imperativo <b>fa! · fazom! · fazez!</b></span>
+<span class="form-item">Causativo <b>far + inf.</b></span>
+</div>
+<div class="note">IT faccio/fai/fa/facciamo/fate/fanno · ES hago/haces/hace/hacemos/hacéis/hacen · FR fais/fais/fait/faisons/faites/font · PT faço/fazes/faz. Cong. imperfetto «feciss-» ← FECISSEM latino (come IT facesse, ES hiciese).</div>
+</div>
+
+<!-- DIR -->
+<div id="dir" style="display:none">
+<div class="etym">dir — lat. DICERE → riduzione · radici dis-/diz-/dic- · PP brevissimo «dit»</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">dis</td></tr><tr><td class="p">te</td><td class="irr">dises</td></tr><tr><td class="p">ez/za</td><td class="irr">dise</td></tr><tr><td class="p">noz</td><td class="irr">dizom</td></tr><tr><td class="p">voz</td><td class="irr">dizez</td></tr><tr><td class="p">lor</td><td class="irr">disen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">dizev</td></tr><tr><td class="p">te</td><td class="irr">dizevas</td></tr><tr><td class="p">ez/za</td><td class="irr">dizeva</td></tr><tr><td class="p">noz</td><td class="irr">dizevom</td></tr><tr><td class="p">voz</td><td class="irr">dizevez</td></tr><tr><td class="p">lor</td><td class="irr">dizeven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">diré</td></tr><tr><td class="p">te</td><td class="irr">dirés</td></tr><tr><td class="p">ez/za</td><td class="irr">dire</td></tr><tr><td class="p">noz</td><td class="irr">dirom</td></tr><tr><td class="p">voz</td><td class="irr">direz</td></tr><tr><td class="p">lor</td><td class="irr">diren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">diria</td></tr><tr><td class="p">te</td><td class="irr">dirias</td></tr><tr><td class="p">ez/za</td><td class="irr">diria</td></tr><tr><td class="p">noz</td><td class="irr">diriom</td></tr><tr><td class="p">voz</td><td class="irr">diriez</td></tr><tr><td class="p">lor</td><td class="irr">dirien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">dize</td></tr><tr><td class="p">te</td><td class="irr">dizes</td></tr><tr><td class="p">ez/za</td><td class="irr">dize</td></tr><tr><td class="p">noz</td><td class="irr">dizom</td></tr><tr><td class="p">voz</td><td class="irr">dizez</td></tr><tr><td class="p">lor</td><td class="irr">dizen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">diciss</td></tr><tr><td class="p">te</td><td class="irr">dicisses</td></tr><tr><td class="p">ez/za</td><td class="irr">dicisse</td></tr><tr><td class="p">noz</td><td class="irr">dicissom</td></tr><tr><td class="p">voz</td><td class="irr">dicissez</td></tr><tr><td class="p">lor</td><td class="irr">dicissen</td></tr></table></div>
+</div>
+<div class="forms-row">
+<span class="form-item">PP <b>dit</b></span>
+<span class="form-item">Gerundio <b>dizend</b></span>
+<span class="form-item">Ausiliare <b>ver</b></span>
+<span class="form-item">Pass. prox. <b>je vey dit</b></span>
+<span class="form-item">Imperativo <b>di! · dizom! · dizez!</b></span>
+</div>
+<div class="note">IT dico/dici/dice/diciamo/dite/dicono · ES digo/dices/dice/decimos/decís/dicen · FR dis/dit/disons/dites/disent · PT digo/dizes/diz. Impf. «dizev-» ← DICEBAM latino.</div>
+</div>
+
+<!-- ESTAR -->
+<div id="estar" style="display:none">
+<div class="etym">estar — lat. STARE · stato transitorio, posizione fisica · diverso da esser (stato permanente) · come ES estar / PT estar</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">estav</td></tr><tr><td class="p">te</td><td>estas</td></tr><tr><td class="p">ez/za</td><td>esta</td></tr><tr><td class="p">noz</td><td>estom</td></tr><tr><td class="p">voz</td><td>estez</td></tr><tr><td class="p">lor</td><td>estan</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>estav</td></tr><tr><td class="p">te</td><td>estavas</td></tr><tr><td class="p">ez/za</td><td>estava</td></tr><tr><td class="p">noz</td><td>estavom</td></tr><tr><td class="p">voz</td><td>estavez</td></tr><tr><td class="p">lor</td><td>estaven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro</div><table class="ct">
+<tr><td class="p">je</td><td>estaré</td></tr><tr><td class="p">te</td><td>estarés</td></tr><tr><td class="p">ez/za</td><td>estare</td></tr><tr><td class="p">noz</td><td>estarom</td></tr><tr><td class="p">voz</td><td>estaez</td></tr><tr><td class="p">lor</td><td>estaren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td>estaria</td></tr><tr><td class="p">te</td><td>estarias</td></tr><tr><td class="p">ez/za</td><td>estaria</td></tr><tr><td class="p">noz</td><td>estariom</td></tr><tr><td class="p">voz</td><td>estariez</td></tr><tr><td class="p">lor</td><td>estarien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">este</td></tr><tr><td class="p">te</td><td class="irr">estes</td></tr><tr><td class="p">ez/za</td><td class="irr">este</td></tr><tr><td class="p">noz</td><td class="irr">estom</td></tr><tr><td class="p">voz</td><td class="irr">estez</td></tr><tr><td class="p">lor</td><td class="irr">esten</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>estass</td></tr><tr><td class="p">te</td><td>estasses</td></tr><tr><td class="p">ez/za</td><td>estasse</td></tr><tr><td class="p">noz</td><td>estassom</td></tr><tr><td class="p">voz</td><td>estassez</td></tr><tr><td class="p">lor</td><td>estassen</td></tr></table></div>
+</div>
+<div class="forms-row">
+<span class="form-item">PP <b>estat</b></span>
+<span class="form-item">Gerundio <b>estand</b></span>
+<span class="form-item">Progressivo <b>je star caminand</b></span>
+<span class="form-item">Imperativo <b>esta! · estom! · estez!</b></span>
+</div>
+<div class="note"><b>esser vs estar:</b> «Je son faticat» (sono stanco — condizione) vs «Je estav aquí» (stavo qui — posizione/temporaneità). In Solis Core la distinzione è facoltativa; in Solis Iberic è obbligatoria come in spagnolo. «Star» nel progressivo è forma contratta di estar.</div>
+</div>
+
+<!-- PODER -->
+<div id="poder" style="display:none">
+<div class="etym">poder — lat. *POTERE · dittongazione o→uo sotto accento · modale puro</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">puod</td></tr><tr><td class="p">te</td><td class="irr">puodes</td></tr><tr><td class="p">ez/za</td><td class="irr">puode</td></tr><tr><td class="p">noz</td><td>podom</td></tr><tr><td class="p">voz</td><td>podez</td></tr><tr><td class="p">lor</td><td class="irr">puoden</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>podiv</td></tr><tr><td class="p">te</td><td>podiyas</td></tr><tr><td class="p">ez/za</td><td>podiva</td></tr><tr><td class="p">noz</td><td>podivom</td></tr><tr><td class="p">voz</td><td>podivez</td></tr><tr><td class="p">lor</td><td>podiven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">podré</td></tr><tr><td class="p">te</td><td class="irr">podrés</td></tr><tr><td class="p">ez/za</td><td class="irr">podre</td></tr><tr><td class="p">noz</td><td class="irr">podrom</td></tr><tr><td class="p">voz</td><td class="irr">podrez</td></tr><tr><td class="p">lor</td><td class="irr">podren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">podria</td></tr><tr><td class="p">te</td><td class="irr">podrias</td></tr><tr><td class="p">ez/za</td><td class="irr">podria</td></tr><tr><td class="p">noz</td><td class="irr">podriom</td></tr><tr><td class="p">voz</td><td class="irr">podriez</td></tr><tr><td class="p">lor</td><td class="irr">podrien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">puode</td></tr><tr><td class="p">te</td><td class="irr">puodes</td></tr><tr><td class="p">ez/za</td><td class="irr">puode</td></tr><tr><td class="p">noz</td><td>podom</td></tr><tr><td class="p">voz</td><td>podez</td></tr><tr><td class="p">lor</td><td class="irr">puoden</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>podiss</td></tr><tr><td class="p">te</td><td>podisses</td></tr><tr><td class="p">ez/za</td><td>podisse</td></tr><tr><td class="p">noz</td><td>podissom</td></tr><tr><td class="p">voz</td><td>podissez</td></tr><tr><td class="p">lor</td><td>podissen</td></tr></table></div>
+</div>
+<div class="forms-row"><span class="form-item">PP <b>podut</b></span><span class="form-item">Gerundio <b>podend</b></span><span class="form-item">No imperativo</span><span class="form-item">No progressivo</span></div>
+</div>
+
+<!-- VOLER -->
+<div id="voler" style="display:none">
+<div class="etym">voler — lat. VELLE · dittongazione o→ue sotto accento · 1ª sing. «vol» senza dittongo (forma propria)</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vol</td></tr><tr><td class="p">te</td><td class="irr">vueles</td></tr><tr><td class="p">ez/za</td><td class="irr">vuele</td></tr><tr><td class="p">noz</td><td>volom</td></tr><tr><td class="p">voz</td><td>volez</td></tr><tr><td class="p">lor</td><td class="irr">vuelen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>volev</td></tr><tr><td class="p">te</td><td>volevas</td></tr><tr><td class="p">ez/za</td><td>voleva</td></tr><tr><td class="p">noz</td><td>volevom</td></tr><tr><td class="p">voz</td><td>volevez</td></tr><tr><td class="p">lor</td><td>voleven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">volré</td></tr><tr><td class="p">te</td><td class="irr">volrés</td></tr><tr><td class="p">ez/za</td><td class="irr">volre</td></tr><tr><td class="p">noz</td><td class="irr">volrom</td></tr><tr><td class="p">voz</td><td class="irr">volrez</td></tr><tr><td class="p">lor</td><td class="irr">volren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">volria</td></tr><tr><td class="p">te</td><td class="irr">volrias</td></tr><tr><td class="p">ez/za</td><td class="irr">volria</td></tr><tr><td class="p">noz</td><td class="irr">volriom</td></tr><tr><td class="p">voz</td><td class="irr">volriez</td></tr><tr><td class="p">lor</td><td class="irr">volrien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">vole</td></tr><tr><td class="p">te</td><td class="irr">voles</td></tr><tr><td class="p">ez/za</td><td class="irr">vole</td></tr><tr><td class="p">noz</td><td class="irr">volom</td></tr><tr><td class="p">voz</td><td class="irr">volez</td></tr><tr><td class="p">lor</td><td class="irr">volen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>voliss</td></tr><tr><td class="p">te</td><td>volisses</td></tr><tr><td class="p">ez/za</td><td>volisse</td></tr><tr><td class="p">noz</td><td>volissom</td></tr><tr><td class="p">voz</td><td>volissez</td></tr><tr><td class="p">lor</td><td>volissen</td></tr></table></div>
+</div>
+<div class="forms-row"><span class="form-item">PP <b>volut</b></span><span class="form-item">Gerundio <b>volend</b></span><span class="form-item">No imperativo diretto</span></div>
+</div>
+
+<!-- SABER -->
+<div id="saber" style="display:none">
+<div class="etym">saber — lat. SAPERE · stativo · irregolare 1ª sing. (sav) · futuro sincopato (savré)</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">sav</td></tr><tr><td class="p">te</td><td>sabes</td></tr><tr><td class="p">ez/za</td><td>sabe</td></tr><tr><td class="p">noz</td><td>sabom</td></tr><tr><td class="p">voz</td><td>sabez</td></tr><tr><td class="p">lor</td><td>saben</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>sabev</td></tr><tr><td class="p">te</td><td>sabevas</td></tr><tr><td class="p">ez/za</td><td>sabeva</td></tr><tr><td class="p">noz</td><td>sabevom</td></tr><tr><td class="p">voz</td><td>sabevez</td></tr><tr><td class="p">lor</td><td>sabeven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">savré</td></tr><tr><td class="p">te</td><td class="irr">savrés</td></tr><tr><td class="p">ez/za</td><td class="irr">savre</td></tr><tr><td class="p">noz</td><td class="irr">savrom</td></tr><tr><td class="p">voz</td><td class="irr">savrez</td></tr><tr><td class="p">lor</td><td class="irr">savren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">savria</td></tr><tr><td class="p">te</td><td class="irr">savrias</td></tr><tr><td class="p">ez/za</td><td class="irr">savria</td></tr><tr><td class="p">noz</td><td class="irr">savriom</td></tr><tr><td class="p">voz</td><td class="irr">savriez</td></tr><tr><td class="p">lor</td><td class="irr">savrien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">sabe</td></tr><tr><td class="p">te</td><td class="irr">sabes</td></tr><tr><td class="p">ez/za</td><td class="irr">sabe</td></tr><tr><td class="p">noz</td><td class="irr">sabom</td></tr><tr><td class="p">voz</td><td class="irr">sabez</td></tr><tr><td class="p">lor</td><td class="irr">saben</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>sabiss</td></tr><tr><td class="p">te</td><td>sabisses</td></tr><tr><td class="p">ez/za</td><td>sabisse</td></tr><tr><td class="p">noz</td><td>sabissom</td></tr><tr><td class="p">voz</td><td>sabissez</td></tr><tr><td class="p">lor</td><td>sabissen</td></tr></table></div>
+</div>
+<div class="forms-row"><span class="form-item">PP <b>sabut</b></span><span class="form-item">Gerundio <b>sabend</b></span><span class="form-item">No progressivo (stativo)</span></div>
+</div>
+
+<!-- TENER -->
+<div id="tener" style="display:none">
+<div class="etym">tener — lat. TENERE · dittongo e→ie + 1ª sing. «teng» · futuro sincopato · PP «tengut»</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">teng</td></tr><tr><td class="p">te</td><td class="irr">tienes</td></tr><tr><td class="p">ez/za</td><td class="irr">tiene</td></tr><tr><td class="p">noz</td><td>tenom</td></tr><tr><td class="p">voz</td><td>tenez</td></tr><tr><td class="p">lor</td><td class="irr">tienen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>teniv</td></tr><tr><td class="p">te</td><td>teniyas</td></tr><tr><td class="p">ez/za</td><td>teniva</td></tr><tr><td class="p">noz</td><td>tenivom</td></tr><tr><td class="p">voz</td><td>tenivez</td></tr><tr><td class="p">lor</td><td>teniven</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Futuro (sincope)</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">tendré</td></tr><tr><td class="p">te</td><td class="irr">tendrés</td></tr><tr><td class="p">ez/za</td><td class="irr">tendre</td></tr><tr><td class="p">noz</td><td class="irr">tendrom</td></tr><tr><td class="p">voz</td><td class="irr">tendrez</td></tr><tr><td class="p">lor</td><td class="irr">tendren</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Condizionale</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">tendria</td></tr><tr><td class="p">te</td><td class="irr">tendrias</td></tr><tr><td class="p">ez/za</td><td class="irr">tendria</td></tr><tr><td class="p">noz</td><td class="irr">tendriom</td></tr><tr><td class="p">voz</td><td class="irr">tendriez</td></tr><tr><td class="p">lor</td><td class="irr">tendrien</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo presente</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">tenge</td></tr><tr><td class="p">te</td><td class="irr">tenges</td></tr><tr><td class="p">ez/za</td><td class="irr">tenge</td></tr><tr><td class="p">noz</td><td class="irr">tengom</td></tr><tr><td class="p">voz</td><td class="irr">tengez</td></tr><tr><td class="p">lor</td><td class="irr">tengen</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Congiuntivo imperfetto</div><table class="ct">
+<tr><td class="p">je</td><td>teniss</td></tr><tr><td class="p">te</td><td>tenisses</td></tr><tr><td class="p">ez/za</td><td>tenisse</td></tr><tr><td class="p">noz</td><td>tenissom</td></tr><tr><td class="p">voz</td><td>tenissez</td></tr><tr><td class="p">lor</td><td>tenissen</td></tr></table></div>
+</div>
+<div class="forms-row"><span class="form-item">PP <b>tengut</b></span><span class="form-item">Gerundio <b>tenend</b></span><span class="form-item">Semi-modale: <b>je teng que + inf.</b></span><span class="form-item">Imperativo <b>tien! · tengom! · tenez!</b></span></div>
+</div>
+
+<!-- METER -->
+<div id="meter" style="display:none">
+<div class="etym">meter — lat. MITTERE · PP irregolare breve «mist» · presente quasi regolare</div>
+<div class="grid">
+<div class="tblock"><div class="tblock-head">Presente indicativo</div><table class="ct">
+<tr><td class="p">je</td><td class="irr">met</td></tr><tr><td class="p">te</td><td>metes</td></tr><tr><td class="p">ez/za</td><td>mete</td></tr><tr><td class="p">noz</td><td>metom</td></tr><tr><td class="p">voz</td><td>metez</td></tr><tr><td class="p">lor</td><td>meten</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Imperfetto / Futuro</div><table class="ct">
+<tr><td class="p">imperf.</td><td>metev…</td></tr><tr><td class="p">futur</td><td class="irr">metré…</td></tr><tr><td class="p">cond.</td><td class="irr">metria…</td></tr><tr><td class="p">cong. pr.</td><td>mete…</td></tr><tr><td class="p">cong. imp.</td><td>metiss…</td></tr></table></div>
+<div class="tblock"><div class="tblock-head">Composti di meter</div><table class="ct">
+<tr><td>prometar</td><td class="irr">promet · promist</td></tr><tr><td>admetir</td><td class="irr">admet · admist</td></tr><tr><td>cometir</td><td class="irr">comet · comist</td></tr><tr><td>remetir</td><td class="irr">remet · remist</td></tr><tr><td>someter</td><td class="irr">somet · somist</td></tr></table></div>
+</div>
+<div class="forms-row"><span class="form-item">PP <b>mist</b></span><span class="form-item">Gerundio <b>metend</b></span><span class="form-item">Imperativo <b>mete! · metom!</b></span></div>
+<div class="note">IT metto/metti/mette · ES meto/metes/mete · FR mets/met. PP «mist» ← MISSUM lat. (IT messo, FR mis). Tutti i composti ereditano PP irregolare: prometar→promist, admetir→admist.</div>
+</div>
+
+<script>
+const all=['esser','aver','andar','venir','far','dir','estar','poder','voler','saber','tener','meter'];
+function sv(id){
+  all.forEach(d=>{const el=document.getElementById(d);if(el)el.style.display='none'});
+  const t=document.getElementById(id);if(t)t.style.display='block';
+  document.querySelectorAll('.vtab').forEach(b=>b.classList.remove('active'));
+  if(event&&event.target)event.target.classList.add('active');
+}
+</script>

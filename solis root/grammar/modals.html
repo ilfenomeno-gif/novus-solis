@@ -1,0 +1,165 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:5px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ex{padding:6px 10px;background:var(--color-background-secondary);border-radius:5px;font-size:13px;margin:4px 0}
+.ex .it{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:13px;color:#533AB7;margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('core')">Modali principali</button>
+  <button class="tab-btn" onclick="show('semi')">Semi-modali</button>
+  <button class="tab-btn" onclick="show('pass')">Modale + inf. passato</button>
+  <button class="tab-btn" onclick="show('panrom')">Confronto romanzo</button>
+</div>
+
+<!-- MODALI PRINCIPALI -->
+<div id="core">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Struttura generale</div>
+<div class="rule-f">modale (coniugato) + infinito semplice</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Il modale porta la morfologia del tempo/modo. L'infinito è sempre nella forma base.</div>
+</div>
+
+<div class="label">I quattro modali puri</div>
+<table class="ct">
+<thead><tr><th>Modale</th><th>Significato principale</th><th>IT</th><th>ES</th></tr></thead>
+<tbody>
+<tr><td class="hl">poder</td><td>possibilità, capacità, permesso</td><td>potere</td><td>poder</td></tr>
+<tr><td class="hl">voler</td><td>volontà, desiderio</td><td>volere</td><td>querer</td></tr>
+<tr><td class="hl">dever</td><td>obbligo morale, probabilità</td><td>dovere</td><td>deber</td></tr>
+<tr><td class="hl">tener que</td><td>obbligo concreto/necessità</td><td>dover/avere da</td><td>tener que</td></tr>
+</tbody></table>
+
+<div class="label">poder — possibilità, capacità, permesso</div>
+<div class="ex">Je <span class="hl">puod</span> caminar. <div class="it">Posso camminare. — capacità fisica</div></div>
+<div class="ex">Je <span class="hl">puod</span> entrar? <div class="it">Posso entrare? — richiesta di permesso</div></div>
+<div class="ex">Ez <span class="hl">podr</span> plovar demà. <div class="it">Potrebbe piovere domani. — possibilità epistemica (futuro)</div></div>
+<div class="ex">Ez <span class="hl">podria</span> esser ver. <div class="it">Potrebbe essere vero. — possibilità epistemica (condizionale)</div></div>
+
+<div class="label">voler — volontà, desiderio, richiesta cortese</div>
+<div class="ex">Je <span class="hl">vol</span> partir. <div class="it">Voglio partire. — volontà</div></div>
+<div class="ex">Je <span class="hl">volria</span> un café, per favor. <div class="it">Vorrei un caffè, per favore. — richiesta cortese (condizionale)</div></div>
+<div class="ex">Ez non <span class="hl">vuele</span> venir. <div class="it">Non vuole venire. — rifiuto</div></div>
+
+<div class="label">dever — obbligo morale, deduzione logica</div>
+<div class="ex">Je <span class="hl">dev</span> estudiar. <div class="it">Devo studiare. — obbligo morale/personale</div></div>
+<div class="ex">Ez <span class="hl">dev</span> esser alí. <div class="it">Deve essere lì. — deduzione logica (alta probabilità)</div></div>
+<div class="ex">Noz <span class="hl">devriom</span> partir avant. <div class="it">Dovremmo partire prima. — obbligo attenuato (condizionale)</div></div>
+
+<div class="label">tener que — obbligo concreto, necessità pratica</div>
+<div class="ex">Je <span class="hl">teng que</span> partir ora. <div class="it">Devo partire adesso. — necessità pratica urgente</div></div>
+<div class="ex">Ez <span class="hl">tien que</span> travailiar. <div class="it">Deve lavorare. — obbligo esterno</div></div>
+<div class="note"><b>dever</b> vs <b>tener que</b>: <em>dever</em> esprime obbligo morale o deduzione (IT dovere morale, ES deber); <em>tener que</em> esprime necessità pratica concreta (IT avere da/dover fare per forza, ES tener que). In molti contesti sono intercambiabili — la distinzione è di sfumatura, non assoluta.</div>
+</div>
+
+<!-- SEMI-MODALI -->
+<div id="semi" style="display:none">
+<div class="label">Semi-modali — verbi con comportamento parzialmente modale</div>
+<table class="ct">
+<thead><tr><th>Semi-modale</th><th>Struttura</th><th>Significato</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td class="hl">saber</td><td>saber + inf.</td><td>saper fare (competenza acquisita)</td><td>sapere</td></tr>
+<tr><td class="hl">laissar</td><td>laissar + inf.</td><td>lasciare fare, permettere</td><td>lasciare</td></tr>
+<tr><td class="hl">far</td><td>far + inf.</td><td>far fare (causativo)</td><td>fare</td></tr>
+<tr><td class="hl">osar</td><td>osar + inf.</td><td>osare</td><td>osare</td></tr>
+<tr><td class="hl">soler</td><td>soler + inf.</td><td>essere solito fare</td><td>solere</td></tr>
+<tr><td class="hl">dever</td><td>dever + inf.</td><td>probabilità epistemica</td><td>dovere</td></tr>
+</tbody></table>
+
+<div class="label">saber + inf. — competenza acquisita</div>
+<div class="ex">Je <span class="hl">sav</span> nadar. <div class="it">So nuotare. — competenza appresa</div></div>
+<div class="ex">Ez non <span class="hl">sab</span> cuinar. <div class="it">Non sa cucinare.</div></div>
+<div class="note"><b>saber</b> vs <b>poder</b>: <em>je sav nadar</em> (so nuotare — competenza) vs <em>je puod nadar</em> (posso nuotare — permesso/condizione fisica). Distinzione identica a IT sapere/potere · ES saber/poder.</div>
+
+<div class="label">far + inf. — causativo</div>
+<div class="ex">Je <span class="hl">faz</span> caminar le can. <div class="it">Faccio camminare il cane. — causativo diretto</div></div>
+<div class="ex">Je <span class="hl">faz</span> caminar le can a mio fiiol. <div class="it">Faccio portare a spasso il cane a mio figlio. — causativo indiretto (agente con <em>a</em>)</div></div>
+<div class="ex">Je <span class="hl">faz</span> costruir la caza. <div class="it">Faccio costruire la casa. — causativo con oggetto</div></div>
+
+<div class="label">soler + inf. — abitualità</div>
+<div class="ex">Je <span class="hl">sol</span> caminar le matin. <div class="it">Sono solito camminare la mattina. — presente abituale</div></div>
+<div class="ex">Ez <span class="hl">solev</span> cantar. <div class="it">Era solito cantare. — imperfetto abituale</div></div>
+<div class="note"><b>soler</b> (← ES soler, cat. soler) esprime abitudine o comportamento ripetuto. Usato soprattutto al presente e imperfetto. Equivale all'IT <em>solere</em> (letterario) o alla perifrasi <em>di solito + presente</em>.</div>
+</div>
+
+<!-- MODALE + INFINITO PASSATO -->
+<div id="pass" style="display:none">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Modale + infinito passato</div>
+<div class="rule-f">modale (coniugato) + ver/ez + participio passato</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Esprime modalità riferita al passato: possibilità, obbligo, o volontà non realizzata.</div>
+</div>
+
+<div class="label">Strutture con infinito passato</div>
+<table class="ct">
+<thead><tr><th>Modale</th><th>+ inf. passato</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td class="hl">poder</td><td>poder + ver + PP</td><td>je podria ver caminat</td><td>avrei potuto camminare</td></tr>
+<tr><td class="hl">voler</td><td>voler + ver + PP</td><td>je volria ver caminat</td><td>avrei voluto camminare</td></tr>
+<tr><td class="hl">dever</td><td>dever + ver + PP</td><td>je devria ver caminat</td><td>avrei dovuto camminare</td></tr>
+<tr><td class="hl">poder</td><td>poder + ver + PP (ind.)</td><td>ez puod ver caminat</td><td>può aver camminato</td></tr>
+<tr><td class="hl">dever</td><td>dever + ver + PP (ind.)</td><td>ez dev ver arrivat</td><td>deve essere arrivato</td></tr>
+</tbody></table>
+
+<div class="label">Distinzione temporale — presente vs passato</div>
+<div class="ex">Ez <span class="hl">dev</span> esser alí. <div class="it">Deve essere lì. — deduzione sul presente</div></div>
+<div class="ex">Ez <span class="hl">dev ver</span> arrivat ia. <div class="it">Deve essere già arrivato. — deduzione sul passato</div></div>
+<div class="ex">Je <span class="hl">podria</span> venir demà. <div class="it">Potrei venire domani. — possibilità futura</div></div>
+<div class="ex">Je <span class="hl">podria ver</span> venit ier. <div class="it">Avrei potuto venire ieri. — possibilità non realizzata</div></div>
+<div class="ex">Je <span class="hl">devria ver</span> studiat plus. <div class="it">Avrei dovuto studiare di più. — obbligo non adempiuto (rimprovero a sé)</div></div>
+
+<div class="label">Verbi di moto — infinito passato con ez</div>
+<div class="ex">Ez <span class="hl">dev ez</span> andat alí. <div class="it">Deve essere andato lì. — moto: ausiliare ez</div></div>
+<div class="ex">Je <span class="hl">podria ez</span> venít prim. <div class="it">Avrei potuto venire prima. — moto: ausiliare ez</div></div>
+<div class="note">Con verbi che usano <b>ez</b> come ausiliare (moto, riflessivi), l'infinito passato è <em>ez + PP</em> invece di <em>ver + PP</em>. Regola identica all'italiano: <em>deve essere andato</em> (non *deve aver andato).</div>
+</div>
+
+<!-- CONFRONTO ROMANZO -->
+<div id="panrom" style="display:none">
+<div class="label">Modali principali — confronto pan-romanzo</div>
+<table class="ct">
+<thead><tr><th>Significato</th><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th></tr></thead>
+<tbody>
+<tr><td>possibilità/capacità</td><td class="hl">poder</td><td>potere</td><td>poder</td><td>pouvoir</td><td>poder</td></tr>
+<tr><td>volontà</td><td class="hl">voler</td><td>volere</td><td>querer</td><td>vouloir</td><td>querer</td></tr>
+<tr><td>obbligo morale</td><td class="hl">dever</td><td>dovere</td><td>deber</td><td>devoir</td><td>dever</td></tr>
+<tr><td>necessità concreta</td><td class="hl">tener que</td><td>dover/avere da</td><td>tener que</td><td>avoir à/falloir</td><td>ter que</td></tr>
+<tr><td>competenza</td><td class="hl">saber</td><td>sapere</td><td>saber</td><td>savoir</td><td>saber</td></tr>
+<tr><td>abitudine</td><td class="hl">soler</td><td>solere</td><td>soler</td><td>avoir l'habitude de</td><td>costumar</td></tr>
+</tbody></table>
+
+<div class="label">Negazione dei modali</div>
+<div class="grid2">
+<div>
+<div class="ex">Je <span class="hl">non puod</span> venir. <div class="it">Non posso venire. — impossibilità</div></div>
+<div class="ex">Je <span class="hl">non dev</span> dir. <div class="it">Non devo dirlo. — assenza di obbligo O divieto</div></div>
+</div>
+<div>
+<div class="ex">Je <span class="hl">non vol</span> partir. <div class="it">Non voglio partire. — rifiuto</div></div>
+<div class="ex">Je <span class="hl">non teng que</span> venir. <div class="it">Non devo venire. — assenza di necessità</div></div>
+</div>
+</div>
+<div class="note"><b>non dever</b> è ambiguo come in italiano: può significare <em>non è obbligatorio</em> oppure <em>è proibito</em>. Il contesto disambigua. Per il divieto esplicito si usa <em>ez ez proibít de + inf.</em> o <em>non se dever + inf.</em></div>
+
+<div class="label">Ordine clitico con modali</div>
+<div class="ex">Je <span class="hl">lo</span> puod vider. / Je puod vider<span class="hl">lo</span>. <div class="it">Posso vederlo. — clitico prima del modale O enclisi sull'infinito</div></div>
+<div class="ex">Je <span class="hl">me</span> vol lavar. / Je vol lavar<span class="hl">me</span>. <div class="it">Voglio lavarmi. — riflessivo: stessa libertà</div></div>
+<div class="note">Con i modali, il clitico può salire davanti al modale (risalita del clitico) oppure restare enclisi sull'infinito. Entrambe le posizioni sono corrette in Solis Core — come in italiano e spagnolo.</div>
+</div>
+
+<script>
+function show(id){['core','semi','pass','panrom'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>

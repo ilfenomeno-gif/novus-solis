@@ -1,0 +1,117 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:5px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.irr{color:#533AB7;font-weight:500}
+.reg{color:var(--color-text-secondary)}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:13px;color:#533AB7;margin:4px 0}
+.col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.mini{border:0.5px solid var(--color-border-tertiary);border-radius:7px;overflow:hidden}
+.mini-h{padding:4px 9px;font-size:11px;font-weight:500;background:var(--color-background-secondary);color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('regola')">La regola</button>
+  <button class="tab-btn" onclick="show('eie')">e → ie (lista)</button>
+  <button class="tab-btn" onclick="show('ouo')">o → uo (lista)</button>
+  <button class="tab-btn" onclick="show('eccezioni')">Eccezioni</button>
+</div>
+
+<div id="regola">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:6px">Regola del dittongo accentuale</div>
+<div class="rule-f">e tonica → ie &nbsp;&nbsp; o tonica → uo</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">Condizione: l'accento tonico cade sulla <b>radice verbale</b>.<br>Le persone noz/voz hanno accento sul <b>suffisso</b> → nessun dittongo.<br>La regola si applica solo al <b>presente indicativo</b> e al <b>congiuntivo presente</b>.</div>
+</div>
+
+<div class="label">Schema visivo dell'alternanza — perder</div>
+<table class="ct">
+<thead><tr><th>Persona</th><th>Accento</th><th>Forma</th><th>Perché</th></tr></thead>
+<tbody>
+<tr><td>je</td><td>PIERd</td><td><span class="irr">pierd</span></td><td>accento sulla radice → dittongo</td></tr>
+<tr><td>te</td><td>PIERdes</td><td><span class="irr">pierdes</span></td><td>accento sulla radice → dittongo</td></tr>
+<tr><td>ez/za</td><td>PIERde</td><td><span class="irr">pierde</span></td><td>accento sulla radice → dittongo</td></tr>
+<tr><td>noz</td><td>perDOM</td><td><span class="reg">perdom</span></td><td>accento sul suffisso → nessun dittongo</td></tr>
+<tr><td>voz</td><td>perDEZ</td><td><span class="reg">perdez</span></td><td>accento sul suffisso → nessun dittongo</td></tr>
+<tr><td>lor</td><td>PIERden</td><td><span class="irr">pierden</span></td><td>accento sulla radice → dittongo</td></tr>
+</tbody></table>
+<div class="note">Questa alternanza crea la «forma a ferro di cavallo» (shoebox pattern) tipica dello spagnolo e del catalano: le persone che dittongano sono je/te/ez/lor — tutto tranne noz/voz. I parlanti romanzi la riconoscono istintivamente.</div>
+</div>
+
+<div id="eie" style="display:none">
+<div class="label">Lista completa: verbi con e → ie</div>
+<table class="ct">
+<thead><tr><th>Infinito</th><th>je (dittonga)</th><th>noz (non ditt.)</th><th>PP</th><th>Confronto ES/IT</th></tr></thead>
+<tbody>
+<tr><td>perder</td><td><span class="irr">pierd</span></td><td class="reg">perdom</td><td>perdut</td><td>ES pierdo · IT perdo</td></tr>
+<tr><td>tener</td><td><span class="irr">teng/tien-</span></td><td class="reg">tenom</td><td>tengut</td><td>ES tengo/tiene</td></tr>
+<tr><td>venir</td><td><span class="irr">vien</span></td><td class="reg">venom</td><td>vengut</td><td>ES viene · IT viene</td></tr>
+<tr><td>entender</td><td><span class="irr">entiend</span></td><td class="reg">entendом</td><td>entendut</td><td>ES entiende</td></tr>
+<tr><td>defender</td><td><span class="irr">defiend</span></td><td class="reg">defendom</td><td>defendut</td><td>ES defiende</td></tr>
+<tr><td>pensar</td><td><span class="irr">piens</span></td><td class="reg">pensom</td><td>pensat</td><td>ES pienso · IT penso</td></tr>
+<tr><td>sentar</td><td><span class="irr">sient</span></td><td class="reg">sentom</td><td>sentat</td><td>ES siento</td></tr>
+<tr><td>mentir</td><td><span class="irr">mient</span></td><td class="reg">mentom</td><td>mentit</td><td>ES miente</td></tr>
+<tr><td>sentir</td><td><span class="irr">sient</span></td><td class="reg">sentom</td><td>sentit</td><td>ES siente · IT sento</td></tr>
+<tr><td>ferir</td><td><span class="irr">fier</span></td><td class="reg">ferom</td><td>ferit</td><td>ES hiere · IT ferisce</td></tr>
+<tr><td>preferir</td><td><span class="irr">prefier</span></td><td class="reg">preferom</td><td>preferit</td><td>ES prefiere</td></tr>
+<tr><td>recomendar</td><td><span class="irr">recomiend</span></td><td class="reg">recomendом</td><td>recomendат</td><td>ES recomienda</td></tr>
+</tbody></table>
+<div class="note">Regola pratica: se il verbo contiene -e- nella sillaba radicale tonica, presupponi la dittongazione. Eccezione: verbi con -e- finale di radice seguita da -r (come tener → teng per la 1ª sing., non tien).</div>
+</div>
+
+<div id="ouo" style="display:none">
+<div class="label">Lista completa: verbi con o → uo</div>
+<table class="ct">
+<thead><tr><th>Infinito</th><th>je (dittonga)</th><th>noz (non ditt.)</th><th>PP</th><th>Confronto ES/IT</th></tr></thead>
+<tbody>
+<tr><td>poder</td><td><span class="irr">puod</span></td><td class="reg">podom</td><td>podut</td><td>ES puedo · IT posso*</td></tr>
+<tr><td>trovar</td><td><span class="irr">truov</span></td><td class="reg">trovom</td><td>trovat</td><td>ES encuentro · IT trovo*</td></tr>
+<tr><td>contar</td><td><span class="irr">cuont</span></td><td class="reg">contom</td><td>contat</td><td>ES cuento · IT conto*</td></tr>
+<tr><td>costar</td><td><span class="irr">cuost</span></td><td class="reg">costom</td><td>costat</td><td>ES cuesta · IT costa*</td></tr>
+<tr><td>mover</td><td><span class="irr">muev</span></td><td class="reg">movom</td><td>movut</td><td>ES mueve · IT muove</td></tr>
+<tr><td>morir</td><td><span class="irr">muer</span></td><td class="reg">morom</td><td>mort</td><td>ES muere · IT muore</td></tr>
+<tr><td>dormir</td><td><span class="irr">duerm</span></td><td class="reg">dormom</td><td>dormit</td><td>ES duerme · IT dorme*</td></tr>
+<tr><td>volver</td><td><span class="irr">vuelv</span></td><td class="reg">volvom</td><td>volvut</td><td>ES vuelve · IT torna</td></tr>
+<tr><td>voler</td><td><span class="irr">vuele</span></td><td class="reg">volom</td><td>volut</td><td>ES quiere · IT vuole</td></tr>
+<tr><td>provar</td><td><span class="irr">pruov</span></td><td class="reg">provom</td><td>provat</td><td>ES prueba · IT prova*</td></tr>
+<tr><td>recordar</td><td><span class="irr">recuerd</span></td><td class="reg">recordom</td><td>recordat</td><td>ES recuerda</td></tr>
+<tr><td>sonar</td><td><span class="irr">suon</span></td><td class="reg">sonom</td><td>sonat</td><td>ES suena · IT suona</td></tr>
+</tbody></table>
+<div class="note">* L'italiano non ha questo dittongo sistematico (trovo/conto/dorme), ma lo riconosce in «suono, vuole, muore, buono». La grafia uo di Solis richiama visivamente l'italiano — un ponte cognitivo naturale per l'italofono.</div>
+</div>
+
+<div id="eccezioni" style="display:none">
+<div class="label">Verbi che NON dittongano nonostante la vocale tonica</div>
+<table class="ct">
+<thead><tr><th>Infinito</th><th>Forma je</th><th>Perché non dittonga</th></tr></thead>
+<tbody>
+<tr><td>bever (bere)</td><td><span class="reg">bev</span></td><td>-e- finale di radice breve → resistenza al dittongo</td></tr>
+<tr><td>veder (vedere)</td><td><span class="reg">vid</span> (apofonia)</td><td>apofonia e→i, non dittongo (come IT vedo → vidi)</td></tr>
+<tr><td>corer (correre)</td><td><span class="reg">cor</span></td><td>monosillabico nella 1ª sing. → forma propria</td></tr>
+<tr><td>leer (leggere)</td><td><span class="reg">leg</span></td><td>-ee- → contrazione, no dittongo</td></tr>
+<tr><td>cred (credere)</td><td><span class="reg">cred</span></td><td>stativo → non dittonga (come saber)</td></tr>
+</tbody></table>
+
+<div class="label" style="margin-top:10px">Apofonia e→i: un terzo pattern (minore)</div>
+<table class="ct">
+<thead><tr><th>Infinito</th><th>je</th><th>noz</th><th>Confronto</th></tr></thead>
+<tbody>
+<tr><td>vider</td><td><span class="irr">vid</span></td><td class="reg">vedom</td><td>IT vedo·vidi · ES ver·veo · FR voir·vois</td></tr>
+<tr><td>seguir</td><td><span class="irr">sig</span></td><td class="reg">seguom</td><td>ES sigo·seguimos · IT seguo</td></tr>
+<tr><td>pedir</td><td><span class="irr">pid</span></td><td class="reg">pedom</td><td>ES pido·pedimos</td></tr>
+<tr><td>repetir</td><td><span class="irr">repit</span></td><td class="reg">repetom</td><td>ES repito</td></tr>
+</tbody></table>
+<div class="note">L'apofonia e→i è un pattern minore ereditato principalmente dallo spagnolo (-ir con apofonia: pedir/pido, seguir/sigo). In Solis si applica solo ai verbi -IR con radice in -e-. Da non confondere con la dittongazione: qui la vocale non si espande ma cambia qualità.</div>
+</div>
+
+<script>
+function show(id){['regola','eie','ouo','eccezioni'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>

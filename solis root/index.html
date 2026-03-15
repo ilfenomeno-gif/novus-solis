@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOLIS — Lingua Romanza Pianificata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FAF6EE;
+  --parch: #F2EAD8;
+  --terra: #C04A15;
+  --terra-light: #E07040;
+  --gold: #C9902A;
+  --gold-light: #F0C060;
+  --forest: #1E4A32;
+  --forest-light: #2D6B4A;
+  --ink: #1A1208;
+  --ink-soft: #3D2E1A;
+  --mid: #7A6A50;
+  --border: rgba(160,130,80,0.25);
+  --border-strong: rgba(160,130,80,0.5);
+  --shadow: rgba(30,15,5,0.12);
+  --r: 10px;
+  --r-sm: 6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: .6;
+}
+
+/* ── NAVIGATION ── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,246,238,0.88);
+  backdrop-filter: blur(18px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 60px;
+  transition: box-shadow .3s;
+}
+#nav.scrolled { box-shadow: 0 4px 24px var(--shadow); }
+
+.nav-logo {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 1.5rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--terra);
+  display: flex; align-items: center; gap: .5rem;
+  text-decoration: none;
+}
+.nav-logo span { font-weight: 300; color: var(--mid); font-size: .9rem; letter-spacing: .15em; }
+
+.nav-links { display: flex; gap: .25rem; }
+.nav-links a {
+  font-size: .8rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  padding: .45rem .9rem; border-radius: 30px;
+  color: var(--ink-soft); text-decoration: none;
+  transition: all .2s; border: 1px solid transparent;
+}
+.nav-links a:hover { color: var(--terra); background: rgba(192,74,21,.07); border-color: rgba(192,74,21,.15); }
+.nav-links a.active { color: var(--terra); background: rgba(192,74,21,.1); border-color: rgba(192,74,21,.2); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 6rem 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,144,42,.12) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 40% at 20% 80%, rgba(30,74,50,.08) 0%, transparent 60%),
+              radial-gradient(ellipse 40% 30% at 80% 70%, rgba(192,74,21,.07) 0%, transparent 50%);
+}
+
+.hero-sun {
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,192,96,.35) 0%, rgba(192,74,21,.12) 45%, transparent 70%);
+  position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+  animation: pulse 6s ease-in-out infinite;
+}
+.hero-sun::after {
+  content: '✦';
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; color: rgba(192,74,21,.3);
+}
+@keyframes pulse { 0%,100%{transform:translateX(-50%) scale(1)} 50%{transform:translateX(-50%) scale(1.05)} }
+
+.hero-content { position: relative; text-align: center; max-width: 760px; }
+
+.hero-eyebrow {
+  font-size: .75rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .75rem; justify-content: center;
+}
+.hero-eyebrow::before, .hero-eyebrow::after { content: '◆'; font-size: .5rem; }
+
+.hero-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  font-weight: 700; line-height: .9;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: .5rem;
+}
+.hero-title em { color: var(--terra); font-style: italic; }
+
+.hero-sub {
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 300; font-style: italic;
+  color: var(--mid); margin-bottom: 2.5rem; letter-spacing: .02em;
+}
+
+.hero-tagline {
+  font-size: .95rem; color: var(--ink-soft); max-width: 540px; margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--terra); color: white;
+  padding: .85rem 2rem; border-radius: 30px; font-size: .9rem; font-weight: 500;
+  letter-spacing: .04em; text-decoration: none; border: none; cursor: pointer;
+  transition: all .25s; box-shadow: 0 4px 18px rgba(192,74,21,.3);
+}
+.btn-primary:hover { background: var(--terra-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(192,74,21,.35); }
+.btn-outline {
+  background: transparent; color: var(--terra);
+  padding: .85rem 2rem; border-radius: 30px; font-size: .9rem; font-weight: 500;
+  letter-spacing: .04em; text-decoration: none;
+  border: 1.5px solid var(--terra); cursor: pointer; transition: all .25s;
+}
+.btn-outline:hover { background: rgba(192,74,21,.07); transform: translateY(-2px); }
+
+.hero-stats {
+  margin-top: 5rem;
+  display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 2.5rem; font-weight: 700; color: var(--terra); line-height: 1;
+}
+.stat-label { font-size: .75rem; color: var(--mid); letter-spacing: .1em; text-transform: uppercase; margin-top: .25rem; }
+
+/* ── SECTIONS ── */
+.section { padding: 6rem 2.5rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+
+.section-header { margin-bottom: 3rem; }
+.section-tag {
+  font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .75rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+.section-title {
+  font-family: 'Cormorant Garant', serif;
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.1;
+  color: var(--ink);
+}
+.section-title em { color: var(--terra); font-style: italic; }
+.section-desc { color: var(--mid); margin-top: .75rem; max-width: 560px; font-size: .95rem; line-height: 1.7; }
+
+/* ── CARDS ── */
+.card {
+  background: white; border: 1px solid var(--border);
+  border-radius: var(--r); padding: 1.5rem;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: all .25s;
+}
+.card:hover { box-shadow: 0 8px 32px var(--shadow); transform: translateY(-2px); }
+
+/* ── GRAMMAR SECTION ── */
+#grammatica { background: var(--parch); }
+
+.gram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.gram-card { background: white; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.gram-card-head {
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
+  color: white;
+}
+.gram-card-head h3 { font-family: 'Cormorant Garant', serif; font-size: 1.2rem; font-weight: 600; }
+.gram-card-head p { font-size: .78rem; opacity: .8; margin-top: .2rem; }
+.gram-card-body { padding: 1.2rem 1.5rem; }
+
+.conj-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.conj-table th {
+  font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--mid); font-weight: 500; padding: .3rem .6rem;
+  border-bottom: 1px solid var(--border); text-align: left;
+}
+.conj-table td { padding: .35rem .6rem; border-bottom: 1px solid rgba(0,0,0,.04); }
+.conj-table tr:last-child td { border-bottom: none; }
+.conj-table .pers { color: var(--mid); font-size: .78rem; }
+.conj-table .form { font-family: 'Cormorant Garant', serif; font-size: 1rem; font-weight: 600; color: var(--forest); }
+.conj-table .irr { color: var(--terra); }
+
+/* ── VERB TABLES ── */
+#verbi { padding: 5rem 2.5rem; }
+.verb-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+.vtab {
+  padding: .5rem 1.1rem; border-radius: 20px; font-size: .82rem; font-weight: 500;
+  border: 1px solid var(--border); background: transparent; color: var(--ink-soft);
+  cursor: pointer; transition: all .2s; font-family: 'Cormorant Garant', serif; font-size: .95rem;
+}
+.vtab:hover { border-color: var(--terra); color: var(--terra); }
+.vtab.active { background: var(--terra); color: white; border-color: var(--terra); box-shadow: 0 3px 12px rgba(192,74,21,.3); }
+
+.verb-panel { display: none; animation: fadeUp .3s ease; }
+.verb-panel.active { display: block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+.verb-header {
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  border-radius: var(--r) var(--r) 0 0; color: white;
+}
+.verb-header h2 { font-family: 'Cormorant Garant', serif; font-size: 2.2rem; font-weight: 700; }
+.verb-header .etym { font-size: .8rem; opacity: .7; margin-top: .3rem; font-style: italic; }
+
+.verb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0; }
+.verb-tense-block { border: 1px solid var(--border); border-top: none; }
+.verb-tense-block:first-child { border-left: none; }
+.verb-tense-head {
+  padding: .6rem 1rem; font-size: .72rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--mid); background: var(--parch);
+  border-bottom: 1px solid var(--border);
+}
+.verb-tense-body { padding: .5rem; }
+.verb-row { display: flex; gap: .5rem; padding: .22rem .5rem; align-items: baseline; }
+.verb-row .p { font-size: .72rem; color: var(--mid); width: 24px; flex-shrink: 0; }
+.verb-row .f { font-family: 'Cormorant Garant', serif; font-size: 1rem; font-weight: 600; }
+.verb-row .f.irr { color: var(--terra); }
+.verb-row .f.reg { color: var(--forest); }
+.verb-forms { padding: 1rem 1.5rem; background: var(--parch); border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: .6rem; }
+.vform-badge {
+  padding: .3rem .8rem; border-radius: 20px; font-size: .8rem;
+  border: 1px solid var(--border); background: white;
+  font-family: 'Cormorant Garant', serif;
+}
+.vform-badge strong { color: var(--terra); font-weight: 600; }
+
+/* ── LESSICO ── */
+#lessico { padding: 5rem 2.5rem; }
+
+.lex-controls {
+  display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center;
+}
+.search-wrap { position: relative; flex: 1; min-width: 240px; }
+.search-wrap svg { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); opacity: .4; pointer-events: none; }
+#searchInput {
+  width: 100%; padding: .8rem 1rem .8rem 2.8rem;
+  border: 1.5px solid var(--border-strong); border-radius: var(--r-sm);
+  background: white; font-size: .95rem; font-family: 'Outfit', sans-serif; color: var(--ink);
+  transition: border-color .2s; outline: none;
+}
+#searchInput:focus { border-color: var(--terra); }
+#searchInput::placeholder { color: var(--mid); }
+
+.mode-btns { display: flex; border: 1.5px solid var(--border-strong); border-radius: var(--r-sm); overflow: hidden; }
+.mode-btn {
+  padding: .75rem 1.2rem; font-size: .83rem; font-weight: 500; letter-spacing: .03em;
+  background: transparent; border: none; color: var(--mid); cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; gap: .4rem;
+}
+.mode-btn.active { background: var(--terra); color: white; }
+.mode-btn:not(.active):hover { background: var(--parch); color: var(--ink); }
+
+.cat-bar { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+.cat-btn {
+  padding: .35rem .9rem; border-radius: 20px; font-size: .78rem; font-weight: 500;
+  border: 1px solid var(--border); background: transparent; color: var(--mid);
+  cursor: pointer; transition: all .2s;
+}
+.cat-btn:hover { border-color: var(--terra); color: var(--terra); }
+.cat-btn.active { background: var(--terra); color: white; border-color: var(--terra); }
+
+.lex-info { font-size: .8rem; color: var(--mid); margin-bottom: 1rem; }
+
+/* TABLE VIEW */
+.lex-table-wrap { overflow-x: auto; }
+#lexTable {
+  width: 100%; border-collapse: collapse; font-size: .88rem;
+}
+#lexTable thead th {
+  padding: .65rem 1rem; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--mid); font-weight: 600; background: var(--parch);
+  border-bottom: 2px solid var(--border-strong); text-align: left; white-space: nowrap;
+}
+#lexTable tbody td { padding: .65rem 1rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+#lexTable tbody tr:last-child td { border-bottom: none; }
+#lexTable tbody tr:hover td { background: rgba(192,74,21,.03); }
+.lex-word { font-family: 'Cormorant Garant', serif; font-size: 1.1rem; font-weight: 700; color: var(--forest); }
+.lex-cat { display: inline-block; padding: .2rem .6rem; border-radius: 10px; font-size: .72rem;
+  background: var(--parch); color: var(--mid); border: 1px solid var(--border); white-space: nowrap; }
+.lex-etym { font-size: .78rem; color: var(--mid); font-style: italic; }
+
+/* FLASHCARD VIEW */
+#flashView { display: none; }
+.fc-container { max-width: 520px; margin: 0 auto; text-align: center; }
+.fc-card {
+  background: white; border: 1.5px solid var(--border-strong);
+  border-radius: 16px; padding: 3rem 2rem; min-height: 240px;
+  cursor: pointer; transition: all .3s;
+  box-shadow: 0 8px 32px var(--shadow);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.fc-card::before {
+  content: '✦';
+  position: absolute; top: 1rem; right: 1.5rem;
+  font-size: 1.5rem; color: rgba(192,74,21,.1);
+}
+.fc-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px var(--shadow); }
+.fc-question { font-family: 'Cormorant Garant', serif; font-size: 3rem; font-weight: 700; color: var(--forest); }
+.fc-cat-badge { margin: .5rem 0; }
+.fc-answer { font-size: 1.4rem; color: var(--ink-soft); margin: .75rem 0; font-family: 'Cormorant Garant', serif; font-size: 1.8rem; }
+.fc-etym-note { font-size: .82rem; color: var(--mid); font-style: italic; }
+.fc-hint { font-size: .75rem; color: var(--mid); margin-top: 1.5rem; letter-spacing: .08em; text-transform: uppercase; }
+.fc-nav { display: flex; align-items: center; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+.fc-nav-btn {
+  padding: .55rem 1.4rem; border-radius: 24px; font-size: .85rem; font-weight: 500;
+  border: 1.5px solid var(--border-strong); background: white; color: var(--ink-soft);
+  cursor: pointer; transition: all .2s;
+}
+.fc-nav-btn:hover { border-color: var(--terra); color: var(--terra); }
+.fc-counter { font-size: .82rem; color: var(--mid); min-width: 80px; text-align: center; }
+
+/* ── FONETICA ── */
+#fonetica { background: var(--parch); padding: 5rem 2.5rem; }
+.phon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+.phon-card { background: white; border: 1px solid var(--border); border-radius: var(--r); padding: 1.5rem; }
+.phon-card h3 { font-family: 'Cormorant Garant', serif; font-size: 1.3rem; font-weight: 600; color: var(--terra); margin-bottom: .75rem; }
+.phon-rule {
+  padding: .6rem 1rem; background: var(--parch); border-radius: var(--r-sm);
+  font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: var(--forest);
+  margin-bottom: .5rem; border-left: 3px solid var(--forest);
+}
+.phon-note { font-size: .82rem; color: var(--mid); line-height: 1.6; margin-top: .5rem; }
+.ipa { font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: var(--terra); background: rgba(192,74,21,.07); padding: .1rem .4rem; border-radius: 3px; }
+
+/* ── STORIA ── */
+#storia { padding: 5rem 2.5rem; }
+.timeline { position: relative; padding-left: 2.5rem; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border-strong); border-radius: 2px; }
+.tl-item { position: relative; margin-bottom: 2.5rem; padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute; left: -2.5rem; top: 6px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--terra); border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--terra);
+}
+.tl-date { font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
+.tl-body h4 { font-family: 'Cormorant Garant', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: .4rem; }
+.tl-body p { font-size: .88rem; color: var(--mid); line-height: 1.7; max-width: 600px; }
+
+/* ── COMPARISON TABLE ── */
+.comp-table { width: 100%; border-collapse: collapse; font-size: .85rem; margin-top: 2rem; }
+.comp-table th { padding: .6rem 1rem; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--mid); font-weight: 600; border-bottom: 2px solid var(--border-strong); background: var(--parch); text-align: left; }
+.comp-table td { padding: .6rem 1rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.comp-table tr:hover td { background: rgba(192,74,21,.02); }
+.comp-table .lat-src { color: var(--gold); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: .8rem; }
+.comp-table .sol-word { font-family: 'Cormorant Garant', serif; font-size: 1.1rem; font-weight: 700; color: var(--terra); }
+
+/* ── INFO CARDS ── */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.info-card { background: white; border: 1px solid var(--border); border-radius: var(--r); padding: 1.5rem; }
+.info-card h3 { font-family: 'Cormorant Garant', serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: .75rem; display: flex; align-items: center; gap: .6rem; }
+.info-card h3 .ic { font-size: 1.1rem; }
+.info-card p, .info-card li { font-size: .85rem; color: var(--mid); line-height: 1.7; }
+.info-card ul { padding-left: 1.2rem; }
+.info-card li { margin-bottom: .3rem; }
+.highlight { color: var(--terra); font-weight: 600; font-family: 'Cormorant Garant', serif; font-size: 1.05rem; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink); color: rgba(255,255,255,.6);
+  padding: 3rem 2.5rem; text-align: center;
+  font-size: .82rem; line-height: 1.8;
+}
+footer strong { color: white; font-family: 'Cormorant Garant', serif; font-size: 1.2rem; }
+
+/* ── TABS (generic) ── */
+.tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1.5rem; padding: .5rem; background: var(--parch); border-radius: var(--r); border: 1px solid var(--border); }
+.tab {
+  padding: .5rem 1rem; border-radius: var(--r-sm); font-size: .82rem; font-weight: 500;
+  border: none; background: transparent; color: var(--mid); cursor: pointer; transition: all .2s;
+}
+.tab:hover { color: var(--ink); }
+.tab.active { background: white; color: var(--terra); box-shadow: 0 2px 8px var(--shadow); }
+
+.tab-panel { display: none; animation: fadeUp .25s ease; }
+.tab-panel.active { display: block; }
+
+/* ── DECISION BADGE ── */
+.decision-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .4rem .9rem; border-radius: 20px; font-size: .78rem; font-weight: 600;
+  background: rgba(30,74,50,.1); color: var(--forest); border: 1px solid rgba(30,74,50,.2);
+}
+.decision-badge.open { background: rgba(192,74,21,.1); color: var(--terra); border-color: rgba(192,74,21,.2); }
+
+/* ── RULE BOX ── */
+.rule-box {
+  padding: 1rem 1.4rem; border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: white; margin: .75rem 0;
+}
+.rule-formula {
+  font-family: 'JetBrains Mono', monospace; font-size: .9rem; color: var(--terra);
+  padding: .4rem .8rem; background: rgba(192,74,21,.06); border-radius: 4px;
+  border-left: 3px solid var(--terra); margin: .4rem 0; display: inline-block;
+}
+.rule-note { font-size: .82rem; color: var(--mid); margin-top: .4rem; line-height: 1.6; }
+
+/* ── EXAMPLE ── */
+.ex { padding: .6rem 1rem; background: var(--parch); border-radius: var(--r-sm); margin: .3rem 0; }
+.ex .solis { font-family: 'Cormorant Garant', serif; font-size: 1rem; font-weight: 600; color: var(--ink); }
+.ex .solis .hl { color: var(--forest); }
+.ex .trad { font-size: .8rem; color: var(--mid); margin-top: .1rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  #nav { padding: 0 1.25rem; }
+  .nav-links { gap: 0; }
+  .nav-links a { padding: .4rem .6rem; font-size: .72rem; }
+  .section { padding: 4rem 1.25rem; }
+  #lessico, #verbi, #fonetica, #storia { padding: 4rem 1.25rem; }
+  .hero-stats { gap: 1.5rem; }
+  .verb-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">✦ SOLIS <span>Lingua Romanza Pianificata</span></a>
+  <div class="nav-links">
+    <a href="#grammatica" class="active">Grammatica</a>
+    <a href="#verbi">Verbi</a>
+    <a href="#lessico">Lessico</a>
+    <a href="#fonetica">Fonetica</a>
+    <a href="#storia">Storia</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-sun"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Lingua Romanza Pianificata · Versione 1.0</div>
+    <h1 class="hero-title"><em>Solis</em></h1>
+    <p class="hero-sub">Una lingua che nasce dal sole delle lingue romanze</p>
+    <p class="hero-tagline">Solis è una lingua costruita sull'eredità di italiano, spagnolo, francese, portoghese e catalano. Naturale, fluida ed espressiva — irregolarità comprese.</p>
+    <div class="hero-btns">
+      <a href="#grammatica" class="btn-primary">Inizia a studiare</a>
+      <a href="#lessico" class="btn-outline">Esplora il lessico</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Lingue sorgente</div></div>
+      <div class="stat"><div class="stat-num">300+</div><div class="stat-label">Voci lessicali</div></div>
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">Verbi irregolari</div></div>
+      <div class="stat"><div class="stat-num">SVO</div><div class="stat-label">Ordine delle parole</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GRAMMATICA ── -->
+<section id="grammatica" class="section">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Grammatica</div>
+      <h2 class="section-title">Le basi di <em>Solis</em></h2>
+      <p class="section-desc">Tre coniugazioni verbali regolari, un sistema nominale semplice, e la ricchezza morfologica delle lingue romanze.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs reveal">
+      <button class="tab active" onclick="showGramTab('coniugazione')">Coniugazione</button>
+      <button class="tab" onclick="showGramTab('pronomi')">Pronomi</button>
+      <button class="tab" onclick="showGramTab('articoli')">Articoli</button>
+      <button class="tab" onclick="showGramTab('comparativi')">Comparativi</button>
+      <button class="tab" onclick="showGramTab('modali')">Modali</button>
+      <button class="tab" onclick="showGramTab('numeri')">Numerali</button>
+      <button class="tab" onclick="showGramTab('avverbi')">Avverbi</button>
+      <button class="tab" onclick="showGramTab('aspetto')">Aspetto verbale</button>
+      <button class="tab" onclick="showGramTab('decisioni')">Decisioni codificate</button>
+    </div>
+
+    <!-- CONIUGAZIONE -->
+    <div id="gram-coniugazione" class="tab-panel active">
+      <div class="gram-grid">
+        <div class="gram-card reveal">
+          <div class="gram-card-head">
+            <h3>Coniugazione -AR · <em>caminar</em></h3>
+            <p>camminare · la classe più produttiva</p>
+          </div>
+          <div class="gram-card-body">
+            <div class="tabs" style="margin-bottom:1rem; padding:.3rem; gap:.3rem;">
+              <button class="tab active" style="padding:.3rem .7rem; font-size:.75rem;" onclick="showSubTab(this,'ar')">Presente</button>
+              <button class="tab" style="padding:.3rem .7rem; font-size:.75rem;" onclick="showSubTab(this,'ar-imp')">Imperfetto</button>
+              <button class="tab" style="padding:.3rem .7rem; font-size:.75rem;" onclick="showSubTab(this,'ar-fut')">Futuro</button>
+              <button class="tab" style="padding:.3rem .7rem; font-size:.75rem;" onclick="showSubTab(this,'ar-cond')">Condizionale</button>
+            </div>
+            <div id="ar" class="stab active">
+              <table class="conj-table">
+                <tr><td class="pers">je</td><td class="form">camin</td></tr>
+                <tr><td class="pers">te</td><td class="form">camines</td></tr>
+                <tr><td class="pers">ez/za</td><td class="form">camine</td></tr>
+                  <tr><td class="pers">je</td><td class="form">caminav</td></tr>
+                <tr><td class="pers">voz</td><td class="form">caminez</td></tr>
+                  <tr><td class="pers">je</td><td class="form">caminar</td></tr>
+              </table>
+                  <tr><td class="pers">je</td><td class="form">caminari</td></tr>
+            <div id="ar-imp" class="stab">
+                  <tr><td class="pers">je</td><td class="form">camin</td></tr>
+                <tr><td class="pers">je</td><td class="form">caminava</td></tr>
+                <tr><td class="pers">te</td><td class="form">caminavas</td></tr>
+                <tr><td class="pers">ez/za</td><td class="form">caminava</td></tr>
+                <tr><td class="pers">noz</td><td class="form">caminavom</td></tr>
+                <tr><td class="pers">voz</td><td class="form">caminavez</td></tr>
+                <tr><td class="pers">lor</td><td class="form">caminavem</td></tr>
+              </table>
+            </div>
+            <div id="ar-fut" class="stab">
+              <table class="conj-table">
+                <tr><td class="pers">je</td><td class="form">caminaré</td></tr>
+                <tr><td class="pers">te</td><td class="form">caminarés</td></tr>
+                <tr><td class="pers">ez/za</td><td class="form">caminare</td></tr>
+                <tr><td class="pers">noz</td><td class="form">caminarom</td></tr>
+                <tr><td class="pers">voz</td><td class="form">caminaréz</td></tr>
+                <tr><td class="pers">lor</td><td class="form">caminaren</td></tr>
+              </table>
+            </div>
+            <div id="ar-cond" class="stab">
+              <table class="conj-table">
+                <tr><td class="pers">je</td><td class="form">caminaria</td></tr>
+                <tr><td class="pers">te</td><td class="form">caminarías</td></tr>
+                <tr><td class="pers">ez/za</td><td class="form">caminaria</td></tr>
+                <tr><td class="pers">noz</td><td class="form">caminaríom</td></tr>
+                <tr><td class="pers">voz</td><td class="form">caminaríez</td></tr>
+                <tr><td class="pers">lor</td><td class="form">caminarien</td></tr>
+              </table>
+            </div>
+            <div style="margin-top:1rem; padding:.6rem; background:var(--parch); border-radius:6px; font-size:.8rem; color:var(--mid);">
+              PP: <strong style="color:var(--terra);font-family:'Cormorant Garant',serif;">caminat</strong> &nbsp;·&nbsp; Gerundio: <strong style="color:var(--terra);font-family:'Cormorant Garant',serif;">caminand</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head" style="background:linear-gradient(135deg,#C04A15,#E07040)">
+            <h3>Coniugazione -ER · <em>perder</em></h3>
+            <p>perdere · con dittongazione e→ie</p>
+          </div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Pers.</th><th>Pres.</th><th>Dittonga?</th></tr></thead>
+              <tr><td class="pers">je</td><td class="form irr">pierd</td><td style="font-size:.75rem;color:var(--terra);">✓ acento radice</td></tr>
+              <tr><td class="pers">te</td><td class="form irr">pierdes</td><td style="font-size:.75rem;color:var(--terra);">✓</td></tr>
+              <tr><td class="pers">ez/za</td><td class="form irr">pierde</td><td style="font-size:.75rem;color:var(--terra);">✓</td></tr>
+              <tr><td class="pers">noz</td><td class="form">perdom</td><td style="font-size:.75rem;color:var(--mid);">— acento suffisso</td></tr>
+              <tr><td class="pers">voz</td><td class="form">perdez</td><td style="font-size:.75rem;color:var(--mid);">—</td></tr>
+              <tr><td class="pers">lor</td><td class="form irr">pierden</td><td style="font-size:.75rem;color:var(--terra);">✓</td></tr>
+            </table>
+            <div style="margin-top:1rem;">
+              <div class="rule-formula">e tonica → ie &nbsp;&nbsp; o tonica → uo</div>
+              <p class="rule-note">Pattern «ferro di cavallo»: dittongano je/te/ez/lor, non noz/voz.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head" style="background:linear-gradient(135deg,#1E4A32,#2D6B4A)">
+            <h3>Coniugazione -IR · <em>partir</em></h3>
+            <p>partire · terza classe</p>
+          </div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Pers.</th><th>Presente</th></tr></thead>
+              <tr><td class="pers">je</td><td class="form">part</td></tr>
+              <tr><td class="pers">te</td><td class="form">partes</td></tr>
+              <tr><td class="pers">ez/za</td><td class="form">parte</td></tr>
+              <tr><td class="pers">noz</td><td class="form">partom</td></tr>
+              <tr><td class="pers">voz</td><td class="form">partez</td></tr>
+              <tr><td class="pers">lor</td><td class="form">parten</td></tr>
+            </table>
+            <div style="margin-top:1rem; padding:.6rem; background:var(--parch); border-radius:6px; font-size:.8rem; color:var(--mid);">
+              PP: <strong style="color:var(--terra);font-family:'Cormorant Garant',serif;">partit</strong> &nbsp;·&nbsp; Gerundio: <strong style="color:var(--terra);font-family:'Cormorant Garant',serif;">partind</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head" style="background:linear-gradient(135deg,#5A3A1A,#8A5A2A)">
+            <h3>Tempi composti</h3>
+            <p>passato prossimo, trapassato, futuro anteriore</p>
+          </div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Tempo</th><th>Struttura</th><th>Esempio</th></tr></thead>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Pass. pross.</td><td class="form" style="font-size:.85rem;">ver + PP</td><td style="font-size:.85rem;font-style:italic;">je vey caminat</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Pass. pross. (moto)</td><td class="form" style="font-size:.85rem;">ez + PP</td><td style="font-size:.85rem;font-style:italic;">ez ez andat</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Trapassato</td><td class="form" style="font-size:.85rem;">avev + PP</td><td style="font-size:.85rem;font-style:italic;">je avev caminat</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Fut. anteriore</td><td class="form" style="font-size:.85rem;">verer + PP</td><td style="font-size:.85rem;font-style:italic;">je verer caminat</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Cond. passato</td><td class="form" style="font-size:.85rem;">veria + PP</td><td style="font-size:.85rem;font-style:italic;">je veria caminat</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head" style="background:linear-gradient(135deg,#2A2A5A,#3C3489)">
+            <h3>Congiuntivo presente</h3>
+            <p>dubbio, desiderio, obbligo</p>
+          </div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Pers.</th><th>-AR</th><th>-ER</th><th>-IR</th></tr></thead>
+              <tr><td class="pers">je</td><td class="form">camine</td><td class="form">perde</td><td class="form">parte</td></tr>
+              <tr><td class="pers">te</td><td class="form">camines</td><td class="form">perdes</td><td class="form">partes</td></tr>
+              <tr><td class="pers">ez/za</td><td class="form">camine</td><td class="form">perde</td><td class="form">parte</td></tr>
+              <tr><td class="pers">noz</td><td class="form">caminom</td><td class="form">perdom</td><td class="form">partom</td></tr>
+              <tr><td class="pers">voz</td><td class="form">caminez</td><td class="form">perdez</td><td class="form">partez</td></tr>
+              <tr><td class="pers">lor</td><td class="form">caminen</td><td class="form">perden</td><td class="form">parten</td></tr>
+            </table>
+            <div class="rule-note" style="margin-top:.75rem;">Congiuntivo imperfetto: <span class="hl">-ass-/-iss-</span> · es. <em style="color:var(--terra);">caminass, perdiss</em></div>
+          </div>
+        </div>
+
+        <div class="gram-card reveal reveal-delay-3">
+          <div class="gram-card-head" style="background:linear-gradient(135deg,#3A1A3A,#6A3A6A)">
+            <h3>Passiva</h3>
+            <p>con ez o con se</p>
+          </div>
+          <div class="gram-card-body">
+            <div class="rule-box">
+              <div class="rule-formula">soggetto + ez + PP [+ da + agente]</div>
+            </div>
+            <div class="ex"><div class="solis">La lezion <span class="hl">ez explicat</span> dal professor.</div><div class="trad">La lezione è spiegata dal professore.</div></div>
+            <div class="ex"><div class="solis"><span class="hl">Se vend</span> librs aquí.</div><div class="trad">Si vendono libri qui. — passiva con se</div></div>
+            <div style="margin-top:.75rem;">
+              <span class="decision-badge">PP invariabile (Core standard)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRONOMI -->
+    <div id="gram-pronomi" class="tab-panel">
+      <div class="gram-grid">
+        <div class="gram-card reveal">
+          <div class="gram-card-head"><h3>Pronomi soggetto</h3><p>sistema a tre vie per la 3ª persona</p></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Persona</th><th>Pronome</th><th>IT</th></tr></thead>
+              <tr><td class="pers">1ª sing.</td><td class="form">je</td><td style="font-size:.82rem;color:var(--mid)">io</td></tr>
+              <tr><td class="pers">2ª sing.</td><td class="form">te</td><td style="font-size:.82rem;color:var(--mid)">tu</td></tr>
+              <tr><td class="pers">3ª m.</td><td class="form irr">ez</td><td style="font-size:.82rem;color:var(--mid)">lui</td></tr>
+              <tr><td class="pers">3ª f.</td><td class="form irr">za</td><td style="font-size:.82rem;color:var(--mid)">lei</td></tr>
+              <tr><td class="pers">3ª neutro</td><td class="form irr" style="color:#6A3A6A;">zo</td><td style="font-size:.82rem;color:var(--mid)">— (non-binario)</td></tr>
+              <tr><td class="pers">1ª pl.</td><td class="form">noz</td><td style="font-size:.82rem;color:var(--mid)">noi</td></tr>
+              <tr><td class="pers">2ª pl.</td><td class="form">voz</td><td style="font-size:.82rem;color:var(--mid)">voi</td></tr>
+              <tr><td class="pers">3ª pl.</td><td class="form">lor</td><td style="font-size:.82rem;color:var(--mid)">loro</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head"><h3>Clitici OD / OI</h3><p>pronomi oggetto diretto e indiretto</p></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Pers.</th><th>OD</th><th>OI</th><th>Rifl.</th></tr></thead>
+              <tr><td class="pers">je</td><td class="form">me</td><td class="form">me</td><td class="form">me</td></tr>
+              <tr><td class="pers">te</td><td class="form">te</td><td class="form">te</td><td class="form">te</td></tr>
+              <tr><td class="pers">ez/za/zo</td><td class="form">lo/la/lo</td><td class="form">li</td><td class="form">se</td></tr>
+              <tr><td class="pers">noz</td><td class="form">noz</td><td class="form">noz</td><td class="form">noz</td></tr>
+              <tr><td class="pers">voz</td><td class="form">voz</td><td class="form">voz</td><td class="form">voz</td></tr>
+              <tr><td class="pers">lor</td><td class="form">los/las</td><td class="form">lor</td><td class="form">se</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head"><h3>Pronomi relativi</h3><p>ki / que / dov / purque…</p></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Rel.</th><th>Uso</th></tr></thead>
+              <tr><td class="form">ki</td><td style="font-size:.82rem;color:var(--mid)">sogg/ogg — animati</td></tr>
+              <tr><td class="form">que</td><td style="font-size:.82rem;color:var(--mid)">sogg/ogg — inanimati</td></tr>
+              <tr><td class="form">de ki / de que</td><td style="font-size:.82rem;color:var(--mid)">genitivo</td></tr>
+              <tr><td class="form">dov</td><td style="font-size:.82rem;color:var(--mid)">locativo</td></tr>
+              <tr><td class="form">purque</td><td style="font-size:.82rem;color:var(--mid)">causale/finale</td></tr>
+              <tr><td class="form">cuand</td><td style="font-size:.82rem;color:var(--mid)">temporale</td></tr>
+              <tr><td class="form">com</td><td style="font-size:.82rem;color:var(--mid)">modale</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICOLI -->
+    <div id="gram-articoli" class="tab-panel">
+      <div class="info-grid">
+        <div class="info-card reveal">
+          <h3><span class="ic">📖</span> Articolo determinativo</h3>
+          <table class="conj-table" style="margin-top:.5rem;">
+            <thead><tr><th></th><th>Masch.</th><th>Femm.</th></tr></thead>
+            <tr><td class="pers">Sing.</td><td class="form">le</td><td class="form">la</td></tr>
+            <tr><td class="pers">Pl.</td><td class="form">los</td><td class="form">las</td></tr>
+          </table>
+          <p style="margin-top:.75rem;">← FR <em>le</em> · massimizza riconoscimento cross-romanzo</p>
+        </div>
+        <div class="info-card reveal reveal-delay-1">
+          <h3><span class="ic">📝</span> Articolo indeterminativo</h3>
+          <table class="conj-table" style="margin-top:.5rem;">
+            <thead><tr><th></th><th>Masch.</th><th>Femm.</th></tr></thead>
+            <tr><td class="pers">Sing.</td><td class="form">un</td><td class="form">una</td></tr>
+            <tr><td class="pers">Pl.</td><td class="form">unos</td><td class="form">unas</td></tr>
+          </table>
+          <p style="margin-top:.75rem;">Solo <em>un/una</em> ha genere. Tutti gli altri cardinali invariabili.</p>
+        </div>
+        <div class="info-card reveal reveal-delay-2">
+          <h3><span class="ic">🔗</span> Preposizioni + articolo</h3>
+          <table class="conj-table" style="margin-top:.5rem;">
+            <thead><tr><th>Prep.</th><th>+ le</th><th>+ la</th><th>+ los</th></tr></thead>
+            <tr><td class="pers">de</td><td class="form">del</td><td class="form">de la</td><td class="form">de los</td></tr>
+            <tr><td class="pers">a</td><td class="form">al</td><td class="form">a la</td><td class="form">a los</td></tr>
+            <tr><td class="pers">en</td><td class="form">en le</td><td class="form">en la</td><td class="form">en los</td></tr>
+          </table>
+        </div>
+        <div class="info-card reveal reveal-delay-3">
+          <h3><span class="ic">⚤</span> Genere dei nomi</h3>
+          <ul>
+            <li>Genere grammaticale come IT/ES</li>
+            <li>Maschile: forma base — <span class="highlight">le libr</span></li>
+            <li>Femminile spesso in <em>-a</em> — <span class="highlight">la femna</span></li>
+            <li>Plurale: aggiunta di <em>-s</em> — <span class="highlight">los librs</span></li>
+            <li>Aggettivo concorda in genere e numero</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARATIVI -->
+    <div id="gram-comparativi" class="tab-panel">
+      <div class="gram-grid">
+        <div class="gram-card reveal">
+          <div class="gram-card-head"><h3>Comparativo</h3><p>maggioranza · minoranza · uguaglianza</p></div>
+          <div class="gram-card-body">
+            <div class="rule-box">
+              <div class="rule-formula">plus … que &nbsp; · &nbsp; menos … que &nbsp; · &nbsp; tan … com</div>
+            </div>
+            <div class="ex"><div class="solis">Ez ez <span class="hl">plus alt que</span> te.</div><div class="trad">È più alto di te.</div></div>
+            <div class="ex"><div class="solis">Je son <span class="hl">menos rapid que</span> lor.</div><div class="trad">Sono meno veloce di loro.</div></div>
+            <div class="ex"><div class="solis">La citat ez <span class="hl">tan grand com</span> Milano.</div><div class="trad">La città è grande come Milano.</div></div>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head"><h3>Superlativo</h3><p>relativo e assoluto</p></div>
+          <div class="gram-card-body">
+            <div class="rule-box">
+              <div class="rule-formula">art. + plus/menos + agg. + de + gruppo</div>
+            </div>
+            <div class="ex"><div class="solis">Ez ez <span class="hl">le plus alt de</span> la classa.</div><div class="trad">È il più alto della classe.</div></div>
+            <table class="conj-table" style="margin-top:.75rem;">
+              <thead><tr><th>Strategia</th><th>Esempio</th><th>Registro</th></tr></thead>
+              <tr><td style="font-size:.78rem;">molt + agg.</td><td class="form" style="font-size:.88rem;">molt inteligent</td><td style="font-size:.72rem;color:var(--mid);">standard</td></tr>
+              <tr><td style="font-size:.78rem;">agg. + -isim</td><td class="form irr" style="font-size:.88rem;">inteligentisim</td><td style="font-size:.72rem;color:var(--mid);">formale</td></tr>
+              <tr><td style="font-size:.78rem;">molt molt</td><td class="form" style="font-size:.88rem;">molt molt bel</td><td style="font-size:.72rem;color:var(--mid);">colloquiale</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head"><h3>Irregolari</h3><p>forme latine ereditate</p></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Base</th><th>Comparativo</th><th>Superlativo ass.</th></tr></thead>
+              <tr><td class="form">bon</td><td class="form irr">meior</td><td class="form irr">optim</td></tr>
+              <tr><td class="form">mal</td><td class="form irr">peior</td><td class="form irr">pessim</td></tr>
+              <tr><td class="form">grand</td><td class="form irr">maior</td><td class="form irr">maxim</td></tr>
+              <tr><td class="form">pec</td><td class="form irr">menor</td><td class="form irr">minim</td></tr>
+              <tr><td class="form">alt</td><td class="form irr">superior</td><td class="form irr">suprem</td></tr>
+              <tr><td class="form">bax</td><td class="form irr">inferior</td><td class="form irr">infim</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODALI -->
+    <div id="gram-modali" class="tab-panel">
+      <div class="gram-grid">
+        <div class="gram-card reveal">
+          <div class="gram-card-head"><h3>I quattro modali puri</h3></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Modale</th><th>Significato</th><th>IT</th></tr></thead>
+              <tr><td class="form">poder</td><td style="font-size:.82rem;color:var(--mid)">possibilità, capacità</td><td style="font-size:.82rem;color:var(--mid)">potere</td></tr>
+              <tr><td class="form">voler</td><td style="font-size:.82rem;color:var(--mid)">volontà, desiderio</td><td style="font-size:.82rem;color:var(--mid)">volere</td></tr>
+              <tr><td class="form">dever</td><td style="font-size:.82rem;color:var(--mid)">obbligo morale</td><td style="font-size:.82rem;color:var(--mid)">dovere</td></tr>
+              <tr><td class="form">tener que</td><td style="font-size:.82rem;color:var(--mid)">necessità concreta</td><td style="font-size:.82rem;color:var(--mid)">dover fare</td></tr>
+            </table>
+            <div class="ex" style="margin-top:1rem;"><div class="solis">Je <span class="hl">volria</span> un café, per favor.</div><div class="trad">Vorrei un caffè, per favore. — condizionale di cortesia</div></div>
+            <div class="ex"><div class="solis">Ez <span class="hl">dev</span> esser alí.</div><div class="trad">Deve essere lì. — deduzione logica</div></div>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head"><h3>Semi-modali</h3></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Semi-modale</th><th>Struttura</th><th>IT</th></tr></thead>
+              <tr><td class="form">saber</td><td style="font-size:.82rem;">saber + inf.</td><td style="font-size:.82rem;color:var(--mid)">sapere fare</td></tr>
+              <tr><td class="form">far</td><td style="font-size:.82rem;">far + inf.</td><td style="font-size:.82rem;color:var(--mid)">far fare</td></tr>
+              <tr><td class="form">soler</td><td style="font-size:.82rem;">soler + inf.</td><td style="font-size:.82rem;color:var(--mid)">essere solito</td></tr>
+              <tr><td class="form">osar</td><td style="font-size:.82rem;">osar + inf.</td><td style="font-size:.82rem;color:var(--mid)">osare</td></tr>
+              <tr><td class="form">laissar</td><td style="font-size:.82rem;">laissar + inf.</td><td style="font-size:.82rem;color:var(--mid)">lasciare fare</td></tr>
+            </table>
+            <div class="ex" style="margin-top:.75rem;"><div class="solis">Je <span class="hl">sav</span> nadar.</div><div class="trad">So nuotare. — competenza acquisita</div></div>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head"><h3>Modale + infinito passato</h3></div>
+          <div class="gram-card-body">
+            <div class="rule-box">
+              <div class="rule-formula">modale + ver/ez + PP</div>
+            </div>
+            <div class="ex"><div class="solis">Je <span class="hl">devria ver</span> studiat plus.</div><div class="trad">Avrei dovuto studiare di più.</div></div>
+            <div class="ex"><div class="solis">Ez <span class="hl">dev ver</span> arrivat ia.</div><div class="trad">Deve essere già arrivato.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NUMERI -->
+    <div id="gram-numeri" class="tab-panel">
+      <div class="gram-grid">
+        <div class="gram-card reveal">
+          <div class="gram-card-head"><h3>Cardinali 0–20</h3></div>
+          <div class="gram-card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.3rem;">
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">0 </span><span class="form" style="font-size:.95rem;">zer</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">1 </span><span class="form" style="font-size:.95rem;">un</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">2 </span><span class="form" style="font-size:.95rem;">dos</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">3 </span><span class="form" style="font-size:.95rem;">tres</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">4 </span><span class="form" style="font-size:.95rem;">catar</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">5 </span><span class="form" style="font-size:.95rem;">cinc</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">6 </span><span class="form" style="font-size:.95rem;">ses</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">7 </span><span class="form" style="font-size:.95rem;">set</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">8 </span><span class="form" style="font-size:.95rem;">oit</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">9 </span><span class="form" style="font-size:.95rem;">nov</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">10 </span><span class="form" style="font-size:.95rem;">dez</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">11 </span><span class="form" style="font-size:.95rem;">onz</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">12 </span><span class="form" style="font-size:.95rem;">dotz</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">15 </span><span class="form" style="font-size:.95rem;">quinz</span></div>
+              <div style="padding:.35rem .5rem;background:var(--parch);border-radius:4px;"><span style="font-size:.72rem;color:var(--mid);">20 </span><span class="form" style="font-size:.95rem;">vint</span></div>
+            </div>
+            <div class="rule-note" style="margin-top:.75rem;">Composizione: <span class="highlight">vint-e-un</span>, <span class="highlight">trenta-e-cinc</span></div>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head"><h3>Ordinali</h3></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>N</th><th>Ordinale</th></tr></thead>
+              <tr><td class="pers">1°</td><td class="form irr">prim/prima</td></tr>
+              <tr><td class="pers">2°</td><td class="form">segond</td></tr>
+              <tr><td class="pers">3°</td><td class="form">terz/terza</td></tr>
+              <tr><td class="pers">4°</td><td class="form">quart</td></tr>
+              <tr><td class="pers">10°</td><td class="form">dezim</td></tr>
+              <tr><td class="pers">11°+</td><td class="form">N + -esim</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head"><h3>Centinaia e migliaia</h3></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <tr><td class="pers">100</td><td class="form">cent</td></tr>
+              <tr><td class="pers">200</td><td class="form">doscentos</td></tr>
+              <tr><td class="pers">1.000</td><td class="form">mil</td></tr>
+              <tr><td class="pers">2.000</td><td class="form">dos mil</td></tr>
+              <tr><td class="pers">1.000.000</td><td class="form">un milion</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVVERBI -->
+    <div id="gram-avverbi" class="tab-panel">
+      <div class="gram-grid">
+        <div class="gram-card reveal">
+          <div class="gram-card-head"><h3>Avverbi in -ament</h3><p>suffisso produttivo</p></div>
+          <div class="gram-card-body">
+            <div class="rule-box"><div class="rule-formula">aggettivo + -ament</div></div>
+            <table class="conj-table">
+              <thead><tr><th>Aggettivo</th><th>Avverbio</th><th>IT</th></tr></thead>
+              <tr><td class="form">rapid</td><td class="form irr">rapidament</td><td style="font-size:.82rem;color:var(--mid)">rapidamente</td></tr>
+              <tr><td class="form">lent</td><td class="form irr">lentament</td><td style="font-size:.82rem;color:var(--mid)">lentamente</td></tr>
+              <tr><td class="form">clar</td><td class="form irr">clarament</td><td style="font-size:.82rem;color:var(--mid)">chiaramente</td></tr>
+              <tr><td class="form">final</td><td class="form irr">finalment</td><td style="font-size:.82rem;color:var(--mid)">finalmente</td></tr>
+              <tr><td class="form">natural</td><td class="form irr">naturalment</td><td style="font-size:.82rem;color:var(--mid)">naturalmente</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head"><h3>Avverbi di tempo</h3></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <tr><td class="form irr">oi</td><td style="font-size:.85rem;color:var(--mid)">oggi</td></tr>
+              <tr><td class="form irr">ier</td><td style="font-size:.85rem;color:var(--mid)">ieri</td></tr>
+              <tr><td class="form irr">demà</td><td style="font-size:.85rem;color:var(--mid)">domani</td></tr>
+              <tr><td class="form">ora</td><td style="font-size:.85rem;color:var(--mid)">ora/adesso</td></tr>
+              <tr><td class="form">pois</td><td style="font-size:.85rem;color:var(--mid)">poi/dopo</td></tr>
+              <tr><td class="form">avant</td><td style="font-size:.85rem;color:var(--mid)">prima</td></tr>
+              <tr><td class="form">ia</td><td style="font-size:.85rem;color:var(--mid)">già</td></tr>
+              <tr><td class="form">encor</td><td style="font-size:.85rem;color:var(--mid)">ancora</td></tr>
+              <tr><td class="form">sempre</td><td style="font-size:.85rem;color:var(--mid)">sempre</td></tr>
+              <tr><td class="form irr">jamais</td><td style="font-size:.85rem;color:var(--mid)">mai</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head"><h3>Intensificatori di grado</h3></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <tr><td class="form">molt</td><td style="font-size:.85rem;color:var(--mid)">molto</td></tr>
+              <tr><td class="form">poc</td><td style="font-size:.85rem;color:var(--mid)">poco</td></tr>
+              <tr><td class="form">trop</td><td style="font-size:.85rem;color:var(--mid)">troppo</td></tr>
+              <tr><td class="form">prou</td><td style="font-size:.85rem;color:var(--mid)">abbastanza</td></tr>
+              <tr><td class="form">tant</td><td style="font-size:.85rem;color:var(--mid)">tanto</td></tr>
+              <tr><td class="form">plus</td><td style="font-size:.85rem;color:var(--mid)">più (comparativo)</td></tr>
+              <tr><td class="form">menos</td><td style="font-size:.85rem;color:var(--mid)">meno (comparativo)</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASPETTO VERBALE -->
+    <div id="gram-aspetto" class="tab-panel">
+      <div class="gram-grid">
+        <div class="gram-card reveal">
+          <div class="gram-card-head"><h3>Progressivo</h3><p>star + gerundio</p></div>
+          <div class="gram-card-body">
+            <div class="rule-box"><div class="rule-formula">star + gerundio</div></div>
+            <table class="conj-table">
+              <tr><td class="pers">je</td><td class="form irr">je star caminand</td></tr>
+              <tr><td class="pers">ez/za</td><td class="form irr">ez star caminand</td></tr>
+              <tr><td class="pers">noz</td><td class="form irr">noz estom caminand</td></tr>
+            </table>
+            <div class="rule-note" style="margin-top:.75rem;"><strong>Gerundio:</strong> -AR → <span class="highlight">-and</span> · -ER → <span class="highlight">-end</span> · -IR → <span class="highlight">-ind</span></div>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-1">
+          <div class="gram-card-head"><h3>Mappa aspettuale completa</h3></div>
+          <div class="gram-card-body">
+            <table class="conj-table">
+              <thead><tr><th>Fase</th><th>Struttura</th><th>Esempio</th></tr></thead>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Imminenza</td><td class="form" style="font-size:.82rem;">estar per + inf.</td><td style="font-size:.82rem;font-style:italic;">je estar per partir</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Inizio</td><td class="form" style="font-size:.82rem;">comezar a + inf.</td><td style="font-size:.82rem;font-style:italic;">je comez a caminar</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">In corso</td><td class="form irr" style="font-size:.82rem;">star + ger.</td><td style="font-size:.82rem;font-style:italic;">je star caminand</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Continuazione</td><td class="form" style="font-size:.82rem;">seguir + ger.</td><td style="font-size:.82rem;font-style:italic;">je seguix caminand</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Fine</td><td class="form" style="font-size:.82rem;">laissar de + inf.</td><td style="font-size:.82rem;font-style:italic;">je laiss de caminar</td></tr>
+              <tr><td style="font-size:.78rem;color:var(--mid);">Risultato</td><td class="form" style="font-size:.82rem;">passato prossimo</td><td style="font-size:.82rem;font-style:italic;">je vey caminat</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="gram-card reveal reveal-delay-2">
+          <div class="gram-card-head"><h3>Futuro perifrastico</h3></div>
+          <div class="gram-card-body">
+            <div class="rule-box"><div class="rule-formula">ir a + infinito</div></div>
+            <div class="ex"><div class="solis">Je <span class="hl">vai a caminar</span>.</div><div class="trad">Sto per camminare / camminerò.</div></div>
+            <div class="rule-note" style="margin-top:.75rem;">Equivale a ES <em>ir a</em> · FR <em>aller + inf.</em> · con sfumatura di intenzione o imminenza.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECISIONI CODIFICATE -->
+    <div id="gram-decisioni" class="tab-panel">
+      <div class="info-grid">
+        <div class="info-card reveal">
+          <h3><span class="ic">⚖️</span> esser vs estar <span class="decision-badge" style="margin-left:auto;">✓ Codificato</span></h3>
+          <table class="conj-table" style="margin-top:.75rem;">
+            <thead><tr><th>Contesto</th><th>Parlato</th><th>Formale</th></tr></thead>
+            <tr><td style="font-size:.75rem;">Identità</td><td class="form" style="font-size:.82rem;">ez medic</td><td class="form" style="font-size:.82rem;">ez medic</td></tr>
+            <tr><td style="font-size:.75rem;">Stato transitorio</td><td class="form" style="font-size:.82rem;">ez faticat</td><td class="form irr" style="font-size:.82rem;">ez estar faticat</td></tr>
+            <tr><td style="font-size:.75rem;">Posizione</td><td class="form" style="font-size:.82rem;">ez aquí</td><td class="form irr" style="font-size:.82rem;">ez estar aquí</td></tr>
+            <tr><td style="font-size:.75rem;">Progressivo</td><td class="form" colspan="2" style="font-size:.82rem;">sempre estar</td></tr>
+          </table>
+        </div>
+        <div class="info-card reveal reveal-delay-1">
+          <h3><span class="ic">🏳️‍🌈</span> Pronome neutro <em>zo</em> <span class="decision-badge" style="margin-left:auto;">✓ Codificato</span></h3>
+          <p><span class="highlight">zo</span> = pronome soggetto neutro / non-binario, 3ª persona singolare</p>
+          <div class="ex" style="margin-top:.75rem;"><div class="solis"><span class="hl">Zo</span> ez medic e travailha en la citat.</div><div class="trad">È (neutro) medico e lavora in città.</div></div>
+          <p style="margin-top:.5rem;">OD: <span class="highlight">lo</span> · OI: <span class="highlight">li</span> · Possessivo: <span class="highlight">son/sa</span></p>
+        </div>
+        <div class="info-card reveal reveal-delay-2">
+          <h3><span class="ic">📐</span> Condizionale definitivo</h3>
+          <p style="margin-bottom:.75rem;"><strong>-aria/-eria/-iria</strong> = Core standard (IT/ES)</p>
+          <p style="margin-bottom:.75rem;"><strong>-ev/-evs</strong> = Solis Fralis (FR) esclusivo</p>
+          <div class="ex"><div class="solis">Je <span class="hl">caminaria</span> con te. (Core)</div><div class="trad">Camminerei con te.</div></div>
+        </div>
+        <div class="info-card reveal reveal-delay-3">
+          <h3><span class="ic">📝</span> Accordo PP — regola definitiva</h3>
+          <ul>
+            <li><strong>Invariabile</strong> nei tempi composti attivi</li>
+            <li><strong>Invariabile</strong> nella passiva (Core standard)</li>
+            <li><strong>Accordo obbligatorio</strong> per PP aggettivale</li>
+            <li><em>la porta avrita</em> (PP = aggettivo → varia)</li>
+            <li><em>je vey caminat</em> (PP = tempo composto → invariabile)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VERBI IRREGOLARI ── -->
+<section id="verbi">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Morfologia verbale</div>
+      <h2 class="section-title">Verbi <em>irregolari</em></h2>
+      <p class="section-desc">12 verbi fondamentali con tutti i tempi, etimologia pan-romanza e note morfologiche.</p>
+    </div>
+    <div class="verb-tabs">
+      <button class="vtab active" onclick="showVerb('esser')">esser</button>
+      <button class="vtab" onclick="showVerb('aver')">aver</button>
+      <button class="vtab" onclick="showVerb('andar')">andar</button>
+      <button class="vtab" onclick="showVerb('venir')">venir</button>
+      <button class="vtab" onclick="showVerb('far')">far</button>
+      <button class="vtab" onclick="showVerb('dir')">dir</button>
+      <button class="vtab" onclick="showVerb('estar')">estar</button>
+      <button class="vtab" onclick="showVerb('poder')">poder</button>
+      <button class="vtab" onclick="showVerb('voler')">voler</button>
+      <button class="vtab" onclick="showVerb('saber')">saber</button>
+      <button class="vtab" onclick="showVerb('tener')">tener</button>
+      <button class="vtab" onclick="showVerb('meter')">meter</button>
+    </div>
+    <div id="vp-esser" class="verb-panel active" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>esser</h2><div class="etym">lat. ESSE + STARE · ausiliare di stato/moto/passiva · completamente irregolare · 3 radici: son-/er-/ser-</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente indicativo</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">son</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">ies</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">ez</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">esom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">esez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">son</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">erav</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">eravas</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">erava</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">eravom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">eravez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">eraven</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro semplice</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">seré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">serés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">sere</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">serom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">serez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">seren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Condizionale</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">seria</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">serias</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">seria</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">seriom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">seriez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">serien</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Congiuntivo presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">eze</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">ezes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">eze</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">ezom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">ezez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">ezen</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Congiuntivo imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">ezze</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">ezzes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">ezze</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">ezzom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">ezzez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">ezzen</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>estat</strong></span><span class="vform-badge">Gerundio <strong>essend</strong></span><span class="vform-badge">Imp. <strong>es! · sez!</strong></span><span class="vform-badge">IT: sono/sei/è · ES: soy/eres/es · FR: suis/es/est</span></div>
+    </div>
+    <div id="vp-aver" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>aver / ver</h2><div class="etym">lat. HABERE · ausiliare transitivo · «ver» nei tempi composti · irregolare 1ª sing. (vey)</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente indicativo</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">vey</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">aves</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">ave</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">avom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">avez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">aven</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f reg">avev</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">avevas</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">aveva</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">avevom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">avevez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">aveven</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">verer</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">vereras</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">verera</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">vererom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">vererez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">vereren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Condizionale</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">veria</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">verias</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">veria</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">veriom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">veriez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">verien</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">ver</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">vers</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">ver</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">verom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">verez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">veren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">verss</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">versses</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">versse</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">verssом</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">verssez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">verssen</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>avut</strong></span><span class="vform-badge">Gerundio <strong>avend</strong></span><span class="vform-badge">Pass. prox. <strong>je vey caminat</strong></span><span class="vform-badge">IT: ho/hai/ha · ES: he/has/ha · FR: ai/as/a</span></div>
+    </div>
+    <div id="vp-andar" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>andar</h2><div class="etym">lat. AMBULARE/VADERE/IRE · supletismo totale · 3 radici: and-/vai-/ir-</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente indicativo</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">vai</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">vas</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">va</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">andom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">andez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">van</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f reg">andav</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">andavas</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">andava</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">andavom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">andavez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">andaven</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro (supletivo)</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">iré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">irés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">ire</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">irom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">irez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">iren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Condizionale</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">iria</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">irias</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">iria</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">iriom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">iriez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">irien</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">vaie</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">vaies</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">vaie</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">andom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">andez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">vaien</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f reg">andass</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">andasses</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">andasse</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">andassom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">andassez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">andassen</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>andat</strong></span><span class="vform-badge">Aux. <strong>ez</strong></span><span class="vform-badge">Pass. prox. <strong>ez ez andat</strong></span><span class="vform-badge">Imp. <strong>vai! · andem!</strong></span></div>
+    </div>
+    <div id="vp-venir" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>venir</h2><div class="etym">lat. VENIRE · dittongo e→ie · 1ª sing. «vien» · PP irregolare «vengut»</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">vien</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">vienes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">viene</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">venom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">venez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">vienen</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">vendré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">vendrés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">vendre</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">vendrom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">vendrez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">vendren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">venge</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">venges</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">venge</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">vengom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">vengez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">vengen</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>vengut</strong></span><span class="vform-badge">Ger. <strong>venind</strong></span><span class="vform-badge">Aux. <strong>ez</strong></span><span class="vform-badge">Imp. <strong>vien! · vengom!</strong></span></div>
+    </div>
+    <div id="vp-far" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>far</h2><div class="etym">lat. FACERE · riduzione pan-romanza · radici fa-/faz-/fec- · completamente irregolare</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">faz</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">fas</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">fa</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">fazom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">fazez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">fan</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">faré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">farés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">fare</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">farom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">farez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">faren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">feciss</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">fecisses</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">fecisse</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">fecissom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">fecissez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">fecissen</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>fat</strong></span><span class="vform-badge">Ger. <strong>fazend</strong></span><span class="vform-badge">Imp. <strong>fa! · fazom!</strong></span><span class="vform-badge">IT: faccio/fa · ES: hago/hace · FR: fais/fait</span></div>
+    </div>
+    <div id="vp-dir" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>dir</h2><div class="etym">lat. DICERE · riduzione · radici dis-/diz-/dic- · PP brevissimo «dit»</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">dis</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">dises</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">dise</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">dizom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">dizez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">disen</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">diré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">dirés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">dire</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">dirom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">direz</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">diren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Condizionale</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">diria</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">dirias</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">diria</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">diriom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">diriez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">dirien</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>dit</strong></span><span class="vform-badge">Ger. <strong>dizend</strong></span><span class="vform-badge">Imp. <strong>di! · dizom!</strong></span></div>
+    </div>
+    <div id="vp-estar" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>estar</h2><div class="etym">lat. STARE · stato transitorio, posizione · diverso da esser (stato permanente)</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">estav</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">estas</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">esta</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">estom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">estez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">estan</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Imperfetto</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f reg">estav</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">estavas</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">estava</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">estavom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">estavez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">estaven</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">este</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">estes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">este</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">estom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">estez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">esten</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>estat</strong></span><span class="vform-badge">Progressivo <strong>je star caminand</strong></span><span class="vform-badge">Imp. <strong>esta! · estom!</strong></span></div>
+    </div>
+    <div id="vp-poder" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>poder</h2><div class="etym">lat. *POTERE · dittongo o→uo sotto accento · modale puro</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">puod</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">puodes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">puode</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">podom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">podez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">puoden</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">podré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">podrés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">podre</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">podrom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">podrez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">podren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Condizionale</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">podria</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">podrias</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">podria</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">podriom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">podriez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">podrien</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>podut</strong></span><span class="vform-badge">Ger. <strong>podend</strong></span><span class="vform-badge">No imperativo · No progressivo</span></div>
+    </div>
+    <div id="vp-voler" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>voler</h2><div class="etym">lat. VELLE · dittongo o→ue · 1ª sing. «vol» senza dittongo (forma propria)</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">vol</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">vueles</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">vuele</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">volom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">volez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">vuelen</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">volré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">volrés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">volre</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">volrom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">volrez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">volren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Condizionale</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">volria</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">volrias</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">volria</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">volriom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">volriez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">volrien</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>volut</strong></span><span class="vform-badge">Ger. <strong>volend</strong></span><span class="vform-badge">No imperativo diretto</span></div>
+    </div>
+    <div id="vp-saber" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>saber</h2><div class="etym">lat. SAPERE · stativo · irregolare 1ª sing. (sav) · futuro sincopato (savré)</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">sav</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">sabes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">sabe</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">sabom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">sabez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">saben</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro (sincope)</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">savré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">savrés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">savre</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">savrom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">savrez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">savren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Condizionale</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">savria</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">savrias</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">savria</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">savriom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">savriez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">savrien</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>sabut</strong></span><span class="vform-badge">Ger. <strong>sabend</strong></span><span class="vform-badge">No progressivo (stativo)</span></div>
+    </div>
+    <div id="vp-tener" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>tener</h2><div class="etym">lat. TENERE · dittongo e→ie + 1ª sing. «teng» · futuro sincopato · PP «tengut»</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">teng</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">tienes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">tiene</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">tenom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">tenez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">tienen</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Futuro (sincope)</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">tendré</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">tendrés</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">tendre</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">tendrom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">tendrez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">tendren</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Cong. presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">tenge</span></div><div class="verb-row"><span class="p">te</span><span class="f irr">tenges</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f irr">tenge</span></div><div class="verb-row"><span class="p">noz</span><span class="f irr">tengom</span></div><div class="verb-row"><span class="p">voz</span><span class="f irr">tengez</span></div><div class="verb-row"><span class="p">lor</span><span class="f irr">tengen</span></div></div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>tengut</strong></span><span class="vform-badge">Semi-modale <strong>je teng que + inf.</strong></span><span class="vform-badge">Imp. <strong>tien! · tengom!</strong></span></div>
+    </div>
+    <div id="vp-meter" class="verb-panel" style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+      <div class="verb-header"><h2>meter</h2><div class="etym">lat. MITTERE · PP irregolare breve «mist» · presente quasi regolare · tutti i composti ereditano PP breve</div></div>
+      <div class="verb-grid">
+        <div class="verb-tense-block"><div class="verb-tense-head">Presente</div><div class="verb-tense-body"><div class="verb-row"><span class="p">je</span><span class="f irr">met</span></div><div class="verb-row"><span class="p">te</span><span class="f reg">metes</span></div><div class="verb-row"><span class="p">ez/za</span><span class="f reg">mete</span></div><div class="verb-row"><span class="p">noz</span><span class="f reg">metom</span></div><div class="verb-row"><span class="p">voz</span><span class="f reg">metez</span></div><div class="verb-row"><span class="p">lor</span><span class="f reg">meten</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Composti</div><div class="verb-tense-body"><div class="verb-row"><span class="p">prometar</span><span class="f irr">promist</span></div><div class="verb-row"><span class="p">admetir</span><span class="f irr">admist</span></div><div class="verb-row"><span class="p">cometir</span><span class="f irr">comist</span></div><div class="verb-row"><span class="p">remetir</span><span class="f irr">remist</span></div><div class="verb-row"><span class="p">someter</span><span class="f irr">somist</span></div></div></div>
+        <div class="verb-tense-block"><div class="verb-tense-head">Note</div><div class="verb-tense-body" style="padding:1rem;font-size:.82rem;color:var(--mid);line-height:1.6;">PP <strong style="color:var(--terra);">mist</strong> ← MISSUM latino<br>(IT messo · FR mis)<br>Tutti i composti: -mist</div></div>
+      </div>
+      <div class="verb-forms"><span class="vform-badge">PP <strong>mist</strong></span><span class="vform-badge">Ger. <strong>metend</strong></span><span class="vform-badge">Imp. <strong>mete! · metom!</strong></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LESSICO ── -->
+<section id="lessico">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Vocabolario</div>
+      <h2 class="section-title">Il <em>Lessico</em> di Solis</h2>
+      <p class="section-desc">Ricerca per parola in Solis o in italiano. Filtra per categoria. Studia con le flashcard.</p>
+    </div>
+    <div class="lex-controls">
+      <div class="search-wrap">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Cerca… es. caminar · camminare · amore…" oninput="filterLex()">
+      </div>
+      <div class="mode-btns">
+        <button class="mode-btn active" onclick="setLexMode('table',this)">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4h14v2H3V4zm0 5h14v2H3V9zm0 5h14v2H3v-2z"/></svg>Tavola
+        </button>
+        <button class="mode-btn" onclick="setLexMode('flash',this)">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M7 10h6M10 7v6" stroke="white" stroke-width="1.5"/></svg>Flashcard
+        </button>
+      </div>
+    </div>
+    <div class="cat-bar" id="catBar"></div>
+    <div class="lex-info" id="lexInfo"></div>
+
+    <!-- TABLE VIEW -->
+    <div id="tableView">
+      <div class="lex-table-wrap">
+        <table id="lexTable">
+          <thead><tr><th>Solis</th><th>Italiano</th><th>Etimologia / Note</th><th>Categoria</th></tr></thead>
+          <tbody id="lexTbody"></tbody>
+        </table>
+        <div id="noRes" style="display:none;padding:3rem;text-align:center;color:var(--mid);font-family:'Cormorant Garant',serif;font-size:1.3rem;font-style:italic;">Nessun risultato trovato.</div>
+      </div>
+    </div>
+
+    <!-- FLASH VIEW -->
+    <div id="flashView">
+      <div class="fc-container">
+        <div class="fc-card" onclick="flipFC()" id="fcCard">
+          <div class="fc-question" id="fcQ"></div>
+          <div class="fc-cat-badge"><span class="lex-cat" id="fcCat"></span></div>
+          <div id="fcAnswer" style="display:none;">
+            <div class="fc-answer" id="fcA"></div>
+            <div class="fc-etym-note" id="fcNote"></div>
+          </div>
+          <div class="fc-hint" id="fcHint">tocca per girare</div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-nav-btn" onclick="fcNav(-1)">← Indietro</button>
+          <span class="fc-counter" id="fcCount"></span>
+          <button class="fc-nav-btn" onclick="fcNav(1)">Avanti →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FONETICA ── -->
+<section id="fonetica">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Fonetica e Prosodia</div>
+      <h2 class="section-title">Come si <em>pronuncia</em> Solis</h2>
+      <p class="section-desc">Base fonetica trasparente con fenomeni contestuali che rendono la pronuncia reale più ricca e fluida.</p>
+    </div>
+    <div class="phon-grid">
+      <div class="phon-card reveal">
+        <h3>Accento tonico</h3>
+        <div class="phon-rule">Penultima sillaba per default</div>
+        <p class="phon-note">Se l'accento cade altrove, è segnato dall'accento grafico: <span class="hl" style="color:var(--terra);font-family:'Cormorant Garant',serif;font-size:1.1rem;">caminár</span> · <span class="hl" style="color:var(--terra);font-family:'Cormorant Garant',serif;font-size:1.1rem;">canción</span></p>
+      </div>
+      <div class="phon-card reveal reveal-delay-1">
+        <h3>Vocali</h3>
+        <div class="phon-rule">5 vocali: a e i o u</div>
+        <p class="phon-note">Nel Core generalmente chiare, come in italiano. Nel parlato veloce le vocali atone possono ridursi.</p>
+        <table style="width:100%;font-size:.82rem;margin-top:.75rem;">
+          <tr><td style="color:var(--mid);">a</td><td class="hl" style="color:var(--forest);font-family:'Cormorant Garant',serif;">agua</td><td><span class="ipa">/a/</span></td></tr>
+          <tr><td style="color:var(--mid);">e</td><td class="hl" style="color:var(--forest);font-family:'Cormorant Garant',serif;">terra</td><td><span class="ipa">/e/</span></td></tr>
+          <tr><td style="color:var(--mid);">o</td><td class="hl" style="color:var(--forest);font-family:'Cormorant Garant',serif;">cor</td><td><span class="ipa">/o/</span></td></tr>
+        </table>
+      </div>
+      <div class="phon-card reveal reveal-delay-2">
+        <h3>Consonanti speciali</h3>
+        <table style="width:100%;font-size:.82rem;">
+          <tr><td style="color:var(--mid);padding:.3rem 0;"><strong>J</strong></td><td>Core: <span class="ipa">/j/</span> come in «ieri»</td></tr>
+          <tr><td style="color:var(--mid);padding:.3rem 0;"><strong>Z</strong></td><td>Core: <span class="ipa">/ts/</span> come «pizza»</td></tr>
+          <tr><td style="color:var(--mid);padding:.3rem 0;"><strong>-</strong> (legatura)</td><td>Unione vocalica: <em>le-om</em></td></tr>
+          <tr><td style="color:var(--mid);padding:.3rem 0;"><strong>G</strong></td><td>davanti a e/i: <span class="ipa">/dʒ/</span></td></tr>
+        </table>
+      </div>
+      <div class="phon-card reveal reveal-delay-1">
+        <h3>Dittongazione accentuale</h3>
+        <div class="phon-rule">e tonica → ie &nbsp;&nbsp; o tonica → uo</div>
+        <p class="phon-note">Solo quando l'accento cade sulla radice verbale. Scompare in noz/voz dove l'accento è sul suffisso.</p>
+        <div style="margin-top:.5rem;display:grid;grid-template-columns:1fr 1fr;gap:.4rem;font-size:.82rem;">
+          <div style="padding:.4rem;background:var(--parch);border-radius:4px;text-align:center;"><span style="color:var(--mid);">perder</span><br><span style="color:var(--terra);font-family:'Cormorant Garant',serif;font-size:1.1rem;">pierd</span></div>
+          <div style="padding:.4rem;background:var(--parch);border-radius:4px;text-align:center;"><span style="color:var(--mid);">poder</span><br><span style="color:var(--terra);font-family:'Cormorant Garant',serif;font-size:1.1rem;">puod</span></div>
+        </div>
+      </div>
+      <div class="phon-card reveal reveal-delay-2">
+        <h3>Consonanti finali</h3>
+        <p class="phon-note">Nel Core si pronunciano (a differenza del francese). In Solis Gallic alcune possono cadere per analogia con il francese.</p>
+        <table style="width:100%;font-size:.82rem;margin-top:.5rem;">
+          <tr><td style="color:var(--mid);padding:.3rem 0;">-S finale</td><td>mantenuta (marca plurale)</td></tr>
+          <tr><td style="color:var(--mid);padding:.3rem 0;">-T finale PP</td><td>mantenuta come memoria latina</td></tr>
+          <tr><td style="color:var(--mid);padding:.3rem 0;">-N 3ª pl.</td><td>mantenuta: <em>caminEN</em></td></tr>
+        </table>
+      </div>
+      <div class="phon-card reveal reveal-delay-3">
+        <h3>Gerundio — suffissi</h3>
+        <div class="phon-rule">-AR → -and &nbsp;&nbsp; -ER → -end &nbsp;&nbsp; -IR → -ind</div>
+        <p class="phon-note">I suffissi rispecchiano le vocali tematiche delle tre coniugazioni.</p>
+        <p class="phon-note" style="margin-top:.5rem;">Irregolari notevoli: <span class="highlight">essend · avend · dizend · fazend · venind</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STORIA ── -->
+<section id="storia">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-tag">Diacronia e Filologia</div>
+      <h2 class="section-title">Dal latino a <em>Solis</em></h2>
+      <p class="section-desc">Una ricostruzione selettiva che massimizza l'intercomprensione pan-romanza mantenendo la naturalezza morfologica.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;" class="reveal">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">III–I sec. a.C.</div>
+          <div class="tl-body"><h4>Latino classico</h4><p>Sistema casuale a 6 casi, coniugazione sintetica. Vocali brevi/lunghe fonologicamente distinte.</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">I–V sec. d.C.</div>
+          <div class="tl-body"><h4>Latino volgare</h4><p>Scomparsa delle quantità vocaliche, inizio perdita dei casi. Nascono le perifrasi verbali (HABEO AMATUM → ho amato).</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">V–IX sec.</div>
+          <div class="tl-body"><h4>Proto-romanzo</h4><p>Le lingue romanze divergono. Articolo si sviluppa da ILLE/ILLA. Caduta consonanti in alcune aree (FR), mantenimento in altre (ES, IT).</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">IX–XIII sec.</div>
+          <div class="tl-body"><h4>Prime testimonianze scritte</h4><p>Serments de Strasbourg (842), Placiti cassinesi (960–963). Fioritura dell'occitano e del catalano medievale.</p></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Solis — progetto</div>
+          <div class="tl-body"><h4>Sintesi deliberata</h4><p>Non continuazione storica, ma ricostruzione selettiva che eredita il meglio di ciascuna lingua romanza.</p></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Cormorant Garant',serif;font-size:1.4rem;font-weight:600;margin-bottom:1.5rem;color:var(--ink);">Vicinanza alle lingue sorgente</h3>
+        <div style="display:flex;flex-direction:column;gap:.75rem;">
+          <div style="display:flex;align-items:center;gap:1rem;"><div style="width:90px;font-size:.82rem;color:var(--mid);">Italiano</div><div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="width:92%;height:100%;background:var(--terra);border-radius:4px;"></div></div><div style="font-size:.75rem;color:var(--terra);font-weight:600;width:50px;text-align:right;">Molto alta</div></div>
+          <div style="display:flex;align-items:center;gap:1rem;"><div style="width:90px;font-size:.82rem;color:var(--mid);">Spagnolo</div><div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="width:90%;height:100%;background:var(--terra);border-radius:4px;"></div></div><div style="font-size:.75rem;color:var(--terra);font-weight:600;width:50px;text-align:right;">Molto alta</div></div>
+          <div style="display:flex;align-items:center;gap:1rem;"><div style="width:90px;font-size:.82rem;color:var(--mid);">Portoghese</div><div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="width:78%;height:100%;background:var(--gold);border-radius:4px;"></div></div><div style="font-size:.75rem;color:var(--gold);font-weight:600;width:50px;text-align:right;">Alta</div></div>
+          <div style="display:flex;align-items:center;gap:1rem;"><div style="width:90px;font-size:.82rem;color:var(--mid);">Catalano</div><div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="width:75%;height:100%;background:var(--gold);border-radius:4px;"></div></div><div style="font-size:.75rem;color:var(--gold);font-weight:600;width:50px;text-align:right;">Alta</div></div>
+          <div style="display:flex;align-items:center;gap:1rem;"><div style="width:90px;font-size:.82rem;color:var(--mid);">Occitano</div><div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="width:73%;height:100%;background:var(--gold);border-radius:4px;"></div></div><div style="font-size:.75rem;color:var(--gold);font-weight:600;width:50px;text-align:right;">Alta</div></div>
+          <div style="display:flex;align-items:center;gap:1rem;"><div style="width:90px;font-size:.82rem;color:var(--mid);">Francese</div><div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="width:48%;height:100%;background:var(--mid);border-radius:4px;"></div></div><div style="font-size:.75rem;color:var(--mid);font-weight:600;width:50px;text-align:right;">Media</div></div>
+        </div>
+        <div style="margin-top:2rem;padding:1.25rem;background:var(--parch);border-radius:var(--r);border:1px solid var(--border);">
+          <p style="font-size:.82rem;color:var(--mid);line-height:1.7;">L'occitano medievale e il catalano moderno hanno un ruolo privilegiato in Solis: forme come <span class="highlight">-at</span> (PP), <span class="highlight">-ut</span> (PP -ER), <span class="highlight">je/jo</span> (1ª sing.) derivano direttamente dall'area occitano-catalana.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Comparison table -->
+    <h3 style="font-family:'Cormorant Garant',serif;font-size:1.6rem;font-weight:600;margin:3rem 0 1rem;color:var(--ink);" class="reveal">20 lemmi fondamentali — dal latino a Solis</h3>
+    <div class="lex-table-wrap reveal">
+      <table class="comp-table">
+        <thead><tr><th>Latino</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th><th>CAT</th><th>Solis</th></tr></thead>
+        <tbody>
+          <tr><td class="lat-src">AQUAM</td><td>acqua</td><td>agua</td><td>eau</td><td>água</td><td>aigua</td><td class="sol-word">agua</td></tr>
+          <tr><td class="lat-src">PANEM</td><td>pane</td><td>pan</td><td>pain</td><td>pão</td><td>pa</td><td class="sol-word">pan</td></tr>
+          <tr><td class="lat-src">HOMINEM</td><td>uomo</td><td>hombre</td><td>homme</td><td>homem</td><td>home</td><td class="sol-word">om</td></tr>
+          <tr><td class="lat-src">NOCTEM</td><td>notte</td><td>noche</td><td>nuit</td><td>noite</td><td>nit</td><td class="sol-word">noit</td></tr>
+          <tr><td class="lat-src">TEMPUS</td><td>tempo</td><td>tiempo</td><td>temps</td><td>tempo</td><td>temps</td><td class="sol-word">temp</td></tr>
+          <tr><td class="lat-src">OCULUM</td><td>occhio</td><td>ojo</td><td>œil</td><td>olho</td><td>ull</td><td class="sol-word">ocl</td></tr>
+          <tr><td class="lat-src">MULTUM</td><td>molto</td><td>mucho</td><td>beaucoup</td><td>muito</td><td>molt</td><td class="sol-word">molt</td></tr>
+          <tr><td class="lat-src">FACERE</td><td>fare</td><td>hacer</td><td>faire</td><td>fazer</td><td>fer</td><td class="sol-word">far</td></tr>
+          <tr><td class="lat-src">VENIRE</td><td>venire</td><td>venir</td><td>venir</td><td>vir</td><td>venir</td><td class="sol-word">venir</td></tr>
+          <tr><td class="lat-src">LINGUAM</td><td>lingua</td><td>lengua</td><td>langue</td><td>língua</td><td>llengua</td><td class="sol-word">lengv</td></tr>
+          <tr><td class="lat-src">FILIUM</td><td>figlio</td><td>hijo</td><td>fils</td><td>filho</td><td>fill</td><td class="sol-word">fiiol</td></tr>
+          <tr><td class="lat-src">PONTEM</td><td>ponte</td><td>puente</td><td>pont</td><td>ponte</td><td>pont</td><td class="sol-word">pont</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <strong>✦ SOLIS ✦</strong><br>
+  Lingua Romanza Pianificata · Versione 1.0 · 2025<br>
+  <span style="opacity:.5;font-size:.75rem;">Solis est donat a tots ki aman las lengas romansas.</span>
+</footer>
+
+<script>
+// ══════════════════════════════════════════
+// LEXICON DATA
+// ══════════════════════════════════════════
+const LEX=[
+// ── SALUTI ──
+['Bon jorn','Buongiorno','bon + jorn (giorno)','Saluti'],
+['Bon sera','Buona sera','bon + sera','Saluti'],
+['Bon nuit / Bona noit','Buona notte','bon + nuit','Saluti'],
+['Salud / Salut','Salve / Ciao','lat. SALUS','Saluti'],
+['cao / salu / caò','Ciao (informale)','var. informale di salut','Saluti'],
+['Tot bon?','Tutto ok?','tot (tutto) + bon (bene)','Saluti'],
+// ── CORTESIA ──
+['plis / Si vos plaz','Per favore (inform./formale)','fr. PLAIRE','Cortesia'],
+['Molt grasias / Grasias','Grazie / Grazie mille','lat. GRATIAS','Cortesia'],
+['dank','Grazie (variante)','germ. DANK','Cortesia'],
+['De nada','Prego','es. DE NADA','Cortesia'],
+['Perdonem / Pardon','Mi scusi','lat. PERDONARE / fr. PARDON','Cortesia'],
+['Je sint pena','Mi dispiace','sentir + pena','Cortesia'],
+['Perdona me','Perdonami','lat. PERDONARE','Cortesia'],
+['Ne mancz!','Figurati!','ne + mancz','Cortesia'],
+// ── FRASI BASE ──
+['Com te ez? / Com va?','Come stai?','com (come) + ez (essere)','Frasi Base'],
+['Com voz ez?','Come sta? (formale)','voz (Lei/voi) + ez','Frasi Base'],
+['Que tal ez te?','Come stai?','es. QUE TAL','Frasi Base'],
+['Qual ez le nom de te?','Come ti chiami?','qual + nom (nome)','Frasi Base'],
+['Me nom ez...','Mi chiamo...','nom (nome) + ez','Frasi Base'],
+['Dov ez...?','Dov\'è...?','lat. UBI EST','Frasi Base'],
+['Purque?','Perché?','per + que','Frasi Base'],
+['Cuan?','Quando?','lat. QUANDO','Frasi Base'],
+['Quant?','Quanto?','lat. QUANTUM','Frasi Base'],
+['Je non compren','Non capisco','comprendre','Frasi Base'],
+['En verit? / Ver?','Sul serio? / Davvero?','veritat (verità)','Frasi Base'],
+['Esque te venes deman?','Vieni domani?','esque + venir','Frasi Base'],
+// ── RISPOSTE BREVI ──
+['Si','Sì','lat. SIC','Risposte'],
+['No','No','lat. NON','Risposte'],
+['Ben','Bene','lat. BENE','Risposte'],
+['Mal / Molt mal','Male / Malissimo','lat. MALE','Risposte'],
+['Forse','Forse','lat. FORSITAN','Risposte'],
+['En verit','In verità','veritat','Risposte'],
+['Donque','Dunque','fr. DONC','Risposte'],
+['Ez bon.','Ok.','ez (essere) + bon','Risposte'],
+['Ah ben...','Eh va bene... (rassegnazione)','colloq.','Risposte'],
+['Eh ja!','Ma dai!','colloq.','Risposte'],
+// ── PERSONE ──
+['om','uomo','lat. HOMINEM','Persone'],
+['fema','donna','lat. FEMINAM','Persone'],
+['enfant','bambino','fr. ENFANT','Persone'],
+['anfant / anfanta','bambina','var. di enfant','Persone'],
+['persona','persona','lat. PERSONA','Persone'],
+['amis','amico/a','lat. AMICUS','Persone'],
+// ── FAMIGLIA ──
+['padron','padre','lat. PATRONUS','Famiglia'],
+['madre','madre','lat. MATER','Famiglia'],
+['fil / fili','figlio','lat. FILIUS','Famiglia'],
+['filia','figlia','lat. FILIA','Famiglia'],
+['fra','fratello','lat. FRATER','Famiglia'],
+['sora','sorella','lat. SOROR','Famiglia'],
+['esposo','marito','lat. SPONSUS','Famiglia'],
+['mulier','moglie','lat. MULIER','Famiglia'],
+['parents','genitori','lat. PARENTES','Famiglia'],
+['filis','figli','lat. FILII','Famiglia'],
+['nunu','nonno','deriv. di nonno','Famiglia'],
+['nona','nonna','lat. NONA','Famiglia'],
+['tio','zio','lat. THIUS','Famiglia'],
+['tia','zia','lat. THIA','Famiglia'],
+['cuzin','cugino','lat. CONSOBRINUS','Famiglia'],
+['cuzina','cugina','lat. CONSOBRINA','Famiglia'],
+// ── TITOLI E PROFESSIONI ──
+['rey','re','lat. REX','Professioni'],
+['rein','regina','lat. REGINA','Professioni'],
+['istrutor / prof','insegnante / professore','lat. INSTRUCTOR','Professioni'],
+['veyont / gide','guida / conduttore','fr. GUIDE','Professioni'],
+['claiont','cliente','fr. CLIENT','Professioni'],
+['funver','seguace / fan','deriv. funzione','Professioni'],
+['studios','studioso','lat. STUDIOSUS','Professioni'],
+['axè','alleato / complice','fr. ASSOCIÉ','Professioni'],
+['doctor','medico','lat. DOCTOR','Professioni'],
+['infermera','infermiera','lat. INFIRMARIA','Professioni'],
+['policia','polizia / agente','lat. POLITIA','Professioni'],
+['mecanic','meccanico','gr. MECHANIKOS','Professioni'],
+['programor','programmatore','lat. PROGRAMMARE + -or','Professioni'],
+['jardiner','giardiniere','fr. JARDINIER','Professioni'],
+['paner','fornaio','lat. PANARIUS','Professioni'],
+['pescador','pescatore','lat. PISCATOR','Professioni'],
+['artista','artista','lat. ARTISTA','Professioni'],
+['director','direttore','lat. DIRECTOR','Professioni'],
+['secretar','segretario','lat. SECRETARIUS','Professioni'],
+['venditor','venditore','lat. VENDITOR','Professioni'],
+['contor','contabile','fr. COMPTEUR','Professioni'],
+['camerer','cameriere','fr. CAMÉRIER','Professioni'],
+['cuocer','cuoco','lat. COQUUS','Professioni'],
+['conductor','autista','lat. CONDUCTOR','Professioni'],
+['porter','portiere','fr. PORTIER','Professioni'],
+// ── CORPO ──
+['cabesa','testa','es. CABEZA','Corpo'],
+['ok / okiar','occhi / occhiali','lat. OCULUS','Corpo'],
+['oreil','orecchio','lat. AURICULA → fr. OREILLE','Corpo'],
+['nas','naso','lat. NASUS','Corpo'],
+['bocà','bocca','lat. BUCCA','Corpo'],
+['man','mano','lat. MANUS','Corpo'],
+['dulco','braccio','orig. Solis','Corpo'],
+['tash','petto','orig. Solis','Corpo'],
+['suruck','schiena','orig. Solis','Corpo'],
+['bein','gamba','germ. BEIN','Corpo'],
+['pè','piede','lat. PEDEM','Corpo'],
+['cor','cuore','lat. COR','Corpo'],
+['pulm','polmone','lat. PULMO','Corpo'],
+['sang','sangue','lat. SANGUIS','Corpo'],
+// ── SALUTE ──
+['malatìa','malattia','it. MALATTIA','Salute'],
+['sintoms','sintomi','gr. SYMPTOMA','Salute'],
+['febre','febbre','lat. FEBRIS','Salute'],
+['dolor / dolora','dolore','lat. DOLOR','Salute'],
+['tos','tosse','lat. TUSSIS','Salute'],
+['catar','catarro','gr. KATARRHOOS','Salute'],
+['presion','pressione','lat. PRESSIO','Salute'],
+['pneumonia','polmonite','gr. PNEUMONIA','Salute'],
+['vacins','vaccini','lat. VACCA','Salute'],
+['antivirals','antivirali','lat. ANTI + VIRUS','Salute'],
+['antibiotics','antibiotici','gr. ANTI + BIOS','Salute'],
+['terapia','terapia','gr. THERAPEIA','Salute'],
+['diagnoz','diagnosi','gr. DIAGNOSIS','Salute'],
+['examen','esame','lat. EXAMEN','Salute'],
+['operazion','operazione','lat. OPERATIO','Salute'],
+['receta','ricetta','lat. RECEPTA','Salute'],
+['farmaci','farmaci','gr. PHARMAKON','Salute'],
+// ── CASA ──
+['casa','casa','lat. CASA','Casa'],
+['porta','porta','lat. PORTA','Casa'],
+['janela / finestra','finestra','port. JANELA / lat. FENESTRA','Casa'],
+['mesa','tavolo','lat. MENSA','Casa'],
+['sedi','sedia','lat. SEDES','Casa'],
+['let','letto','lat. LECTUS','Casa'],
+['armari','armadio','lat. ARMARIUM','Casa'],
+['miròr / spegl','specchio','fr. MIROIR / germ. SPIEGEL','Casa'],
+['tapet','tappeto','gr. TAPETON','Casa'],
+['lamp','lampada','gr. LAMPAS','Casa'],
+['cusin','cucina','lat. COQUINA','Casa'],
+['forn','forno','lat. FURNUS','Casa'],
+['fornel','fornello','dim. di forn','Casa'],
+['padel','padella','lat. PATELLA','Casa'],
+['taz','tazza','ar. TASSAH','Casa'],
+['plat','piatto','lat. PLATTUS','Casa'],
+['culter','coltello','lat. CULTER','Casa'],
+['banio','bagno','lat. BALNEUM','Casa'],
+['doz','doccia','fr. DOUCHE','Casa'],
+['lavab','lavandino','lat. LAVARE','Casa'],
+['savon','sapone','fr. SAVON','Casa'],
+// ── LUOGHI URBANI ──
+['rua / via / strada','strada / via','port. RUA / lat. VIA','Luoghi'],
+['parc','parco','fr. PARC','Luoghi'],
+['cita / citá / urbe','città','lat. CIVITAS / URBS','Luoghi'],
+['plaza','piazza','es. PLAZA','Luoghi'],
+['pont','ponte','lat. PONS','Luoghi'],
+['tuna / tunel','tunnel','fr. TUNNEL','Luoghi'],
+['scola','scuola','lat. SCHOLA','Luoghi'],
+['hospital / ospital','ospedale','lat. HOSPITALE','Luoghi'],
+['bank','banca','germ. BANK','Luoghi'],
+['ofis de post','ufficio postale','fr. OFFICE DE POSTE','Luoghi'],
+['farmacia','farmacia','gr. PHARMAKEIA','Luoghi'],
+['bibliotec','biblioteca','gr. BIBLIOTHEKE','Luoghi'],
+['museu','museo','gr. MOUSEION','Luoghi'],
+['teatra / tea','teatro','gr. THEATRON','Luoghi'],
+['camp de jug','campo da gioco','camp + jugar','Luoghi'],
+['jardìn public','giardino pubblico','fr. JARDIN','Luoghi'],
+['port','porto','lat. PORTUS','Luoghi'],
+['aeroport','aeroporto','aer + port','Luoghi'],
+['estazion','stazione','lat. STATIO','Luoghi'],
+['magaz','negozio','fr. MAGASIN','Luoghi'],
+['supermagaz','supermercato','super + magaz','Luoghi'],
+['magaz de alimentz','alimentari','magaz + aliment','Luoghi'],
+['panaria','panetteria','pan + -aria','Luoghi'],
+['mercato / mercat','mercato','lat. MERCATUS','Luoghi'],
+// ── NATURA ──
+['mar','mare','lat. MARE','Natura'],
+['riu','fiume','lat. RIVUS','Natura'],
+['lac','lago','lat. LACUS','Natura'],
+['cascada','cascata','es. CASCADA','Natura'],
+['montan','montagna','lat. MONTANEA','Natura'],
+['val','valle','lat. VALLIS','Natura'],
+['camp','campagna','lat. CAMPUS','Natura'],
+['desert','deserto','lat. DESERTUM','Natura'],
+['forest / selva','foresta','lat. FORESTA / SILVA','Natura'],
+['prateria','prateria','lat. PRATERIA','Natura'],
+['riva','riva / fiume','lat. RIPA','Natura'],
+['arbol','albero','lat. ARBOR','Natura'],
+['flor','fiore','lat. FLOS','Natura'],
+['erb','erba','lat. HERBA','Natura'],
+['frut','frutto','lat. FRUCTUS','Natura'],
+['sem','seme','lat. SEMEN','Natura'],
+['radic','radice','lat. RADIX','Natura'],
+['tronch','tronco','lat. TRUNCUS','Natura'],
+['ram','ramo','lat. RAMUS','Natura'],
+['foja','foglia','lat. FOLIA','Natura'],
+['sol / luxman','sole','lat. SOL','Natura'],
+['lun','luna','lat. LUNA','Natura'],
+['cel / ciel','cielo','lat. CAELUM','Natura'],
+['stel / astra','stella','lat. STELLA / ASTRA','Natura'],
+['nuvol','nuvola','lat. NUBILUS','Natura'],
+['ombra','ombra','lat. UMBRA','Natura'],
+['luz','luce','lat. LUX','Natura'],
+['vent','vento','lat. VENTUS','Natura'],
+['pluv','pioggia','lat. PLUVIA','Natura'],
+['nivi','neve','lat. NIVES','Natura'],
+['temp','tempo / temporale','lat. TEMPUS','Natura'],
+['agua','acqua','lat. AQUAM','Natura'],
+['foc','fuoco','lat. FOCUS','Natura'],
+// ── COLORI ──
+['ruj','rosso','fr. ROUGE','Colori'],
+['verd','verde','lat. VIRIDIS','Colori'],
+['blu','blu','fr. BLEU','Colori'],
+['jon','giallo','fr. JAUNE','Colori'],
+['ner / nuar','nero','lat. NIGER / fr. NOIR','Colori'],
+['blanc','bianco','germ. BLANK','Colori'],
+['gris','grigio','fr. GRIS','Colori'],
+['ross','rosa','fr. ROSE','Colori'],
+['viole','viola','lat. VIOLA','Colori'],
+['marron','marrone','fr. MARRON','Colori'],
+// ── FORME ──
+['cerc / cerco','cerchio','lat. CIRCUS','Forme'],
+['quadr / cuadrato','quadrato','lat. QUADRATUS','Forme'],
+['triangl / triumangol','triangolo','lat. TRIANGULUS','Forme'],
+['rectangl','rettangolo','lat. RECTANGULUS','Forme'],
+['ovàl','ovale','lat. OVUM','Forme'],
+['lin / fil','linea','lat. LINEA','Forme'],
+['punt / dot','punto','lat. PUNCTUM','Forme'],
+// ── MISURE E QUALITÀ ──
+['grand','grande','lat. GRANDIS','Misure'],
+['petit','piccolo','fr. PETIT','Misure'],
+['alt','alto','lat. ALTUS','Misure'],
+['bas','basso','lat. BASSUS','Misure'],
+['long','lungo','lat. LONGUS','Misure'],
+['curt','corto','lat. CURTUS','Misure'],
+['pes','pesante','lat. PENSUM','Misure'],
+['lejer','leggero','fr. LÉGER','Misure'],
+['larg','largo','lat. LARGUS','Misure'],
+['estret','stretto','lat. STRICTUS','Misure'],
+['frez','freddo','lat. FRIGIDUS','Misure'],
+['cald','caldo','lat. CALIDUS','Misure'],
+['nov','nuovo','lat. NOVUS','Misure'],
+['vejo','vecchio','lat. VETUS → es. VIEJO','Misure'],
+['rapid','rapido','lat. RAPIDUS','Misure'],
+['lent','lento','lat. LENTUS','Misure'],
+// ── CIBO ──
+['pan','pane','lat. PANIS','Cibo'],
+['pizza / pizà','pizza','it. PIZZA','Cibo'],
+['crem de gel','gelato','crem (crema) + gel (freddo)','Cibo'],
+['sopa / sup','zuppa','fr. SOUPE','Cibo'],
+['salat','insalata','fr. SALADE','Cibo'],
+['carn / carni','carne','lat. CARO','Cibo'],
+['pesk / fish','pesce','lat. PISCIS / en. FISH','Cibo'],
+['arroz','riso','ar. ARUZZ → es. ARROZ','Cibo'],
+['pasta','pasta','lat. PASTA','Cibo'],
+['formach / formatg','formaggio','lat. FORMATICUS','Cibo'],
+['ov','uovo','lat. OVUM','Cibo'],
+// ── FRUTTA E VERDURA ──
+['fruta','frutta','lat. FRUCTA','Frutta e Verdura'],
+['pom','mela','lat. POMUM','Frutta e Verdura'],
+['pera','pera','lat. PIRA','Frutta e Verdura'],
+['uva','uva','lat. UVA','Frutta e Verdura'],
+['banan','banana','port. BANANA','Frutta e Verdura'],
+['aranja','arancia','ar. NARANJ','Frutta e Verdura'],
+['limon','limone','ar. LAYMUN','Frutta e Verdura'],
+['fraga','fragola','lat. FRAGARIA','Frutta e Verdura'],
+['melòn','melone','lat. MELOPEPO','Frutta e Verdura'],
+['sandìa','anguria','es. SANDÍA','Frutta e Verdura'],
+['verdur / vandur','verdura','lat. VIRIDURA','Frutta e Verdura'],
+['tomat','pomodoro','azteco TOMATL','Frutta e Verdura'],
+['cipol','cipolla','lat. CEPA','Frutta e Verdura'],
+['aj','aglio','lat. ALLIUM','Frutta e Verdura'],
+['patat','patata','es. PATATA','Frutta e Verdura'],
+['carota','carota','gr. KARŌTON','Frutta e Verdura'],
+['zucc','zucca','lat. CUCURBITA','Frutta e Verdura'],
+['spinac','spinaci','ar. ISFANAJ','Frutta e Verdura'],
+['peper','peperone','lat. PIPER','Frutta e Verdura'],
+['berinj','melanzana','ar. BADINJAN','Frutta e Verdura'],
+// ── BEVANDE ──
+['agua','acqua','lat. AQUAM','Bevande'],
+['vin','vino','lat. VINUM','Bevande'],
+['bier / boa','birra','germ. BIER','Bevande'],
+['cafè','caffè','ar. QAHWA','Bevande'],
+['tè','tè','cin. TÉ','Bevande'],
+['suc / latte','succo / latte','lat. SUCUS / LACTEM','Bevande'],
+['limonad','limonata','limon + -ad','Bevande'],
+['chocolat cald','cioccolata calda','azteco CHOCOLATL + cald','Bevande'],
+// ── CUCINA ──
+['comer','mangiare','lat. COMEDERE','Cucina'],
+['beber','bere','lat. BIBERE','Cucina'],
+['cocinar','cucinare','es. COCINAR','Cucina'],
+['servir','servire','lat. SERVIRE','Cucina'],
+['pagar','pagare','lat. PACARE','Cucina'],
+['comprar','comprare','lat. COMPARARE','Cucina'],
+// ── ANIMALI ──
+['can / cana','cane / cagna','lat. CANIS','Animali'],
+['jatu / jata','gatto / gatta','orig. Solis','Animali'],
+['caval / cavall','cavallo','lat. CABALLUS','Animali'],
+['vacà / vaca','mucca / vacca','lat. VACCA','Animali'],
+['porc / porç','maiale','lat. PORCUS','Animali'],
+['aroepa / ovel','pecora','orig. Solis / lat. OVIS','Animali'],
+['caprà / capr','capra','lat. CAPRA','Animali'],
+['oriko / gal','gallo','orig. Solis / lat. GALLUS','Animali'],
+['galinha / galina','gallina','port. GALINHA','Animali'],
+['anatra','anatra','lat. ANATRA','Animali'],
+['fifò / conej','coniglio','orig. Solis / lat. CUNICULUS','Animali'],
+['asin','asino','lat. ASINUS','Animali'],
+['lup','lupo','lat. LUPUS','Animali'],
+['urs / urso','orso','lat. URSUS','Animali'],
+['volp','volpe','lat. VULPES','Animali'],
+['cervò / cerv','cervo','lat. CERVUS','Animali'],
+['capriol','capriolo','lat. CAPREOLUS','Animali'],
+['lepor','lepre','lat. LEPOREM','Animali'],
+['sitol','scoiattolo','orig. Solis','Animali'],
+['talp','talpa','lat. TALPA','Animali'],
+['spinol','riccio','orig. Solis','Animali'],
+['lontra','lontra','lat. LUTRA','Animali'],
+['ana-marin','foca','lit. anatra marina','Animali'],
+['marinel','balena','lat. MARE + -inel','Animali'],
+['delfin','delfino','gr. DELPHIS','Animali'],
+['elefant','elefante','gr. ELEPHAS','Animali'],
+['lio / leon','leone','lat. LEO','Animali'],
+['titit / tigre','tigre','lat. TIGRIS','Animali'],
+['leopar','leopardo','lat. LEOPARDUS','Animali'],
+['aquil / avil','aquila','lat. AQUILA','Animali'],
+['peti (pl. petis)','uccello (generico)','orig. Solis','Animali'],
+['pasàro','passero','lat. PASSER','Animali'],
+['merl','merlo','lat. MERULUS','Animali'],
+['rondin','rondine','lat. HIRUNDO','Animali'],
+['colomb','colomba / piccione','lat. COLUMBA','Animali'],
+['cavo','corvo','lat. CORVUS','Animali'],
+['gufò','gufo / civetta','orig. Solis','Animali'],
+['falc / falcon','falco','lat. FALCO','Animali'],
+['cicònha','cicogna','lat. CICONIA','Animali'],
+['pavon / dusu','pavone','lat. PAVO','Animali'],
+['pinguin','pinguino','en. PENGUIN','Animali'],
+['pelican','pellicano','lat. PELICANUS','Animali'],
+['sass','serpente','orig. Solis','Animali'],
+['luzerta','lucertola','lat. LACERTA','Animali'],
+['wei','tartaruga','orig. Solis','Animali'],
+['drilò','coccodrillo','gr. KROKODILOS','Animali'],
+['pesh / pesk','pesce','lat. PISCIS','Animali'],
+// ── TECNOLOGIA ──
+['compiutador / ordinator','computer','lat. COMPUTARE + -ador','Tecnologia'],
+['laptop','portatile','en. LAPTOP','Tecnologia'],
+['telefon','telefono','gr. TELE + PHONE','Tecnologia'],
+['mobilfon / celùlar','cellulare','germ. MOBIL + fon','Tecnologia'],
+['tablet','tablet','en. TABLET','Tecnologia'],
+['viosion / vision','schermo','lat. VISIO','Tecnologia'],
+['tecklat / tastièr','tastiera','fr. TECLA + klat','Tecnologia'],
+['mouse','mouse','en. MOUSE','Tecnologia'],
+['robot / robo','robot','ceco ROBOT','Tecnologia'],
+['dron','drone','en. DRONE','Tecnologia'],
+['caricator','caricatore / batteria','lat. CARRICARE + -ator','Tecnologia'],
+['internet','internet','en. INTERNET','Tecnologia'],
+['sit web','sito web','en. WEBSITE','Tecnologia'],
+['ap','app','en. APP','Tecnologia'],
+['imeil','e-mail','en. EMAIL adattato','Tecnologia'],
+['chat','chat','en. CHAT','Tecnologia'],
+['videoconferenc','videoconferenza','video + conferenc','Tecnologia'],
+['archìv cloud','archivio cloud','lat. ARCHIVUM + en. CLOUD','Tecnologia'],
+['contrasen / seguretat','password / sicurezza','contra + sen','Tecnologia'],
+['uaifai','wifi','en. WIFI adattato','Tecnologia'],
+['ret','rete','lat. RETE','Tecnologia'],
+['dat / datz','dati','lat. DATA','Tecnologia'],
+['cod','codice','lat. CODEX','Tecnologia'],
+['algoritm','algoritmo','ar. AL-KHWARIZMI','Tecnologia'],
+['sistem','sistema','gr. SYSTEMA','Tecnologia'],
+['firmware','firmware','en. FIRMWARE','Tecnologia'],
+['driver','driver','en. DRIVER','Tecnologia'],
+['actualiz','aggiornamento','lat. ACTUALIS','Tecnologia'],
+['bug','bug','en. BUG','Tecnologia'],
+['patch','patch','en. PATCH','Tecnologia'],
+['backup','backup','en. BACKUP','Tecnologia'],
+['logicial','software','fr. LOGICIEL','Tecnologia'],
+['fisical','hardware','lat. PHYSICA','Tecnologia'],
+['intel artificial','intelligenza artificiale','lat. INTELLIGENTIA + artificialis','Tecnologia'],
+// ── MEDIA ──
+['video','video','lat. VIDEO','Media'],
+['fot / foto','foto','gr. PHOTOS','Media'],
+['muzic','musica','gr. MOUSIKE','Media'],
+['radio','radio','lat. RADIUS','Media'],
+['jornal','giornale','fr. JOURNAL','Media'],
+// ── TRASPORTI ──
+['auto / macina','auto / macchina','gr. AUTOS','Trasporti'],
+['bici','bicicletta','fr. BICYCLETTE','Trasporti'],
+['moto','moto','gr. MOTOR','Trasporti'],
+['autobus','autobus','gr. AUTOS + lat. OMNIBUS','Trasporti'],
+['taxi','taxi','en. TAXI','Trasporti'],
+['tren','treno','fr. TRAIN','Trasporti'],
+['avjon','aereo','fr. AVION','Trasporti'],
+['barca','barca','lat. BARCA','Trasporti'],
+['nav','nave','lat. NAVIS','Trasporti'],
+['patinet','monopattino','fr. PATIN + -et','Trasporti'],
+['via / rua','via / strada','lat. VIA / port. RUA','Trasporti'],
+['indicator / semafor','semaforo','lat. INDICATOR','Trasporti'],
+['cruz','incrocio','lat. CRUX','Trasporti'],
+['parchat','parcheggio','fr. PARQUET adattato','Trasporti'],
+['biglièt','biglietto','fr. BILLET','Trasporti'],
+['carburant','carburante','fr. CARBURANT','Trasporti'],
+['batteria','batteria','fr. BATTERIE','Trasporti'],
+// ── EMOZIONI ──
+['amor / amora','amore','lat. AMOR','Emozioni'],
+['esperansa','speranza','lat. SPES → es. ESPERANZA','Emozioni'],
+['soledat','solitudine','lat. SOLITUDO → es. SOLEDAD','Emozioni'],
+['coraj','coraggio','fr. COURAGE','Emozioni'],
+['felihitat / felisia','felicità','lat. FELICITAS','Emozioni'],
+['tristesa / tristia','tristezza','lat. TRISTIS','Emozioni'],
+['envidia','invidia','lat. INVIDIA','Emozioni'],
+['rabia','rabbia','lat. RABIA','Emozioni'],
+['calma','calma','gr. KAUMA','Emozioni'],
+['ansia','ansia','lat. ANXIA','Emozioni'],
+['espant','spavento','es. ESPANTO','Emozioni'],
+['ira','ira','lat. IRA','Emozioni'],
+['otellusion','gelosia + senso di colpa','Otello + illusione (neol. Solis)','Emozioni'],
+['maison','nostalgia di casa','fr. MAISON (neol. Solis)','Emozioni'],
+['son','sogno','lat. SOMNIUM','Emozioni'],
+['dison','incubo','opposto di son (neol. Solis)','Emozioni'],
+['desilusion','delusione / disincanto','lat. DIS + ILLUSIO','Emozioni'],
+// ── MENTE ──
+['pensament','pensiero','lat. PENSAMENTUM','Mente'],
+['memorie','memoria','lat. MEMORIA','Mente'],
+['idea','idea','gr. IDEA','Mente'],
+['dubl','dubbio','lat. DUBIUM','Mente'],
+['atencion','attenzione','lat. ATTENTIO','Mente'],
+['volunt','volontà','lat. VOLUNTAS','Mente'],
+['calm','calma (stato)','gr. KAUMA','Mente'],
+['furor','rabbia intensa','lat. FUROR','Mente'],
+['ment','mente','lat. MENS','Mente'],
+// ── VERBI AUSILIARI ──
+['ez (essere)','essere','lat. ESSE','Verbi Ausiliari'],
+['ver / vey (avere)','avere','lat. HABERE','Verbi Ausiliari'],
+['vol (volere)','volere','lat. VELLE','Verbi Ausiliari'],
+['pod (potere)','potere','lat. POSSE','Verbi Ausiliari'],
+['dev (dovere)','dovere','lat. DEBERE','Verbi Ausiliari'],
+['star (stare)','stare','lat. STARE','Verbi Ausiliari'],
+// ── VERBI AZIONE ──
+['var / far','fare','lat. FACERE','Verbi Azione'],
+['rifar','rifare','re + far','Verbi Azione'],
+['crear','creare','lat. CREARE','Verbi Azione'],
+['destrur','distruggere','lat. DESTRUERE','Verbi Azione'],
+['abrir','aprire','lat. APERIRE','Verbi Azione'],
+['cerrar','chiudere','es. CERRAR','Verbi Azione'],
+['portar','portare','lat. PORTARE','Verbi Azione'],
+['tirar','tirare','it. TIRARE','Verbi Azione'],
+['spinger','spingere','it. SPINGERE','Verbi Azione'],
+['lev','alzare','lat. LEVARE','Verbi Azione'],
+['andar','andare','lat. AMBULARE','Verbi Azione'],
+['venir','venire','lat. VENIRE','Verbi Azione'],
+['tornar','tornare','lat. TORNARE','Verbi Azione'],
+['entrar','entrare','lat. INTRARE','Verbi Azione'],
+['salir','uscire','es. SALIR','Verbi Azione'],
+['pasar','passare','lat. PASSARE','Verbi Azione'],
+['restar','restare','lat. RESTARE','Verbi Azione'],
+['morar','abitare','lat. MORARI','Verbi Azione'],
+['vivir','vivere','lat. VIVERE','Verbi Azione'],
+['viajar','viaggiare','es. VIAJAR','Verbi Azione'],
+['curre','correre','lat. CURRERE','Verbi Azione'],
+['caminar','camminare','lat. CAMINARE','Verbi Azione'],
+// ── VERBI PERCEZIONE ──
+['vey (vedere)','vedere','lat. VIDERE','Verbi Percezione'],
+['oir','udire','lat. AUDIRE','Verbi Percezione'],
+['senti / sentir','sentire','lat. SENTIRE','Verbi Percezione'],
+['tocar','toccare','lat. TOCCARE','Verbi Percezione'],
+['gustar','gustare','lat. GUSTARE','Verbi Percezione'],
+['olfar','odorare','lat. OLFACERE','Verbi Percezione'],
+['parlar','parlare','lat. PARABOLARE','Verbi Percezione'],
+['legir','leggere','lat. LEGERE','Verbi Percezione'],
+['scrir','scrivere','lat. SCRIBERE','Verbi Percezione'],
+['chamar','chiamare / evocare','es. LLAMAR','Verbi Percezione'],
+['sonar','sognare / suonare','lat. SONARE','Verbi Percezione'],
+['fuscar','oscurare / offuscare','lat. FUSCARE','Verbi Percezione'],
+['incanter','incantare / trasformare','lat. INCANTARE','Verbi Percezione'],
+['amar','amare','lat. AMARE','Verbi Percezione'],
+['offrir','offrire','lat. OFFERRE','Verbi Percezione'],
+// ── VITA QUOTIDIANA ──
+['laberar / laborar','lavorare','lat. LABORARE','Vita Quotidiana'],
+['jugar','giocare','lat. JOCARI','Vita Quotidiana'],
+['dormir','dormire','lat. DORMIRE','Vita Quotidiana'],
+['studiar / estudar','studiare','lat. STUDIUM','Vita Quotidiana'],
+['vender','vendere','lat. VENDERE','Vita Quotidiana'],
+['reservar','prenotare','lat. RESERVARE','Vita Quotidiana'],
+['llamar','chiamare (tel.)','es. LLAMAR','Vita Quotidiana'],
+// ── AVVERBI ──
+['ahir','ieri','lat. HERI','Avverbi'],
+['oghi','oggi','lat. HOC DIE','Avverbi'],
+['doman','domani','lat. DE MANE','Avverbi'],
+["l'altr ahir","l'altro ieri","avant + ieri",'Avverbi'],
+['apres doman','dopodomani','apres + doman','Avverbi'],
+['matin','mattina','lat. MATUTINUM','Avverbi'],
+['jurn','giorno','fr. JOUR','Avverbi'],
+['pome','pomeriggio','lat. POST MERIDIEM','Avverbi'],
+['sera / nuit','sera','lat. SERA','Avverbi'],
+['nuit / noite','notte','lat. NOCTEM','Avverbi'],
+['sempre','sempre','lat. SEMPER','Avverbi'],
+['sovent','spesso','fr. SOUVENT','Avverbi'],
+['rarament','raramente','raro + -ament','Avverbi'],
+['ja','già','lat. IAM','Avverbi'],
+['ancor','ancora','lat. HANC HORAM','Avverbi'],
+['verament','veramente','verat + -ament','Avverbi'],
+['clarament','chiaramente','clar + -ament','Avverbi'],
+['rapidament','rapidamente','rapid + -ament','Avverbi'],
+['lentament','lentamente','lent + -ament','Avverbi'],
+['forse / fors','forse','lat. FORSITAN','Avverbi'],
+['en verit','in verità','en + veritat','Avverbi'],
+// ── CONNETTIVI ──
+['donque / alor','dunque / allora','fr. DONC / ALORS','Connettivi'],
+['posque / purque','poiché / perché','pos + que','Connettivi'],
+['afin que','affinché','fr. AFIN QUE','Connettivi'],
+['dum / mentr','durante / mentre','lat. DUM / MENTE','Connettivi'],
+['apres','dopo','lat. AD PRESSUM','Connettivi'],
+['avans','prima','lat. ABANTE','Connettivi'],
+['ma','ma','lat. MAGIS','Connettivi'],
+['però','però','lat. PER HOC','Connettivi'],
+['se non','se no','lat. SI NON','Connettivi'],
+['poike','poiché','poi + che','Connettivi'],
+// ── QUANTITÀ ──
+['molt','molto','cat. MOLT','Quantità'],
+['poc','poco','lat. PAUCUM','Quantità'],
+['assez','abbastanza','fr. ASSEZ','Quantità'],
+['tant / tantz','tanto / tanti','lat. TANTUM','Quantità'],
+['tot','tutto','lat. TOTUM','Quantità'],
+['parte','parte','lat. PARTEM','Quantità'],
+['mitad','metà','es. MITAD','Quantità'],
+['doble','doppio','lat. DUPLUM','Quantità'],
+['triple','triplo','lat. TRIPLUS','Quantità'],
+// ── NUMERI ──
+['zer','zero','ar. SIFR','Numeri'],
+['un','uno','lat. UNUM','Numeri'],
+['du','due','lat. DUOS','Numeri'],
+['trez','tre','lat. TRES','Numeri'],
+['quatr','quattro','lat. QUATTUOR','Numeri'],
+['cinz','cinque','lat. QUINQUE','Numeri'],
+['ses','sei','lat. SEX','Numeri'],
+['set','sette','lat. SEPTEM','Numeri'],
+['oct','otto','lat. OCTO','Numeri'],
+['nov','nove','lat. NOVEM','Numeri'],
+['dez','dieci','lat. DECEM','Numeri'],
+['undez','undici','lat. UNDECIM','Numeri'],
+['dudez','dodici','lat. DUODECIM','Numeri'],
+['quinz','quindici','lat. QUINDECIM','Numeri'],
+['van','venti','lat. VIGINTI','Numeri'],
+['trent','trenta','lat. TRIGINTA','Numeri'],
+['quaranta','quaranta','lat. QUADRAGINTA','Numeri'],
+['cent','cento','lat. CENTUM','Numeri'],
+['mil','mille','lat. MILLE','Numeri'],
+// ── ORDINALI ──
+['prim / prima','primo / prima','lat. PRIMUS','Ordinali'],
+['segund','secondo','lat. SECUNDUS','Ordinali'],
+['ters','terzo','lat. TERTIUS','Ordinali'],
+['quart','quarto','lat. QUARTUS','Ordinali'],
+['quint','quinto','lat. QUINTUS','Ordinali'],
+// ── ESPRESSIONI TEMPORALI ──
+["cuest'an","quest'anno","cuest + an",'Tempo'],
+['cueste mes','questo mese','cueste + mes','Tempo'],
+['cueste semana','questa settimana','cueste + semana','Tempo'],
+['a la oit ora','alle otto','a la + oit + ora','Tempo'],
+// ── PROVERBI E IDIOMI ──
+['Pluv om antub','Piove a catinelle','lett. piove come secchi','Proverbi'],
+['Le ciel ez romput.','Piove a catinelle (var. nativa)','il cielo è rotto','Proverbi'],
+['Est in le setim ciel','Essere al settimo cielo','setim (settimo) + ciel','Proverbi'],
+['ez camina in l\'agua','È lentissimo','lit. cammina nell\'acqua','Proverbi'],
+['vent in le ment','Mente confusa','lit. vento nella mente','Proverbi'],
+['pizze en le còrs','Un piacere improvviso','lit. pizzico nel cuore','Proverbi'],
+['Aver pluv in le ment','Essere confusi','lit. avere pioggia in mente','Proverbi'],
+['Non comprar un fíg','Non capire un\'acca','lit. non comprare un fico','Proverbi'],
+['Parlar a loz ventz','Parlare invano','lit. parlare ai venti','Proverbi'],
+['Cantar con le vent','Esprimersi liberamente','lit. cantare con il vento','Proverbi'],
+['Costar un ocl de la cara','Costare un occhio della faccia','calco it.','Proverbi'],
+['In boca al lup! / Lup morz!','In bocca al lupo! / Crepi!','calco it.','Proverbi'],
+['Ki dorm ne prend pesk.','Chi dorme non piglia pesci.','calco it.','Proverbi'],
+['Melhor tard que mai.','Meglio tardi che mai.','calco romanzo','Proverbi'],
+['Ne ez rosa san espin.','Non c\'è rosa senza spine.','calco fr.','Proverbi'],
+['Pluv pur lo ja mollat.','Piove sul bagnato.','calco it.','Proverbi'],
+['Qui va plan va san e va lon.','Chi va piano va sano e va lontano.','calco it./fr.','Proverbi'],
+['Le sol non vey semper le ver.','Le apparenze ingannano.','lit. il sole non vede sempre il vero','Proverbi'],
+// ── SLANG ──
+['Tot bon?','Tutto ok? (saluto rapido)','tot + bon','Slang'],
+['Ke fas?','Che fai?','ke (che) + fas (fai)','Slang'],
+['Nada nov.','Niente di nuovo.','nada + nov','Slang'],
+['Tot chill.','Tutto tranquillo.','tot + en. chill','Slang'],
+['Ez top.','È fantastico!','ez + en. top','Slang'],
+['Molt mal!','Malissimo!','molt + mal','Slang'],
+['Lolz','Ahah / che ridere','da internet-slang','Slang'],
+['Bro / Sis','Fratello / sorella (tra amici)','en. BRO / SIS','Slang'],
+['Ne carez.','Non importa / fa niente.','ne + carez','Slang'],
+['Toxik','Tossico (persone/relazioni)','en. TOXIC adattato','Slang'],
+['Flexar','Mettersi in mostra','en. FLEX adattato','Slang'],
+['Ghostar','Sparire, ignorare','en. GHOST adattato','Slang'],
+['Spamà','Bombardare di messaggi','en. SPAM adattato','Slang'],
+['Ke tal?','Come va? (saluto informale)','es. QUE TAL','Slang'],
+['Tranq.','Tranquillo / va bene (abbr.)','abbr. tranquilo','Slang'],
+['OMG, serio?','Oh mio Dio, davvero?','en. OMG','Slang'],
+['Ke vibes!','Che atmosfera!','en. VIBES','Slang'],
+['Fuul chill','Super rilassato','en. FULL + CHILL','Slang'],
+['Ke roll?','Che succede?','ke + roll','Slang'],
+['Ez cringe!','È imbarazzante!','en. CRINGE adattato','Slang'],
+['Ez boom.','È esplosivo / figata','en. BOOM adattato','Slang'],
+['Ke drama!','Che dramma! (ironico)','en. DRAMA adattato','Slang'],
+['Su!','Dai! (incitamento)','it. SU','Slang'],
+// ── GIURIDICO ──
+['jug / jude','giudice','lat. JUDEX','Giuridico'],
+['ley / lei','legge','lat. LEX','Giuridico'],
+['acusat','imputato','lat. ACCUSATUS','Giuridico'],
+['crim','crimine','lat. CRIMEN','Giuridico'],
+['procès','processo','lat. PROCESSUS','Giuridico'],
+['prison','prigione','fr. PRISON','Giuridico'],
+['testimonianza','testimonianza','lat. TESTIMONIUM','Giuridico'],
+// ── ECONOMIA ──
+['bank','banca','germ. BANK','Economia'],
+['debit','debito','lat. DEBITUM','Economia'],
+['prez','prezzo','lat. PRETIUM','Economia'],
+['med','moneta (da "mediterraneo")','neol. Solis','Economia'],
+['saler','salario','lat. SALARIUM','Economia'],
+['taxà','tassa','lat. TAXA','Economia'],
+// ── POLITICA ──
+['demo / democrasia','democrazia','gr. DEMOS + KRATOS','Politica'],
+['ministru','ministro','lat. MINISTER','Politica'],
+['partit','partito','lat. PARTITUS','Politica'],
+['vot','voto','lat. VOTUM','Politica'],
+['govern','governo','lat. GUBERNUM','Politica'],
+['libertat','libertà','lat. LIBERTAS','Politica'],
+['justisia','giustizia','lat. IUSTITIA','Politica'],
+['revoluzion','rivoluzione','lat. REVOLUTIO','Politica'],
+['politiga','politica','gr. POLITIKE','Politica'],
+['histoiría','storia','gr. HISTORIA','Politica'],
+['ideoligia','ideologia','gr. IDEA + LOGOS','Politica'],
+// ── RELIGIONE ──
+['deus','Dio','lat. DEUS','Religione'],
+['fed / feda','fede','lat. FIDES','Religione'],
+['soul','anima','en. SOUL / lat. ANIMA','Religione'],
+['spirít','spirito','lat. SPIRITUS','Religione'],
+['salud a deus','preghiera','lit. saluto a Dio','Religione'],
+['sacr','sacro','lat. SACER','Religione'],
+['libru sant','testo sacro','libru + sant','Religione'],
+['paradis','paradiso','gr. PARADEISOS','Religione'],
+['infern','inferno','lat. INFERNUS','Religione'],
+// ── SPORT ──
+['futbol','calcio','en. FOOTBALL','Sport'],
+['eskudra','squadra','es. ESCUADRA','Sport'],
+['partida','partita','es. PARTIDA','Sport'],
+['gol','goal','en. GOAL adattato','Sport'],
+['albitero','arbitro','es. ÁRBITRO adattato','Sport'],
+['jugador','giocatore','es. JUGADOR','Sport'],
+['porter (sport)','portiere (calcio)','fr. PORTIER','Sport'],
+// ── SCIENZA ──
+['siensia','scienza','lat. SCIENTIA','Scienza'],
+['experiment','esperimento','lat. EXPERIMENTUM','Scienza'],
+['teoria','teoria','gr. THEORIA','Scienza'],
+['ipotesi','ipotesi','gr. HYPOTHESIS','Scienza'],
+['concept','concetto','lat. CONCEPTUS','Scienza'],
+['análisi','analisi','gr. ANALYSIS','Scienza'],
+['etica','etica','gr. ETHOS','Scienza'],
+['existencia','esistenza','lat. EXISTENTIA','Scienza'],
+// ── ARTE E MUSICA ──
+['musica / muzic','musica','gr. MOUSIKE','Arte'],
+['cant','canto','lat. CANTUS','Arte'],
+['sonor','suono','lat. SONORUS','Arte'],
+['instrument','strumento','lat. INSTRUMENTUM','Arte'],
+['pictura','pittura','lat. PICTURA','Arte'],
+['art','arte','lat. ARS','Arte'],
+['emocion','emozione','lat. EMOTIO','Arte'],
+// ── MILITARE ──
+['soldat','soldato','fr. SOLDAT','Militare'],
+['belli','guerra','lat. BELLUM','Militare'],
+['arm','arma','lat. ARMA','Militare'],
+['defens','difesa','lat. DEFENSIO','Militare'],
+['atak','attacco','fr. ATTAQUE','Militare'],
+// ── DERIVAZIONE ──
+['-cion','azione / risultato (suffisso)','construir → construcion','Derivazione'],
+['-ment','da verbo a nome astratto (suffisso)','cambiar → cambiament','Derivazione'],
+['-os','aggettivo da nome (abbondanza)','pericol → pericolos','Derivazione'],
+['-bil','possibilità (suffisso)','sosten → sostenibil','Derivazione'],
+['-or','agente / professionista (suffisso)','cantar → cantor','Derivazione'],
+['-ari','luogo / collezione (suffisso)','libr → librari','Derivazione'],
+['-et','diminutivo (suffisso)','casa → caset','Derivazione'],
+['-ific','che produce (suffisso)','teror → terorific','Derivazione'],
+['-itud','qualità astratta (suffisso)','alt → altitud','Derivazione'],
+['-ism','dottrina / movimento (suffisso)','capital → capitalism','Derivazione'],
+['re-','ripetizione / ritorno (prefisso)','venir → revenir','Derivazione'],
+['des-','opposto / negazione (prefisso)','montar → desmontar','Derivazione'],
+['auto-','da sé (prefisso)','biografia → autobiografia','Derivazione'],
+['tele-','a distanza (prefisso)','vision → television','Derivazione'],
+['bio-','vita (prefisso)','diversitá → biodiversitá','Derivazione'],
+['calma → calmar','calmare / essere calmo','agg. + -ar','Derivazione'],
+['forte → fortar','rafforzare','agg. + -ar','Derivazione'],
+['feliz → felisar','rallegrare','agg. + -ar','Derivazione'],
+['clar → clarer','chiarire','agg. + -ar','Derivazione'],
+];
+
+const CATS=[...new Set(LEX.map(r=>r[3]))].sort();
+let activeC='Tutti', searchQ='', lexMode='table', fcIdx=0, fcFlip=false, filtered=[];
+
+function buildCatBar(){
+  const bar=document.getElementById('catBar');
+  bar.innerHTML='';
+  ['Tutti',...CATS].forEach(c=>{
+    const b=document.createElement('button');
+    b.className='cat-btn'+(c===activeC?' active':'');
+    b.textContent=c;
+    b.onclick=()=>{activeC=c;buildCatBar();filterLex();};
+    bar.appendChild(b);
+  });
+}
+
+function getFiltered(){
+  return LEX.filter(r=>{
+    const mc=activeC==='Tutti'||r[3]===activeC;
+    const q=searchQ.toLowerCase();
+    const mq=!q||r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q)||r[2].toLowerCase().includes(q);
+    return mc&&mq;
+  });
+}
+
+function filterLex(){
+  searchQ=document.getElementById('searchInput').value;
+  filtered=getFiltered();
+  document.getElementById('lexInfo').textContent=filtered.length+' parole'+(activeC!=='Tutti'?' · '+activeC:'');
+  if(lexMode==='table') renderTable();
+  else { fcIdx=0; loadFC(); }
+}
+
+function renderTable(){
+  const tb=document.getElementById('lexTbody');
+  const nr=document.getElementById('noRes');
+  tb.innerHTML='';
+  if(!filtered.length){nr.style.display='block';return;}
+  nr.style.display='none';
+  filtered.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="lex-word">${r[0]}</span></td><td>${r[1]}</td><td><span class="lex-etym">${r[2]}</span></td><td><span class="lex-cat">${r[3]}</span></td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function setLexMode(m,btn){
+  lexMode=m;
+  document.getElementById('tableView').style.display=m==='table'?'block':'none';
+  document.getElementById('flashView').style.display=m==='flash'?'block':'none';
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(m==='flash'){fcIdx=0;fcFlip=false;loadFC();}
+  else renderTable();
+}
+
+function loadFC(){
+  if(!filtered.length){document.getElementById('fcQ').textContent='Nessun risultato';document.getElementById('fcCount').textContent='';return;}
+  const r=filtered[Math.min(fcIdx,filtered.length-1)];
+  fcFlip=false;
+  document.getElementById('fcQ').textContent=r[0];
+  document.getElementById('fcCat').textContent=r[3];
+  document.getElementById('fcA').textContent=r[1];
+  document.getElementById('fcNote').textContent=r[2];
+  document.getElementById('fcAnswer').style.display='none';
+  document.getElementById('fcHint').textContent='tocca per girare';
+  document.getElementById('fcCount').textContent=(Math.min(fcIdx,filtered.length-1)+1)+' / '+filtered.length;
+}
+
+function flipFC(){
+  fcFlip=!fcFlip;
+  document.getElementById('fcAnswer').style.display=fcFlip?'block':'none';
+  document.getElementById('fcHint').textContent=fcFlip?'tocca per nascondere':'tocca per girare';
+}
+
+function fcNav(d){
+  if(!filtered.length)return;
+  fcIdx=(fcIdx+d+filtered.length)%filtered.length;
+  loadFC();
+}
+
+// ══════════════════════════════════════════
+// GRAMMAR TABS
+// ══════════════════════════════════════════
+function showGramTab(id){
+  document.querySelectorAll('[id^="gram-"]').forEach(el=>el.classList.remove('active'));
+  document.getElementById('gram-'+id).classList.add('active');
+  document.querySelectorAll('#grammatica .tab').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function showSubTab(btn, id){
+  const parent=btn.closest('.gram-card-body');
+  parent.querySelectorAll('.stab').forEach(el=>{el.style.display='none'; el.classList.remove('active');});
+  const t=parent.querySelector('#'+id);
+  if(t){t.style.display='block'; t.classList.add('active');}
+  btn.closest('.tabs').querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// VERB TABS
+// ══════════════════════════════════════════
+const VERBS=['esser','aver','andar','venir','far','dir','estar','poder','voler','saber','tener','meter'];
+function showVerb(id){
+  VERBS.forEach(v=>{
+    const el=document.getElementById('vp-'+v);
+    if(el)el.classList.remove('active');
+  });
+  const t=document.getElementById('vp-'+id);
+  if(t)t.classList.add('active');
+  document.querySelectorAll('.vtab').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// INIT + SCROLL
+// ══════════════════════════════════════════
+buildCatBar();
+filterLex();
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>40);
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight-60) el.classList.add('visible');
+  });
+  const sections=['grammatica','verbi','lessico','fonetica','storia'];
+  let cur='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<120)cur=id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+// Initial reveal
+setTimeout(()=>document.querySelectorAll('.reveal').forEach(el=>{
+  if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('visible');
+}),100);
+</script>
+</body>
+</html>

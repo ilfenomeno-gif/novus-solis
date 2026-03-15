@@ -1,0 +1,148 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:5px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ex{padding:6px 10px;background:var(--color-background-secondary);border-radius:5px;font-size:13px;margin:4px 0}
+.ex .it{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:13px;color:#533AB7;margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('struct')">Struttura e agente</button>
+  <button class="tab-btn" onclick="show('tempi')">Tutti i tempi</button>
+  <button class="tab-btn" onclick="show('se')">Passiva con se</button>
+  <button class="tab-btn" onclick="show('accord')">Accordo PP</button>
+</div>
+
+<!-- STRUTTURA E AGENTE -->
+<div id="struct">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Passiva con ez — struttura base</div>
+<div class="rule-f">soggetto + ez (coniugato) + PP [+ da/por + agente]</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Equivale a IT essere + PP · ES ser + PP · FR être + PP.</div>
+</div>
+
+<div class="label">Trasformazione attiva → passiva</div>
+<table class="ct">
+<thead><tr><th></th><th>Frase</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>Attiva</td><td>Le profesor <span class="hl">explica</span> le lezion.</td><td>Il professore spiega la lezione.</td></tr>
+<tr><td>Passiva</td><td>La lezion <span class="hl">ez explicat</span> dal profesor.</td><td>La lezione è spiegata dal professore.</td></tr>
+<tr><td>Attiva</td><td>Los students <span class="hl">ven legit</span> le libr.</td><td>Gli studenti hanno letto il libro.</td></tr>
+<tr><td>Passiva</td><td>Le libr <span class="hl">ez estat legit</span> de los students.</td><td>Il libro è stato letto dagli studenti.</td></tr>
+<tr><td>Passiva</td><td>Le libr <span class="hl">ez estat publicat</span> en 2024. <div class="it">Il libro è stato pubblicato nel 2024. — evento passivo senza agente espresso (adattato)</div></td></tr>
+</tbody></table>
+
+<div class="label">Introduzione dell'agente — da vs por</div>
+<table class="ct">
+<thead><tr><th>Preposizione</th><th>Uso</th><th>Esempio</th><th>IT / ES</th></tr></thead>
+<tbody>
+<tr><td class="hl">da</td><td>agente animato (standard)</td><td>legit <span class="hl">da</span> le profesor</td><td>IT da · ES por</td></tr>
+<tr><td class="hl">por</td><td>agente animato (Iberic/formale)</td><td>legit <span class="hl">por</span> le profesor</td><td>ES por · PT por</td></tr>
+<tr><td class="hl">de</td><td>causa/strumento inanimato</td><td>covert <span class="hl">de</span> nev</td><td>IT di/da · ES de</td></tr>
+</tbody></table>
+<div class="note"><b>da</b> è la preposizione agente standard del Core (calco IT). <b>por</b> è variante Iberic e usata in registro formale scritto (calco ES/PT). <b>de</b> introduce cause o strumenti inanimati: <em>covert de nev</em> (coperto di neve), <em>rodenat de persones</em> (circondato da persone).</div>
+
+<div class="label">Passiva senza agente (agente omesso)</div>
+<div class="ex">La porta <span class="hl">ez avrita</span>. <div class="it">La porta è aperta. — stato risultante (senza agente)</div></div>
+<div class="ex">Le libr <span class="hl">ez estat publicat</span> en 2024. <div class="it">Il libro è stato pubblicato nel 2024. — evento passivo senza agente espresso</div></div>
+<div class="ex">Los criminals <span class="hl">son estat arrestats</span>. <div class="it">I criminali sono stati arrestati. — passiva al passato prossimo</div></div>
+</div>
+
+<!-- TUTTI I TEMPI -->
+<div id="tempi" style="display:none">
+<div class="label">Passiva ai 10 tempi principali — verbo: amar (sogg. le libr)</div>
+<table class="ct">
+<thead><tr><th>Tempo</th><th>Struttura</th><th>Forma passiva</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>Presente</td><td class="hl">ez + PP</td><td>le libr <span class="hl">ez amat</span></td><td>il libro è amato</td></tr>
+<tr><td>Imperfetto</td><td class="hl">erava + PP</td><td>le libr <span class="hl">erava amat</span></td><td>il libro era amato</td></tr>
+<tr><td>Passato prossimo</td><td class="hl">ez estat + PP</td><td>le libr <span class="hl">ez estat amat</span></td><td>il libro è stato amato</td></tr>
+<tr><td>Trapassato</td><td class="hl">erava estat + PP</td><td>le libr <span class="hl">erava estat amat</span></td><td>il libro era stato amato</td></tr>
+<tr><td>Futuro semplice</td><td class="hl">sere + PP</td><td>le libr <span class="hl">sere amat</span></td><td>il libro sarà amato</td></tr>
+<tr><td>Futuro anteriore</td><td class="hl">verer estat + PP</td><td>le libr <span class="hl">verer estat amat</span></td><td>il libro sarà stato amato</td></tr>
+<tr><td>Condizionale pres.</td><td class="hl">seria + PP</td><td>le libr <span class="hl">seria amat</span></td><td>il libro sarebbe amato</td></tr>
+<tr><td>Condizionale pass.</td><td class="hl">seria estat + PP</td><td>le libr <span class="hl">seria estat amat</span></td><td>il libro sarebbe stato amato</td></tr>
+<tr><td>Congiuntivo pres.</td><td class="hl">eze + PP</td><td>que le libr <span class="hl">eze amat</span></td><td>che il libro sia amato</td></tr>
+<tr><td>Congiuntivo imp.</td><td class="hl">ezze + PP</td><td>que le libr <span class="hl">ezze amat</span></td><td>che il libro fosse amato</td></tr>
+</tbody></table>
+<div class="note">La passiva si forma con <b>ez</b> coniugato al tempo desiderato + PP invariabile (Core standard). Per i tempi composti passivi si usa la forma composta di <em>ez</em>: <em>ez estat</em> (pass. prox.) · <em>erava estat</em> (trapass.) ecc. — come l'italiano «essere stato».</div>
+
+<div class="label">Passiva progressiva</div>
+<div class="ex">Le libr <span class="hl">star essend legit</span>. <div class="it">Il libro sta essendo letto. — progressivo passivo (raro, registro formale)</div></div>
+<div class="ex">Le libr <span class="hl">se leg</span> ora. <div class="it">Il libro si sta leggendo adesso. — preferita: passiva con se (più naturale)</div></div>
+<div class="note">Il progressivo passivo (<em>star essend + PP</em>) esiste ma è pesante e raro. In registro colloquiale si preferisce sempre la passiva con <em>se</em> o la costruzione attiva.</div>
+</div>
+
+<!-- PASSIVA CON SE -->
+<div id="se" style="display:none">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Passiva con se — struttura</div>
+<div class="rule-f">se + verbo attivo (3ª sing./pl.) — senza agente espresso</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Preferita in registro colloquiale. Non ammette agente espresso.</div>
+</div>
+
+<div class="label">Passiva con se vs passiva con ez — quando usare quale</div>
+<table class="ct">
+<thead><tr><th>Tipo</th><th>Esempio</th><th>Quando</th></tr></thead>
+<tbody>
+<tr><td class="hl">ez + PP</td><td>Le libr ez publicat da Einaudi.</td><td>Agente espresso · registro formale/scritto</td></tr>
+<tr><td class="hl">se + verbo</td><td>Se publica molts librs.</td><td>Agente omesso · registro colloquiale · azioni generiche</td></tr>
+</tbody></table>
+
+<div class="label">se passivo ai diversi tempi</div>
+<div class="ex"><span class="hl">Se vend</span> librs aquí. <div class="it">Si vendono libri qui. — presente</div></div>
+<div class="ex"><span class="hl">Se vendav</span> molts librs ier. <div class="it">Si vendevano molti libri ieri. — imperfetto</div></div>
+<div class="ex"><span class="hl">Se ver vendit</span> tot. <div class="it">Si è venduto tutto. — passato prossimo</div></div>
+<div class="ex"><span class="hl">Se vendr</span> en line. <div class="it">Si venderà online. — futuro</div></div>
+<div class="ex"><span class="hl">Se podr</span> trovar facilament. <div class="it">Si potrà trovare facilmente. — futuro modale</div></div>
+
+<div class="label">Accordo del verbo nel se passivo</div>
+<div class="ex"><span class="hl">Se vend</span> un libr. <div class="it">Si vende un libro. — soggetto sing. → verbo sing.</div></div>
+<div class="ex"><span class="hl">Se venden</span> dos librs. <div class="it">Si vendono due libri. — soggetto pl. → verbo pl.</div></div>
+<div class="ex"><span class="hl">Se parla</span> Solis aquí. <div class="it">Si parla Solis qui. — lingua = sing.</div></div>
+<div class="note">Il verbo nel <em>se</em> passivo si accorda sempre col soggetto logico (l'oggetto dell'azione). Regola identica a IT/ES.</div>
+</div>
+
+<!-- ACCORDO PP -->
+<div id="accord" style="display:none">
+<div class="label">Regola definitiva dell'accordo del PP nella passiva</div>
+<table class="ct">
+<thead><tr><th>Contesto</th><th>Accordo</th><th>Esempio</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>Passiva con ez (Core std.)</td><td class="hl">invariabile</td><td>la femna ez amat · los oms son amat</td><td>PP non varia</td></tr>
+<tr><td>Passiva con ez (letterario)</td><td class="hl">facoltativo</td><td>la femna ez amata [lett.]</td><td>accordo in genere/num.</td></tr>
+<tr><td>PP predicativo (agg.)</td><td class="hl">obbligatorio</td><td>la porta ez avrita · los librs son scrits</td><td>PP = aggettivo</td></tr>
+<tr><td>Passiva con se</td><td class="hl">non applicabile</td><td>se vend librs</td><td>verbo varia, non PP</td></tr>
+</tbody></table>
+
+<div class="label">Distinzione cruciale: passiva verbale vs stato risultante</div>
+<div class="ex">La porta <span class="hl">ez avrita</span> dal ventil. <div class="it">La porta è aperta dal vento. — passiva verbale (azione): PP invariabile std.</div></div>
+<div class="ex">La porta <span class="hl">ez avrita</span>. <div class="it">La porta è aperta. — stato risultante (aggettivo): PP varia = avrita (f.)</div></div>
+<div class="note">L'ambiguità è strutturale — identica all'italiano. Il contesto disambigua: presenza dell'agente (<em>dal ventil</em>) segnala la passiva verbale; assenza dell'agente e interpretazione statale segnala lo stato risultante. In entrambi i casi il Core standard usa il PP invariabile; solo in letterario il PP varia nella passiva verbale.</div>
+
+<div class="label">Riepilogo: tutte le passività in Solis</div>
+<table class="ct">
+<thead><tr><th>Tipo</th><th>Struttura</th><th>Agente?</th><th>Registro</th></tr></thead>
+<tbody>
+<tr><td>Passiva con ez</td><td class="hl">ez + PP [da + agente]</td><td>✓ facoltativo</td><td>formale/neutro</td></tr>
+<tr><td>Passiva con se</td><td class="hl">se + verbo attivo</td><td>✗ impossibile</td><td>colloquiale/generico</td></tr>
+<tr><td>Stato risultante</td><td class="hl">ez + PP (agg.)</td><td>✗ assente</td><td>tutti i registri</td></tr>
+<tr><td>Impersonale</td><td class="hl">se + verbo 3ª sing.</td><td>✗ impossibile</td><td>colloquiale</td></tr>
+</tbody></table>
+</div>
+
+<script>
+function show(id){['struct','tempi','se','accord'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>

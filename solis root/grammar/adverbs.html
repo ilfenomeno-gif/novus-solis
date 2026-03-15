@@ -1,0 +1,181 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:5px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ex{padding:6px 10px;background:var(--color-background-secondary);border-radius:5px;font-size:13px;margin:4px 0}
+.ex .it{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:13px;color:#533AB7;margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('ament')">-ament</button>
+  <button class="tab-btn" onclick="show('lextempo')">Luogo e tempo</button>
+  <button class="tab-btn" onclick="show('modo')">Modo e grado</button>
+  <button class="tab-btn" onclick="show('pos')">Posizione e uso</button>
+</div>
+
+<!-- -AMENT -->
+<div id="ament">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Regola produttiva: avverbi in -ament</div>
+<div class="rule-f">aggettivo (forma femminile o base) + -ament</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Equivale a IT -mente · ES -mente · FR -ment · PT -mente. Invariabile.</div>
+</div>
+
+<div class="label">Formazione — regola</div>
+<table class="ct">
+<thead><tr><th>Aggettivo</th><th>Base usata</th><th>Avverbio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>rapid (rapido)</td><td>rapid-</td><td class="hl">rapidament</td><td>rapidamente</td></tr>
+<tr><td>lent (lento)</td><td>lent-</td><td class="hl">lentament</td><td>lentamente</td></tr>
+<tr><td>facil (facile)</td><td>facil-</td><td class="hl">facilament</td><td>facilmente</td></tr>
+<tr><td>clar (chiaro)</td><td>clar-</td><td class="hl">clarament</td><td>chiaramente</td></tr>
+<tr><td>bel (bello)</td><td>bel-</td><td class="hl">belament</td><td>bellamente</td></tr>
+<tr><td>sol (solo)</td><td>sol-</td><td class="hl">solament</td><td>solamente</td></tr>
+<tr><td>final (finale)</td><td>final-</td><td class="hl">finalment</td><td>finalmente</td></tr>
+<tr><td>direct (diretto)</td><td>direct-</td><td class="hl">directament</td><td>direttamente</td></tr>
+<tr><td>real (reale)</td><td>real-</td><td class="hl">realment</td><td>realmente</td></tr>
+<tr><td>natural (naturale)</td><td>natural-</td><td class="hl">naturalment</td><td>naturalmente</td></tr>
+</tbody></table>
+<div class="note">La base è sempre la forma invariabile dell'aggettivo (non la forma femminile come in IT/ES). Questo semplifica la regola: <em>rapid → rapidament</em>, non <em>rapida → rapidamente</em>. Aggettivi in <b>-al</b> perdono la -a- finale davanti a -ment per eufonia: <em>final → finalment, natural → naturalment</em>.</div>
+
+<div class="label">Accumulazione di avverbi in -ament</div>
+<div class="ex">Ez parla <span class="hl">clarament e directament</span>. <div class="it">Parla chiaramente e direttamente. — -ament si ripete su entrambi (come IT)</div></div>
+<div class="ex">Ez fa le trevail <span class="hl">rapid, precis e eficazament</span>. <div class="it">Fa il lavoro rapidamente, con precisione ed efficacemente. — in lista, solo l'ultimo porta -ament (registro formale, come ES)</div></div>
+<div class="note">In registro standard si ripete -ament su ogni avverbio. In registro formale/scritto si può omettere su tutti tranne l'ultimo — come in spagnolo. Entrambe le strategie sono corrette in Solis Core.</div>
+</div>
+
+<!-- LUOGO E TEMPO -->
+<div id="lextempo" style="display:none">
+<div class="label">Avverbi di luogo</div>
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">aquí</td><td>qui/qua</td><td>aquí</td><td>vicinanza al parlante</td></tr>
+<tr><td class="hl">alí</td><td>lì/là</td><td>allí/allá</td><td>lontananza dal parlante</td></tr>
+<tr><td class="hl">dov</td><td>dove</td><td>donde</td><td>interrogativo/relativo</td></tr>
+<tr><td class="hl">dovere</td><td>dovunque</td><td>dondequiera</td><td>indefinito</td></tr>
+<tr><td class="hl">supr</td><td>sopra/su</td><td>arriba/encima</td><td></td></tr>
+<tr><td class="hl">sot</td><td>sotto/giù</td><td>abajo/debajo</td><td></td></tr>
+<tr><td class="hl">davant</td><td>davanti</td><td>delante</td><td></td></tr>
+<tr><td class="hl">derier</td><td>dietro</td><td>detrás</td><td></td></tr>
+<tr><td class="hl">dentr</td><td>dentro</td><td>dentro</td><td></td></tr>
+<tr><td class="hl">for</td><td>fuori</td><td>fuera</td><td></td></tr>
+<tr><td class="hl">longe</td><td>lontano</td><td>lejos</td><td></td></tr>
+<tr><td class="hl">prop</td><td>vicino</td><td>cerca</td><td></td></tr>
+</tbody></table>
+
+<div class="label">Avverbi di tempo</div>
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">ora</td><td>ora/adesso</td><td>ahora</td><td></td></tr>
+<tr><td class="hl">pois</td><td>poi/dopo</td><td>después/luego</td><td>sequenza temporale</td></tr>
+<tr><td class="hl">avant</td><td>prima</td><td>antes</td><td></td></tr>
+<tr><td class="hl">ia</td><td>già</td><td>ya</td><td></td></tr>
+<tr><td class="hl">encor</td><td>ancora</td><td>todavía/aún</td><td></td></tr>
+<tr><td class="hl">sempre</td><td>sempre</td><td>siempre</td><td></td></tr>
+<tr><td class="hl">jamais</td><td>mai</td><td>jamás/nunca</td><td>negativo</td></tr>
+<tr><td class="hl">nunca</td><td>mai (enfatico)</td><td>nunca</td><td>negativo enfatico</td></tr>
+<tr><td class="hl">sovint</td><td>spesso</td><td>a menudo</td><td></td></tr>
+<tr><td class="hl">rarament</td><td>raramente</td><td>raramente</td><td>da -ament</td></tr>
+<tr><td class="hl">demà</td><td>domani</td><td>mañana</td><td></td></tr>
+<tr><td class="hl">ier</td><td>ieri</td><td>ayer</td><td></td></tr>
+<tr><td class="hl">oi</td><td>oggi</td><td>hoy</td><td></td></tr>
+</tbody></table>
+<div class="note"><b>jamais</b> vs <b>nunca</b>: <em>jamais</em> (← FR jamais, IT mai) è il negativo standard: <em>je jamais camin</em> (non cammino mai). <em>nunca</em> è la forma enfatica/assoluta: <em>nunca!</em> (mai e poi mai!). In frase negativa, Solis usa <em>non … jamais</em>: <em>je non ver jamais dit</em>.</div>
+</div>
+
+<!-- MODO E GRADO -->
+<div id="modo" style="display:none">
+<div class="label">Avverbi di modo (lessicali)</div>
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th></tr></thead>
+<tbody>
+<tr><td class="hl">ben</td><td>bene</td><td>bien</td></tr>
+<tr><td class="hl">mal</td><td>male</td><td>mal</td></tr>
+<tr><td class="hl">ensem</td><td>insieme</td><td>juntos</td></tr>
+<tr><td class="hl">sol</td><td>da solo/solamente</td><td>solo</td></tr>
+<tr><td class="hl">exprés</td><td>apposta/espressamente</td><td>expresamente</td></tr>
+<tr><td class="hl">quasi</td><td>quasi</td><td>casi</td></tr>
+<tr><td class="hl">com</td><td>come</td><td>como</td></tr>
+<tr><td class="hl">ensin</td><td>così</td><td>así</td></tr>
+</tbody></table>
+
+<div class="label">Avverbi di grado (intensificatori)</div>
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td class="hl">molt</td><td>molto</td><td>muy/mucho</td><td>davanti ad agg./avv.: <em>molt rapid</em></td></tr>
+<tr><td class="hl">poc</td><td>poco</td><td>poco</td><td>davanti ad agg./avv.: <em>poc clar</em></td></tr>
+<tr><td class="hl">trop</td><td>troppo</td><td>demasiado</td><td><em>trop cald</em></td></tr>
+<tr><td class="hl">prou</td><td>abbastanza</td><td>bastante</td><td><em>prou grand</em></td></tr>
+<tr><td class="hl">tant</td><td>tanto</td><td>tanto</td><td>davanti ad agg./avv.</td></tr>
+<tr><td class="hl">tan</td><td>così/tanto (compar.)</td><td>tan</td><td>nella comparazione: <em>tan rapid com</em></td></tr>
+<tr><td class="hl">plus</td><td>più</td><td>más</td><td>comparativo: <em>plus alt</em></td></tr>
+<tr><td class="hl">menos</td><td>meno</td><td>menos</td><td>comparativo: <em>menos rapid</em></td></tr>
+</tbody></table>
+<div class="note"><b>molt</b> davanti ad aggettivo/avverbio (= IT molto, ES muy): <em>molt bon, molt rapidament</em>. <b>molt</b> davanti a sostantivo con valore quantitativo: <em>je ver molt de pacienz</em> (ho molta pazienza) — in questo caso si usa <em>molt de + N</em>.</div>
+
+<div class="label">Avverbi di affermazione, negazione, dubbio</div>
+<div class="grid2">
+<table class="ct">
+<thead><tr><th>Tipo</th><th>Solis</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>affermazione</td><td class="hl">sí · certan · zert</td><td>sì · certamente</td></tr>
+<tr><td>negazione</td><td class="hl">non · no</td><td>non · no</td></tr>
+<tr><td>dubbio</td><td class="hl">potser · peut-estr</td><td>forse</td></tr>
+<tr><td>probabilità</td><td class="hl">probablament</td><td>probabilmente</td></tr>
+</tbody></table>
+<table class="ct">
+<thead><tr><th>Tipo</th><th>Solis</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>concessione</td><td class="hl">tot · tot-ensin</td><td>tuttavia · eppure</td></tr>
+<tr><td>aggiunta</td><td class="hl">tamben · encor</td><td>anche · ancora</td></tr>
+<tr><td>contrasto</td><td class="hl">pero · tot-vez</td><td>però · tuttavia</td></tr>
+<tr><td>conclusione</td><td class="hl">doncs · al fin</td><td>dunque · infine</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<!-- POSIZIONE E USO -->
+<div id="pos" style="display:none">
+<div class="label">Posizione nella frase — regole generali</div>
+<table class="ct">
+<thead><tr><th>Tipo avverbio</th><th>Posizione normale</th><th>Esempio</th></tr></thead>
+<tbody>
+<tr><td>Modo (-ament)</td><td>dopo il verbo / dopo l'oggetto</td><td>Ez parla <span class="hl">clarament</span>. · Ez fa le trevail <span class="hl">rapidament</span>.</td></tr>
+<tr><td>Grado (molt/poc…)</td><td>immediatamente prima dell'agg./avv.</td><td>Ez ez <span class="hl">molt</span> inteligent. · Ez camin <span class="hl">trop</span> lentament.</td></tr>
+<tr><td>Tempo</td><td>inizio o fine di frase</td><td><span class="hl">Oi</span> je non ver temp. · Je venit <span class="hl">ier</span>.</td></tr>
+<tr><td>Luogo</td><td>dopo il verbo</td><td>Ez ez <span class="hl">aquí</span>. · Je voi <span class="hl">alí</span>.</td></tr>
+<tr><td>Negazione</td><td>prima del verbo</td><td>Je <span class="hl">non</span> sav.</td></tr>
+<tr><td>Frequenza</td><td>dopo ausiliare / prima di verbo principale</td><td>Je ver <span class="hl">sovint</span> caminat. · Ez <span class="hl">sempre</span> ariv tard.</td></tr>
+</tbody></table>
+
+<div class="label">Avverbio vs aggettivo invariabile — distinzione</div>
+<div class="ex">Ez camin <span class="hl">rapid</span>. <div class="it">Cammina veloce. — <em>rapid</em> come avverbio (agg. invariabile in funzione avv., come IT «cammina veloce»)</div></div>
+<div class="ex">Ez camin <span class="hl">rapidament</span>. <div class="it">Cammina velocemente. — <em>rapidament</em> avverbio derivato (più formale)</div></div>
+<div class="ex">Ez ez un om <span class="hl">rapid</span>. <div class="it">È un uomo veloce. — <em>rapid</em> come aggettivo attributivo</div></div>
+<div class="note">In Solis, come in italiano e spagnolo, molti aggettivi possono fungere da avverbi senza suffisso: <em>parlar clar, volar alt, andar lent</em>. La forma in -ament è sempre disponibile ma spesso facoltativa in registro colloquiale.</div>
+
+<div class="label">Avverbi con valore di connettivo testuale</div>
+<div class="ex"><span class="hl">Prim</span>, je examinaré le problem. <span class="hl">Pois</span>, je trovaré una soluzion. <span class="hl">Al fin</span>, je presentaré le rezultat. <div class="it">Prima esaminerò il problema. Poi troverò una soluzione. Infine presenterò il risultato.</div></div>
+<div class="ex"><span class="hl">Tot-ensin</span>, ez non er satisfat. <div class="it">Tuttavia, non era soddisfatto.</div></div>
+<div class="ex"><span class="hl">Doncs</span>, que fazom noz? <div class="it">Dunque, cosa facciamo?</div></div>
+<div class="note">I connettivi testuali si posizionano normalmente in testa alla frase, seguiti da virgola. <em>doncs</em> (← cat. doncs, FR donc) è il connettivo conclusivo per eccellenza in Solis.</div>
+</div>
+
+<script>
+function show(id){['ament','lextempo','modo','pos'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>

@@ -1,0 +1,139 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:5px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ex{padding:6px 10px;background:var(--color-background-secondary);border-radius:5px;font-size:13px;margin:4px 0}
+.ex .it{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:13px;color:#533AB7;margin:4px 0}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('comp')">Comparativo</button>
+  <button class="tab-btn" onclick="show('superl')">Superlativo</button>
+  <button class="tab-btn" onclick="show('irr')">Irregolari</button>
+  <button class="tab-btn" onclick="show('panrom')">Confronto romanzo</button>
+</div>
+
+<div id="comp">
+<div class="label">Tre tipi di comparativo</div>
+<table class="ct">
+<thead><tr><th>Tipo</th><th>Struttura</th><th>Esempio Solis</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>Maggioranza</td><td><span class="hl">plus … que</span></td><td>Ez ez <span class="hl">plus alt que</span> te.</td><td>È più alto di te.</td></tr>
+<tr><td>Minoranza</td><td><span class="hl">menos … que</span></td><td>Je son <span class="hl">menos rapid que</span> lor.</td><td>Sono meno veloce di loro.</td></tr>
+<tr><td>Uguaglianza</td><td><span class="hl">tan … com</span></td><td>La citat ez <span class="hl">tan grand com</span> Milano.</td><td>La città è grande come Milano.</td></tr>
+</tbody></table>
+
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Struttura completa</div>
+<div class="rule-f">plus/menos/tan + [aggettivo/avverbio] + que/com + [secondo termine]</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Il secondo termine può essere un pronome tonico, un sintagma nominale o una proposizione.</div>
+</div>
+
+<div class="label">Comparativo di quantità (sostantivi)</div>
+<table class="ct">
+<thead><tr><th>Tipo</th><th>Struttura</th><th>Esempio</th></tr></thead>
+<tbody>
+<tr><td>Più di</td><td><span class="hl">plus de + N</span></td><td>Je vey <span class="hl">plus de librs</span> que te.</td></tr>
+<tr><td>Meno di</td><td><span class="hl">menos de + N</span></td><td>Ez ver <span class="hl">menos de temp</span>.</td></tr>
+<tr><td>Tanto quanto</td><td><span class="hl">tant de + N … com</span></td><td>Je ver <span class="hl">tant de pacienz com</span> ez.</td></tr>
+</tbody></table>
+<div class="note">Con i numeri si usa <b>plus de / menos de</b> senza «que»: <em>plus de cent persones</em> (più di cento persone). Stesso pattern dell'italiano «più di cento».</div>
+
+<div class="label">Secondo termine — pronomi tonici</div>
+<div class="ex">Ez ez plus alt que <span class="hl">je</span>. <div class="it">È più alto di me. — pronome tonico soggetto</div></div>
+<div class="ex">Je parlov de te, non de <span class="hl">lor</span>. <div class="it">Parlavo di te, non di loro. — pronome tonico obliquo</div></div>
+<div class="note">Pronomi tonici: je · te · ez/za · noz · voz · lor (stessi del soggetto, ma usati dopo preposizioni e nelle comparazioni).</div>
+</div>
+
+<div id="superl" style="display:none">
+<div class="label">Superlativo relativo</div>
+<div class="rule">
+<div class="rule-f">art. + plus/menos + [aggettivo] + (de + gruppo)</div>
+</div>
+<div class="ex">Ez ez <span class="hl">le plus alt de</span> la classa. <div class="it">È il più alto della classe.</div></div>
+<div class="ex">Ez ez <span class="hl">la plus bela de</span> la citat. <div class="it">È la più bella della città.</div></div>
+<div class="ex">Son <span class="hl">los menos rapids de</span> lor grup. <div class="it">Sono i meno veloci del loro gruppo.</div></div>
+<div class="note">L'articolo si accorda col sostantivo cui si riferisce l'aggettivo: <em>le</em> (m.sg.) · <em>la</em> (f.sg.) · <em>los/las</em> (pl.). Il gruppo di riferimento è introdotto da <b>de</b>.</div>
+
+<div class="label">Superlativo assoluto — tre strategie</div>
+<table class="ct">
+<thead><tr><th>Strategia</th><th>Struttura</th><th>Esempio</th><th>Registro</th></tr></thead>
+<tbody>
+<tr><td>Avverbio <em>molt</em></td><td><span class="hl">molt + agg.</span></td><td>Ez ez <span class="hl">molt inteligent</span>.</td><td>standard</td></tr>
+<tr><td>Suffisso <em>-isim</em></td><td><span class="hl">agg. + -isim/-isima</span></td><td>Ez ez <span class="hl">inteligentisim</span>.</td><td>formale/enfatico</td></tr>
+<tr><td>Raddoppio avv.</td><td><span class="hl">molt molt + agg.</span></td><td>Ez ez <span class="hl">molt molt bel</span>.</td><td>colloquiale</td></tr>
+</tbody></table>
+<div class="note">Il suffisso <b>-isim/-isima</b> è ereditato direttamente dal latino <em>-ISSIMUS</em> (IT bellissimo, ES bellísimo). In Solis si aggiunge alla forma base dell'aggettivo: <em>rapid → rapidisim · grand → grandisim · bel → belisim</em>.</div>
+
+<div class="label">Posizione del superlativo relativo rispetto al nome</div>
+<div class="ex">le <span class="hl">plus grand</span> libr <div class="it">il libro più grande — agg. dopo art.+plus, nome dopo</div></div>
+<div class="ex">le libr <span class="hl">plus grand de tots</span> <div class="it">il libro più grande di tutti — struttura postnominale (enfatica)</div></div>
+</div>
+
+<div id="irr" style="display:none">
+<div class="label">Forme irregolari — comparativi e superlativi</div>
+<table class="ct">
+<thead><tr><th>Base</th><th>Comparativo</th><th>Superlativo rel.</th><th>Superlativo ass.</th><th>IT / ES</th></tr></thead>
+<tbody>
+<tr><td><b>bon</b> (buono)</td><td><span class="irr">meior</span></td><td><span class="irr">le meior</span></td><td><span class="irr">optim / bontisim</span></td><td>IT migliore/ottimo · ES mejor/óptimo</td></tr>
+<tr><td><b>mal</b> (cattivo)</td><td><span class="irr">peior</span></td><td><span class="irr">le peior</span></td><td><span class="irr">pessim / maltisim</span></td><td>IT peggiore/pessimo · ES peor/pésimo</td></tr>
+<tr><td><b>grand</b> (grande)</td><td><span class="irr">maior</span></td><td><span class="irr">le maior</span></td><td><span class="irr">maxim / grandisim</span></td><td>IT maggiore/massimo · ES mayor/máximo</td></tr>
+<tr><td><b>pec</b> (piccolo)</td><td><span class="irr">menor</span></td><td><span class="irr">le menor</span></td><td><span class="irr">minim / pecisim</span></td><td>IT minore/minimo · ES menor/mínimo</td></tr>
+<tr><td><b>alt</b> (alto)</td><td>plus alt / <span class="irr">superior</span></td><td>le plus alt / <span class="irr">le superior</span></td><td><span class="irr">suprem / altisim</span></td><td>IT superiore/supremo · ES superior/supremo</td></tr>
+<tr><td><b>bax</b> (basso)</td><td>menos alt / <span class="irr">inferior</span></td><td>le menos alt / <span class="irr">le inferior</span></td><td><span class="irr">infim / baxisim</span></td><td>IT inferiore/infimo · ES inferior/ínfimo</td></tr>
+</tbody></table>
+<div class="note">Le forme latine (<em>meior, peior, maior, menor, superior, inferior</em>) sono usate preferibilmente in registro formale e scritto. In parlato corrente si usano anche le forme analitiche: <em>plus bon, plus mal, plus grand, plus pec</em> — come accade nell'italiano popolare («più buono» accanto a «migliore»).</div>
+
+<div class="label">Usi fissi delle forme latine (non intercambiabili)</div>
+<div class="ex">de <span class="irr">meior</span> in meior <div class="it">di bene in meglio — locuzione fissa</div></div>
+<div class="ex">le <span class="irr">maior</span> part <div class="it">la maggior parte — solo «maior», non «plus grand»</div></div>
+<div class="ex">en <span class="irr">menor</span> mesura <div class="it">in misura minore — registro formale</div></div>
+<div class="ex">de <span class="irr">inferior</span> qualitat <div class="it">di qualità inferiore — termine tecnico/commerciale</div></div>
+</div>
+
+<div id="panrom" style="display:none">
+<div class="label">Comparativo di maggioranza — confronto pan-romanzo</div>
+<table class="ct">
+<thead><tr><th></th><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th></tr></thead>
+<tbody>
+<tr><td>Struttura</td><td class="hl">plus … que</td><td>più … di/che</td><td>más … que</td><td>plus … que</td><td>mais … que</td></tr>
+<tr><td>Es più alto di me</td><td>Ez ez plus alt que je.</td><td>È più alto di me.</td><td>Es más alto que yo.</td><td>Il est plus grand que moi.</td><td>É mais alto do que eu.</td></tr>
+<tr><td>Uguaglianza</td><td class="hl">tan … com</td><td>tanto … quanto / come</td><td>tan … como</td><td>aussi … que</td><td>tão … como/quanto</td></tr>
+</tbody></table>
+
+<div class="label">Superlativi irregolari — confronto</div>
+<table class="ct">
+<thead><tr><th>Base</th><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th><th>Latino</th></tr></thead>
+<tbody>
+<tr><td>buono</td><td class="irr">meior</td><td>migliore</td><td>mejor</td><td>meilleur</td><td>melhor</td><td>MELIOR</td></tr>
+<tr><td>cattivo</td><td class="irr">peior</td><td>peggiore</td><td>peor</td><td>pire</td><td>pior</td><td>PEIOR</td></tr>
+<tr><td>grande</td><td class="irr">maior</td><td>maggiore</td><td>mayor</td><td>majeur</td><td>maior</td><td>MAIOR</td></tr>
+<tr><td>piccolo</td><td class="irr">menor</td><td>minore</td><td>menor</td><td>moindre</td><td>menor</td><td>MINOR</td></tr>
+</tbody></table>
+<div class="note">Solis conserva le forme latine quasi intatte — più vicino al portoghese (<em>melhor, pior, maior, menor</em>) che all'italiano o al francese. Questa trasparenza etimologica è una scelta deliberata del Core: chi conosce il latino o il portoghese riconosce immediatamente le forme.</div>
+
+<div class="label">Superlativo assoluto con -isim — confronto</div>
+<table class="ct">
+<thead><tr><th>Aggettivo</th><th>Solis</th><th>IT</th><th>ES</th><th>FR</th></tr></thead>
+<tbody>
+<tr><td>bello</td><td class="hl">belisim</td><td>bellissimo</td><td>bellísimo</td><td>très beau (no suffisso)</td></tr>
+<tr><td>grande</td><td class="hl">grandisim</td><td>grandissimo</td><td>grandísimo</td><td>très grand</td></tr>
+<tr><td>rapido</td><td class="hl">rapidisim</td><td>rapidissimo</td><td>rapidísimo</td><td>très rapide</td></tr>
+</tbody></table>
+<div class="note">Il francese non ha il suffisso -issimus produttivo: usa <em>très</em>. Solis segue l'italiano e lo spagnolo nel mantenere il suffisso come opzione formale/enfatica.</div>
+</div>
+
+<script>
+function show(id){['comp','superl','irr','panrom'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>

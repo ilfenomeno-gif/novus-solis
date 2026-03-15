@@ -1,0 +1,163 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:5px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ex{padding:6px 10px;background:var(--color-background-secondary);border-radius:5px;font-size:13px;margin:4px 0}
+.ex .it{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:13px;color:#533AB7;margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.decision{padding:10px 14px;border:1px solid #1D9E75;border-radius:8px;background:#E1F5EE;color:#085041;font-size:13px;margin:8px 0}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('prog')">Progressivo</button>
+  <button class="tab-btn" onclick="show('incoa')">Incoativo</button>
+  <button class="tab-btn" onclick="show('cont')">Continuativo e terminativo</button>
+  <button class="tab-btn" onclick="show('panrom')">Confronto romanzo</button>
+</div>
+
+<!-- PROGRESSIVO -->
+<div id="prog">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Progressivo — struttura</div>
+<div class="rule-f">star + gerundio</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Azione in corso nel momento di riferimento. <em>star</em> = forma contratta di <em>estar</em>.</div>
+</div>
+
+<div class="label">Paradigma di star al presente</div>
+<table class="ct">
+<thead><tr><th>Persona</th><th>star + gerundio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>je</td><td class="hl">je star caminand</td><td>sto camminando</td></tr>
+<tr><td>te</td><td class="hl">te estar caminand</td><td>stai camminando</td></tr>
+<tr><td>ez/za</td><td class="hl">ez star caminand</td><td>sta camminando</td></tr>
+<tr><td>noz</td><td class="hl">noz estom caminand</td><td>stiamo camminando</td></tr>
+<tr><td>voz</td><td class="hl">voz estez caminand</td><td>state camminando</td></tr>
+<tr><td>lor</td><td class="hl">lor star caminand</td><td>stanno camminando</td></tr>
+</tbody></table>
+<div class="note"><b>star</b> è la forma contratta di <em>estar</em> usata nel progressivo (come IT <em>stare</em> nel gerundio). Alla 1ª sing. e 3ª sing./pl. usa la forma <em>star</em> contratta; alle altre persone usa le forme piene di <em>estar</em>. Confronta IT: <em>sto/stai/sta/stiamo/state/stanno</em>.</div>
+
+<div class="label">Progressivo in altri tempi</div>
+<table class="ct">
+<thead><tr><th>Tempo</th><th>Struttura</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>Presente</td><td class="hl">star + ger.</td><td>je star caminand</td><td>sto camminando</td></tr>
+<tr><td>Imperfetto</td><td class="hl">estava + ger.</td><td>je estava caminand</td><td>stavo camminando</td></tr>
+<tr><td>Futuro</td><td class="hl">estaré + ger.</td><td>je estaré caminand</td><td>starò camminando</td></tr>
+<tr><td>Condizionale</td><td class="hl">estaria + ger.</td><td>je estaria caminand</td><td>starei camminando</td></tr>
+</tbody></table>
+<div class="note">Il progressivo imperfetto (<em>estava caminand</em>) è particolarmente frequente per descrivere un'azione in corso interrotta da un'altra: <em>Je estava caminand cuand ez ariv</em> (Stavo camminando quando arrivò).</div>
+
+<div class="label">Limiti d'uso del progressivo</div>
+<div class="ex">Ez <span class="hl">star caminand</span>. ✓ <div class="it">Sta camminando. — azione dinamica in corso → progressivo naturale</div></div>
+<div class="ex">Ez <span class="hl">sab</span> la resposta. ✓ (non: *ez star sabend) <div class="it">Sa la risposta. — verbo stativo → NO progressivo</div></div>
+<div class="ex">Ez <span class="hl">ama</span> la musica. ✓ (non: *ez star amand) <div class="it">Ama la musica. — stato emotivo duraturo → NO progressivo</div></div>
+<div class="note">Come in italiano e spagnolo, i verbi stativi (<em>saber, poder, amar, aver, esser</em>) non accettano il progressivo. Il progressivo è riservato alle azioni dinamiche in corso.</div>
+</div>
+
+<!-- INCOATIVO -->
+<div id="incoa" style="display:none">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:4px">Incoativo — struttura</div>
+<div class="rule-f">comezar a + infinito</div>
+<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Inizio di un'azione. Equivale a IT <em>cominciare a</em> · ES <em>empezar a</em>.</div>
+</div>
+
+<div class="label">comezar a + inf. — paradigma e usi</div>
+<div class="ex">Je <span class="hl">comez a</span> comprender. <div class="it">Comincio a capire. — inizio progressivo</div></div>
+<div class="ex">Ez <span class="hl">comezav a</span> plorar cuand je ariv. <div class="it">Stava cominciando a piangere quando arrivai. — incoativo nel passato</div></div>
+<div class="ex">Le sol <span class="hl">comez a</span> levar. <div class="it">Il sole comincia a sorgere. — incoativo con soggetto inanimato</div></div>
+
+<div class="label">Varianti incoative</div>
+<table class="ct">
+<thead><tr><th>Struttura</th><th>Sfumatura</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td class="hl">comezar a + inf.</td><td>inizio generico</td><td>comez a caminar</td><td>cominciare a camminare</td></tr>
+<tr><td class="hl">meter-se a + inf.</td><td>inizio improvviso/deciso</td><td>je me met a caminar</td><td>mettersi a camminare</td></tr>
+<tr><td class="hl">ponerse a + inf.</td><td>inizio volontario (Iberic)</td><td>je me pon a caminar</td><td>mettersi a camminare</td></tr>
+<tr><td class="hl">estar per + inf.</td><td>azione imminente</td><td>je estar per partir</td><td>stare per partire</td></tr>
+<tr><td class="hl">ir a + inf.</td><td>futuro prossimo/intenzionale</td><td>je vai a caminar</td><td>andare a / stare per</td></tr>
+</tbody></table>
+<div class="note"><b>ir a + inf.</b> è il futuro perifrastico (come ES <em>ir a</em>, FR <em>aller +inf.</em>, PT <em>ir a</em>): <em>je vai a caminar</em> = sto per camminare / camminerò. In Solis Core è equivalente al futuro semplice, ma con sfumatura di intenzione o imminenza.</div>
+</div>
+
+<!-- CONTINUATIVO E TERMINATIVO -->
+<div id="cont" style="display:none">
+<div class="label">Continuativo — azione che prosegue</div>
+<table class="ct">
+<thead><tr><th>Struttura</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+  <tr><td class="hl">seguir + gerundio</td><td>Je seguix caminand.</td><td>Continuo a camminare.</td></tr>
+<tr><td class="hl">continuar + gerundio</td><td>Ez continua parlend.</td><td>Continua a parlare.</td></tr>
+<tr><td class="hl">seguir + gerundio</td><td>Lor seguixen studiant.</td><td>Continuano a studiare.</td></tr>
+</tbody></table>
+<div class="note"><b>seguir</b> (← ES seguir, cat. seguir) + gerundio = azione che continua senza interruzione. <b>continuar</b> è il sinonimo più formale. Entrambi accettano anche <em>a + infinito</em>: <em>seguir a caminar, continuar a parlar</em>.</div>
+
+<div class="label">Terminativo — fine di un'azione</div>
+<table class="ct">
+<thead><tr><th>Struttura</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td class="hl">laissar de + inf.</td><td>Je laiss de fumar.</td><td>Smetto di fumare.</td></tr>
+<tr><td class="hl">finir de + inf.</td><td>Ez finix de caminar.</td><td>Finisce di camminare.</td></tr>
+<tr><td class="hl">deissar de + inf.</td><td>Ez deissa de plorar.</td><td>Smette di piangere.</td></tr>
+<tr><td class="hl">cessar de + inf.</td><td>Le ploiva cessa de cader.</td><td>La pioggia cessa di cadere.</td></tr>
+</tbody></table>
+<div class="note"><b>laissar de</b> (← FR laisser, cat. deixar) = smettere improvvisamente. <b>finir de</b> = portare a termine. <b>cessar de</b> = cessazione formale/scritta. Tutti reggono <em>de + infinito</em>.</div>
+
+<div class="label">Mappa aspettuale completa</div>
+<table class="ct">
+<thead><tr><th>Fase</th><th>Struttura</th><th>Esempio</th></tr></thead>
+<tbody>
+<tr><td>Imminenza</td><td class="hl">estar per + inf.</td><td>je estar per partir</td></tr>
+<tr><td>Inizio</td><td class="hl">comezar a + inf.</td><td>je comez a caminar</td></tr>
+<tr><td>In corso</td><td class="hl">star + gerundio</td><td>je star caminand</td></tr>
+<tr><td>Continuazione</td><td class="hl">seguir + gerundio</td><td>je seguix caminand</td></tr>
+<tr><td>Fine</td><td class="hl">laissar de / finir de + inf.</td><td>je laiss de caminar</td></tr>
+<tr><td>Risultato</td><td class="hl">passato prossimo</td><td>je vey caminat</td></tr>
+</tbody></table>
+</div>
+
+<!-- CONFRONTO ROMANZO -->
+<div id="panrom" style="display:none">
+<div class="label">Progressivo — confronto pan-romanzo</div>
+<table class="ct">
+<thead><tr><th></th><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th></tr></thead>
+<tbody>
+<tr><td>Struttura</td><td class="hl">star + ger.</td><td>stare + ger.</td><td>estar + ger.</td><td>(être en train de + inf.)</td><td>estar + ger.</td></tr>
+<tr><td>Sto camminando</td><td class="hl">je star caminand</td><td>sto camminando</td><td>estoy caminando</td><td>je suis en train de marcher</td><td>estou caminhando</td></tr>
+</tbody></table>
+<div class="note">Il francese non ha un progressivo morfologico: usa la perifrasi <em>être en train de + inf.</em> Il Solis segue l'italiano e lo spagnolo con <em>star/estar + gerundio</em>. Il gerundio Solis termina in <b>-and/-end/-ind</b> a seconda della coniugazione.</div>
+
+<div class="label">Incoativo — confronto pan-romanzo</div>
+<table class="ct">
+<thead><tr><th></th><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th></tr></thead>
+<tbody>
+<tr><td>Inizio</td><td class="hl">comezar a</td><td>cominciare a</td><td>empezar a</td><td>commencer à</td><td>começar a</td></tr>
+<tr><td>Imminenza</td><td class="hl">estar per</td><td>stare per</td><td>estar a punto de</td><td>être sur le point de</td><td>estar prestes a</td></tr>
+<tr><td>Futuro pross.</td><td class="hl">ir a + inf.</td><td>—</td><td>ir a + inf.</td><td>aller + inf.</td><td>ir + inf.</td></tr>
+</tbody></table>
+
+<div class="label">Gerundio Solis — formazione</div>
+<table class="ct">
+<thead><tr><th>Coniugazione</th><th>Suffisso</th><th>Esempio</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>-AR</td><td class="hl">-and</td><td>caminar → <span class="hl">caminand</span></td><td>camminando</td></tr>
+<tr><td>-ER</td><td class="hl">-end</td><td>perder → <span class="hl">perdend</span></td><td>perdendo</td></tr>
+<tr><td>-IR</td><td class="hl">-ind</td><td>partir → <span class="hl">partind</span></td><td>partendo</td></tr>
+</tbody></table>
+<div class="note">I suffissi del gerundio (-and/-end/-ind) rispecchiano le vocali tematiche delle tre coniugazioni. Irregolari notevoli: <em>esser → essend · aver → avend · dir → dizend · far → fazend · venir → venind</em>.</div>
+</div>
+
+<script>
+function show(id){['prog','incoa','cont','panrom'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>

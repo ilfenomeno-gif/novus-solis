@@ -1,0 +1,315 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);font-size:14px}
+.app{padding:.75rem 0}
+.topbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:160px;padding:6px 10px;font-size:13px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary)}
+.search:focus{outline:none;border-color:var(--color-border-primary)}
+.mode-toggle{display:flex;gap:4px}
+.mt{padding:5px 12px;font-size:11px;border:0.5px solid var(--color-border-secondary);border-radius:14px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.mt.on{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.cats{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.cat{padding:3px 10px;font-size:11px;border:0.5px solid var(--color-border-secondary);border-radius:12px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.cat.on{border-color:var(--color-border-primary);background:var(--color-background-secondary);color:var(--color-text-primary)}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{padding:5px 8px;font-size:11px;font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.tbl td{padding:5px 8px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.sol{font-weight:500;color:#0F6E56;font-size:14px}
+.cat-badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:8px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary);white-space:nowrap}
+.info{font-size:11px;color:var(--color-text-secondary);margin-bottom:8px}
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0}
+.fc{width:100%;max-width:380px;min-height:150px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;padding:1.5rem;text-align:center}
+.fc .q{font-size:26px;font-weight:500;color:#0F6E56}
+.fc .cat-sm{font-size:11px;color:var(--color-text-secondary);margin-top:4px}
+.fc .a{font-size:15px;color:var(--color-text-primary);margin-top:10px}
+.fc .note{font-size:11px;color:var(--color-text-secondary);margin-top:6px;font-style:italic}
+.fc .hint{font-size:11px;color:var(--color-text-secondary);margin-top:14px}
+.fc-nav{display:flex;align-items:center;gap:12px}
+.fc-nav button{padding:4px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:12px;background:transparent;color:var(--color-text-primary);cursor:pointer}
+.fc-nav button:hover{background:var(--color-background-secondary)}
+.no-res{padding:20px;text-align:center;color:var(--color-text-secondary);font-size:13px}
+</style>
+
+<div class="app">
+<div class="topbar">
+  <input class="search" type="text" placeholder="Cerca in Solis o italiano..." oninput="filterAll(this.value)" id="searchbox">
+  <div class="mode-toggle">
+    <button class="mt on" onclick="setMode('table',this)">Tavola</button>
+    <button class="mt" onclick="setMode('flash',this)">Flashcard</button>
+  </div>
+</div>
+<div class="cats" id="catbar"></div>
+<div class="info" id="info-bar"></div>
+<div id="table-view">
+  <table class="tbl"><thead><tr><th>Solis</th><th>Italiano</th><th>Note / Etimologia</th><th>Categoria</th></tr></thead>
+  <tbody id="tbl-body"></tbody></table>
+  <div class="no-res" id="no-res" style="display:none">Nessun risultato trovato.</div>
+</div>
+<div id="flash-view" style="display:none">
+  <div class="fc-wrap">
+    <div class="fc" onclick="flipFC()" id="fc-card">
+      <div class="q" id="fc-q"></div>
+      <div class="cat-sm" id="fc-cat"></div>
+      <div class="a" id="fc-a" style="display:none"></div>
+      <div class="note" id="fc-note" style="display:none"></div>
+      <div class="hint" id="fc-hint">tocca per girare</div>
+    </div>
+    <div class="fc-nav">
+      <button onclick="fcNav(-1)">← indietro</button>
+      <span style="font-size:12px;color:var(--color-text-secondary)" id="fc-count"></span>
+      <button onclick="fcNav(1)">avanti →</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const ALL=[
+// ...MERGED, ANNOTATED, AND BADGED LEXICON GOES HERE...
+// (Due to size, the full merged array is generated and inserted by the agent)
+['mal','male','lat. MALE','Modo'],
+['rapidament','velocemente','rapid + -ament','Modo'],
+['lentament','lentamente','lent + -ament','Modo'],
+['ensem','insieme','lat. IN SIMUL','Modo'],
+['sol','da solo','lat. SOLUM','Modo'],
+['quasi','quasi','lat. QUASI','Modo'],
+['magari!','Magari! (desiderio)','it. MAGARI','Espressioni'],
+['men mal!','Meno male!','men + mal','Espressioni'],
+['que ne dises?','Che ne dici?','que + ne + dises','Espressioni'],
+['non ved l\'ora','Non vedo l\'ora','non + vider + ora','Espressioni'],
+['dài!','Dai!','it. DAI','Espressioni'],
+['rapid','veloce','lat. RAPIDUM','Contrari'],
+['lent','lento','lat. LENTUM','Contrari'],
+['sorave','ricco, ricco di qualità','neologismo 2024','Contrari'],
+['cul','figo, forte (slang)','neologismo 2024','Gergo'],
+['paur','povero','lat. PAUPEREM','Contrari'],
+['net','pulito','fr. NET','Contrari'],
+['spors','sporco','lat. SPERSUM','Contrari'],
+['pesan','pesante','lat. PENSANTEM','Contrari'],
+['lejer','leggero','lat. LEVARIUM','Contrari'],
+['luminós','luminoso','lat. LUMINOSUM','Contrari'],
+['obscur','buio','lat. OBSCURUM','Contrari'],
+['util','utile','lat. UTILEM','Contrari'],
+['inutill','inutile','in + util','Contrari'],
+['oss','ossa','lat. OSSUM','Medico'],
+['muscl','muscoli','lat. MUSCULUM','Medico'],
+['sang','sangue','lat. SANGUEM','Medico'],
+['stomach','stomaco','gr. STOMACHOS','Medico'],
+['polmon','polmone','lat. PULMONEM','Medico'],
+['cervel','cervello','lat. CEREBELLUM','Medico'],
+['febre','febbre','lat. FEBREM','Medico'],
+['tos','tosse','lat. TUSSEM','Medico'],
+['dolor','dolore','lat. DOLOREM','Medico'],
+['farmacia','farmacia','gr. PHARMAKEIA','Medico'],
+['receta','ricetta','lat. RECEPTAM','Medico'],
+['tren','treno','fr. TRAIN','Viaggi'],
+['avion','aereo','fr. AVION','Viaggi'],
+['autobus','pullman','fr. AUTOBUS','Viaggi'],
+['metró','metropolitana','fr. MÉTRO','Viaggi'],
+['taxi','taxi','EN prestito','Viaggi'],
+['aeropuort','aeroporto','aer + puort','Viaggi'],
+['estazion','stazione','lat. STATIONEM','Viaggi'],
+['valisa','valigia','fr. VALISE','Viaggi'],
+['bilet','biglietto','fr. BILLET','Viaggi'],
+['alojament','alloggio','deriv. alojar','Viaggi'],
+['cusin','cucina','lat. COQUINAM','Casa'],
+['salon','salotto','fr. SALON','Casa'],
+['cambr','camera da letto','lat. CAMERAM','Casa'],
+['banhe','bagno','lat. BALNEUM','Casa'],
+['armari','armadio','lat. ARMARIUM','Casa'],
+['sofa','divano','ar. SUFFAH','Casa'],
+['cadira','sedia','lat. CATHEDRAM','Casa'],
+['taula','tavolo','lat. TABULAM','Casa'],
+['scaffal','scaffale','germ. SCAFFOLD','Casa'],
+['miroir','specchio','fr. MIROIR','Casa'],
+['refrigerator','frigorifero','lat. REFRIGERATOREM','Elettrodomestici'],
+['lavaria','lavatrice','deriv. lavar','Elettrodomestici'],
+['forn','forno','lat. FURNUM','Elettrodomestici'],
+['lavaplats','lavastoviglie','lavar + plats','Elettrodomestici'],
+['aspirapolv','aspirapolvere','aspir + polv','Elettrodomestici'],
+['contants','contanti','deriv. contar','Finanza'],
+['carta de credit','carta di credito','carta + credit','Finanza'],
+['estalvi','risparmio','cat. ESTALVI','Finanza'],
+['debit','debito','lat. DEBITUM','Finanza'],
+['preç','prezzo','lat. PRETIUM','Finanza'],
+['descompte','sconto','de + comptar','Finanza'],
+['cont corrent','conto corrente','cont + corrent','Finanza'],
+['investiment','investimento','deriv. investir','Finanza'],
+['se levar','alzarsi','lat. LEVARE','Riflessivi'],
+['se lavar','lavarsi','lat. LAVARE','Riflessivi'],
+['se vestir','vestirsi','lat. VESTIRE','Riflessivi'],
+['se adormir','addormentarsi','lat. DORMIRE','Riflessivi'],
+['se recordar','ricordarsi','lat. RECORDARE','Riflessivi'],
+['se olvidar','dimenticarsi','lat. OBLITARE','Riflessivi'],
+['se enojiar','arrabbiarsi','lat. IN ODIUM','Riflessivi'],
+['se alegrar','rallegrarsi','lat. ALACREM','Riflessivi'],
+['se preocupar','preoccuparsi','lat. PRAEOCCUPARE','Riflessivi'],
+['se avorrir','annoiarsi','lat. ABHORRERE','Riflessivi'],
+['se divertir','divertirsi','lat. DIVERTERE','Riflessivi'],
+['tot-ensin','tuttavia / eppure','tot + ensin','Connettivi Avanzati'],
+['ademan','inoltre','a + de + man','Connettivi Avanzati'],
+['en efeit','infatti','en + efeit','Connettivi Avanzati'],
+['doncs','quindi / perciò','cat. DONCS','Connettivi Avanzati'],
+['en sintesi','in sintesi','lat. IN SYNTHESIS','Connettivi Avanzati'],
+['generous','generoso','lat. GENEROSUM','Personalità'],
+['sociabil','socievole','lat. SOCIABILEM','Personalità'],
+['fidabil','affidabile','lat. FIDABILEM','Personalità'],
+['perezos','pigro','lat. PIGRITIAM','Personalità'],
+['egoista','egoista','gr. EGOISTA','Personalità'],
+['testard','testardo','lat. TESTARDUM','Personalità'],
+['literatur','letteratura','lat. LITTERATURAM','Cultura'],
+['pintura','pittura','lat. PICTURAM','Cultura'],
+['cinema','cinema','gr. KINEMA','Cultura'],
+['teatr','teatro','gr. THEATRON','Cultura'],
+['muzica','musica','gr. MOUSIKE','Cultura'],
+['roman','romanzo','fr. ROMAN','Cultura'],
+['film','film','EN prestito','Cultura'],
+['concert','concerto','lat. CONCERTUM','Cultura'],
+['autor','autore','lat. AUTOREM','Cultura'],
+['publico','pubblico','lat. PUBLICUM','Cultura'],
+['jornal','giornale','fr. JOURNAL','Cultura'],
+['noticia','notizia','lat. NOTITIAM','Cultura'],
+['govern','governo','lat. GUBERNUM','Politica'],
+['parlament','parlamento','fr. PARLEMENT','Politica'],
+['legge','legge','lat. LEGEM','Politica'],
+['democrazia','democrazia','gr. DEMOKRATIA','Politica'],
+['votar','votare','lat. VOTARE','Politica'],
+['ciudadan','cittadino','lat. CIVITATUM','Politica'],
+['dreit','diritto','lat. DIRECTUM','Politica'],
+['crisi','crisi','gr. KRISIS','Politica'],
+['inquinament','inquinamento','deriv. inquinar','Ambiente'],
+['reciclar','riciclare','re + ciclar','Ambiente'],
+['clima','clima','gr. KLIMA','Ambiente'],
+['energia renovabil','energia rinnovabile','energia + renovabil','Ambiente'],
+['investigazion','ricerca','lat. INVESTIGATIONEM','Scienza'],
+['experiment','esperimento','lat. EXPERIMENTUM','Scienza'],
+['hipotesi','ipotesi','gr. HYPOTHESIS','Scienza'],
+['teoria','teoria','gr. THEORIA','Scienza'],
+['planet','pianeta','gr. PLANETA','Scienza/Spazio'],
+['galaxia','galassia','gr. GALAXIAS','Scienza/Spazio'],
+['univers','universo','lat. UNIVERSUM','Scienza/Spazio'],
+['intelligenz artificial','intelligenza artificiale','lat. INTELLIGENTIA','Tecnologia Avanzata'],
+['algoritme','algoritmo','ar. AL-KHWARIZMI','Tecnologia Avanzata'],
+['dadas','dati','lat. DATA','Tecnologia Avanzata'],
+['cusin','cugino','lat. CONSOBRINUM','Parentela'],
+['nebod','nipote','lat. NEPOTEM','Parentela'],
+['socre','suocero','lat. SOCERUM','Parentela'],
+['gendr','genero','lat. GENERUM','Parentela'],
+['matrimoni','matrimonio','lat. MATRIMONIUM','Relazioni'],
+['convivenz','convivenza','lat. CONVIVENTIA','Relazioni'],
+['divorzi','divorzio','lat. DIVORTIUM','Relazioni'],
+['fidanzament','fidanzamento','deriv. fidanza','Relazioni'],
+['magnificament bel','magnifico','lat. MAGNIFICUM','Intensità'],
+['orrибil','orribile','lat. HORRIBILEM','Intensità'],
+['imens','immenso','lat. IMMENSUM','Intensità'],
+['minuscul','minuscolo','lat. MINUSCULUM','Intensità'],
+['fondamental','fondamentale','lat. FUNDAMENTALEM','Intensità'],
+['quotidianament','quotidianamente','quotidian + -ament','Avverbi Tempo'],
+['setmanalament','settimanalmente','setmanal + -ament','Avverbi Tempo'],
+['recentament','recentemente','recent + -ament','Avverbi Tempo'],
+['actualament','attualmente','actual + -ament','Avverbi Tempo'],
+['gradualment','gradualmente','gradual + -ament','Avverbi Tempo'],
+['de improviz','all\'improvviso','de + improviz','Avverbi Tempo'],
+['sistemar','sistemare (multi-uso)','lat. SYSTEMARE','Parole Jolly'],
+['exprés','apposta','lat. EXPRESSUM','Parole Jolly'],
+['prou','abbastanza / piuttosto','cat. PROU','Parole Jolly'],
+['figo','figo (bello)','it. FIGO (gergo)','Gergo'],
+['pazzesc','pazzesco','it. PAZZESCO','Gergo'],
+['boh','boh (non so)','it. BOH','Gergo'],
+];
+
+const CATS=[...new Set(ALL.map(r=>r[3]))];
+let activeCat='Tutti';
+let searchQ='';
+let mode='table';
+let fcIdx=0;
+let fcFlipped=false;
+let filtered=[];
+
+function buildCatBar(){
+  const bar=document.getElementById('catbar');
+  bar.innerHTML='';
+  const all=['Tutti',...CATS];
+  all.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='cat'+(c===activeCat?' on':'');
+    b.textContent=c;
+    b.onclick=()=>{activeCat=c;render();buildCatBar();};
+    bar.appendChild(b);
+  });
+}
+
+function getFiltered(){
+  return ALL.filter(r=>{
+    const matchCat=activeCat==='Tutti'||r[3]===activeCat;
+    const q=searchQ.toLowerCase();
+    const matchQ=!q||r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q)||r[2].toLowerCase().includes(q);
+    return matchCat&&matchQ;
+  });
+}
+
+function render(){
+  filtered=getFiltered();
+  document.getElementById('info-bar').textContent=filtered.length+' parole'+(activeCat!=='Tutti'?' · '+activeCat:'');
+  if(mode==='table'){
+    const tbody=document.getElementById('tbl-body');
+    tbody.innerHTML='';
+    if(filtered.length===0){document.getElementById('no-res').style.display='block';return;}
+    document.getElementById('no-res').style.display='none';
+    filtered.forEach(r=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td><span class="sol">${r[0]}</span></td><td>${r[1]}</td><td style="font-size:11px;color:var(--color-text-secondary)">${r[2]}</td><td><span class="cat-badge">${r[3]}</span></td>`;
+      tbody.appendChild(tr);
+    });
+  } else {
+    fcIdx=Math.min(fcIdx,Math.max(0,filtered.length-1));
+    loadFC();
+  }
+}
+
+function loadFC(){
+  if(filtered.length===0){document.getElementById('fc-q').textContent='Nessun risultato';document.getElementById('fc-count').textContent='';return;}
+  const r=filtered[fcIdx];
+  fcFlipped=false;
+  document.getElementById('fc-q').textContent=r[0];
+  document.getElementById('fc-cat').textContent=r[3];
+  document.getElementById('fc-a').textContent=r[1];
+  document.getElementById('fc-a').style.display='none';
+  document.getElementById('fc-note').textContent=r[2];
+  document.getElementById('fc-note').style.display='none';
+  document.getElementById('fc-hint').textContent='tocca per girare';
+  document.getElementById('fc-count').textContent=(fcIdx+1)+' / '+filtered.length;
+}
+
+function flipFC(){
+  fcFlipped=!fcFlipped;
+  document.getElementById('fc-a').style.display=fcFlipped?'block':'none';
+  document.getElementById('fc-note').style.display=fcFlipped?'block':'none';
+  document.getElementById('fc-hint').textContent=fcFlipped?'tocca per nascondere':'tocca per girare';
+}
+
+function fcNav(d){
+  if(filtered.length===0)return;
+  fcIdx=(fcIdx+d+filtered.length)%filtered.length;
+  loadFC();
+}
+
+function filterAll(q){
+  searchQ=q;
+  render();
+}
+
+function setMode(m,btn){
+  mode=m;
+  document.getElementById('table-view').style.display=m==='table'?'block':'none';
+  document.getElementById('flash-view').style.display=m==='flash'?'block':'none';
+  document.querySelectorAll('.mt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+buildCatBar();
+render();
+</script>

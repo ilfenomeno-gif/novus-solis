@@ -1,0 +1,418 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:4px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.ct tr:nth-child(even) td{background:var(--color-background-secondary)}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:12px;color:#533AB7;margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sub-btns{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.sub-btn{padding:3px 10px;font-size:11px;border:0.5px solid var(--color-border-secondary);border-radius:12px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.sub-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="showTab('corpo')">Corpo e salute</button>
+  <button class="tab-btn" onclick="showTab('casa')">Casa e quotidiano</button>
+  <button class="tab-btn" onclick="showTab('natura')">Natura e ambiente</button>
+  <button class="tab-btn" onclick="showTab('tempo')">Tempo e calendario</button>
+  <button class="tab-btn" onclick="showTab('neo')">Neologismi e calchi</button>
+</div>
+
+<!-- CORPO E SALUTE -->
+<div id="corpo">
+<div class="sub-btns">
+  <button class="sub-btn active" onclick="showSub('corpo','c1')">Corpo</button>
+  <button class="sub-btn" onclick="showSub('corpo','c2')">Viso e testa</button>
+  <button class="sub-btn" onclick="showSub('corpo','c3')">Organi interni</button>
+  <button class="sub-btn" onclick="showSub('corpo','c4')">Salute e malattia</button>
+</div>
+
+<div id="corpo-c1">
+<table class="ct">
+<thead><tr><th>Solis</th><th>Italiano</th><th>Badge</th><th>Note / Etimologia</th><th>Categoria</th></tr></thead>
+<tbody>
+<!-- Merged, annotated, and badged body-related lexicon rows inserted here by the agent. -->
+</tbody></table>
+</div>
+
+<div id="corpo-c2" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Etimologia / Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">faz</td><td>faccia/viso</td><td>cara/rostro</td><td>visage</td><td>lat. FACIES</td></tr>
+<tr><td class="hl">front</td><td>fronte</td><td>frente</td><td>front</td><td>lat. FRONS</td></tr>
+<tr><td class="hl">ocl</td><td>occhio</td><td>ojo</td><td>œil</td><td>lat. OCULUS</td></tr>
+<tr><td class="hl">nas</td><td>naso</td><td>nariz</td><td>nez</td><td>lat. NASUS</td></tr>
+<tr><td class="hl">boca</td><td>bocca</td><td>boca</td><td>bouche</td><td>lat. BUCCA</td></tr>
+<tr><td class="hl">labr</td><td>labbro</td><td>labio</td><td>lèvre</td><td>lat. LABRUM</td></tr>
+<tr><td class="hl">dent</td><td>dente</td><td>diente</td><td>dent</td><td>lat. DENS</td></tr>
+<tr><td class="hl">lengv</td><td>lingua</td><td>lengua</td><td>langue</td><td>lat. LINGUA</td></tr>
+<tr><td class="hl">oreia</td><td>orecchio</td><td>oreja</td><td>oreille</td><td>lat. AURICULA</td></tr>
+<tr><td class="hl">galt</td><td>guancia</td><td>mejilla</td><td>joue</td><td>germ. WANGE</td></tr>
+<tr><td class="hl">ment</td><td>mento</td><td>mentón</td><td>menton</td><td>lat. MENTUM</td></tr>
+<tr><td class="hl">cabels</td><td>capelli</td><td>cabello/pelo</td><td>cheveux</td><td>lat. CAPILLUS (pl.)</td></tr>
+<tr><td class="hl">sourcil</td><td>sopracciglio</td><td>ceja</td><td>sourcil</td><td>← FR sourcil</td></tr>
+<tr><td class="hl">cil</td><td>ciglio</td><td>pestaña</td><td>cil</td><td>lat. CILIUM</td></tr>
+</tbody></table>
+</div>
+
+<div id="corpo-c3" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Etimologia / Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">cor</td><td>cuore</td><td>corazón</td><td>cœur</td><td>lat. COR</td></tr>
+<tr><td class="hl">polmon</td><td>polmone</td><td>pulmón</td><td>poumon</td><td>lat. PULMO</td></tr>
+<tr><td class="hl">figat</td><td>fegato</td><td>hígado</td><td>foie</td><td>lat. FICATUM</td></tr>
+<tr><td class="hl">stomach</td><td>stomaco</td><td>estómago</td><td>estomac</td><td>gr. STOMACHOS</td></tr>
+<tr><td class="hl">ren</td><td>rene</td><td>riñón</td><td>rein</td><td>lat. RENES</td></tr>
+<tr><td class="hl">intestin</td><td>intestino</td><td>intestino</td><td>intestin</td><td>lat. INTESTINUM</td></tr>
+<tr><td class="hl">cervel</td><td>cervello</td><td>cerebro</td><td>cerveau</td><td>lat. CEREBELLUM</td></tr>
+<tr><td class="hl">veina</td><td>vena</td><td>vena</td><td>veine</td><td>lat. VENA</td></tr>
+<tr><td class="hl">arteria</td><td>arteria</td><td>arteria</td><td>artère</td><td>gr. ARTERIA</td></tr>
+</tbody></table>
+</div>
+
+<div id="corpo-c4" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>Italiano</th><th>Badge</th><th>Note / Etimologia</th><th>Categoria</th></tr></thead>
+<tbody>
+<!-- Merged, annotated, and badged health-related lexicon rows inserted here by the agent. -->
+</tbody></table>
+</div>
+</div>
+
+<!-- CASA E QUOTIDIANO -->
+<div id="casa" style="display:none">
+<div class="sub-btns">
+  <button class="sub-btn active" onclick="showSub('casa','h1')">Struttura</button>
+  <button class="sub-btn" onclick="showSub('casa','h2')">Cucina</button>
+  <button class="sub-btn" onclick="showSub('casa','h3')">Oggetti e mobili</button>
+  <button class="sub-btn" onclick="showSub('casa','h4')">Vestiti</button>
+</div>
+
+<div id="casa-h1">
+<table class="ct">
+<thead><tr><th>Solis</th><th>Italiano</th><th>Badge</th><th>Note / Etimologia</th><th>Categoria</th></tr></thead>
+<tbody>
+<!-- Merged, annotated, and badged house/structure-related lexicon rows inserted here by the agent. -->
+</tbody></table>
+</div>
+
+<div id="casa-h2" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">taula</td><td>tavola/tavolo</td><td>mesa</td><td>table</td><td>lat. TABULA</td></tr>
+<tr><td class="hl">cadira</td><td>sedia</td><td>silla</td><td>chaise</td><td>lat. CATHEDRA</td></tr>
+<tr><td class="hl">forn</td><td>forno</td><td>horno</td><td>four</td><td>lat. FURNUS</td></tr>
+<tr><td class="hl">refrigerator</td><td>frigorifero</td><td>refrigerador</td><td>réfrigérateur</td><td>calco scientifico</td></tr>
+<tr><td class="hl">lavaplats</td><td>lavastoviglie</td><td>lavavajillas</td><td>lave-vaisselle</td><td>composto: lavar+plats</td></tr>
+<tr><td class="hl">plat</td><td>piatto</td><td>plato</td><td>assiette/plat</td><td>lat. PLATTUS</td></tr>
+<tr><td class="hl">bol</td><td>ciotola/scodella</td><td>bol/tazón</td><td>bol</td><td>← FR bol</td></tr>
+<tr><td class="hl">forqueta</td><td>forchetta</td><td>tenedor</td><td>fourchette</td><td>lat. FURCA + -et</td></tr>
+<tr><td class="hl">coltell</td><td>coltello</td><td>cuchillo</td><td>couteau</td><td>lat. CULTELLUS</td></tr>
+<tr><td class="hl">cuilhera</td><td>cucchiaio</td><td>cuchara</td><td>cuillère</td><td>lat. COCHLEARIUM</td></tr>
+<tr><td class="hl">goto</td><td>bicchiere</td><td>vaso</td><td>verre</td><td>germ. GOT</td></tr>
+<tr><td class="hl">copa</td><td>coppa/calice</td><td>copa</td><td>coupe</td><td>lat. CUPPA</td></tr>
+<tr><td class="hl">olha</td><td>pentola</td><td>olla</td><td>marmite</td><td>lat. OLLA</td></tr>
+<tr><td class="hl">padela</td><td>padella</td><td>sartén</td><td>poêle</td><td>lat. PATELLA</td></tr>
+</tbody></table>
+</div>
+
+<div id="casa-h3" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">lit</td><td>letto</td><td>cama</td><td>lit</td><td>lat. LECTUS</td></tr>
+<tr><td class="hl">sofa</td><td>divano/sofà</td><td>sofá</td><td>canapé/sofa</td><td>ar. SUFFAH</td></tr>
+<tr><td class="hl">armari</td><td>armadio</td><td>armario</td><td>armoire</td><td>lat. ARMARIUM</td></tr>
+<tr><td class="hl">escriptori</td><td>scrivania</td><td>escritorio</td><td>bureau</td><td>lat. SCRIPTORIUM</td></tr>
+<tr><td class="hl">librari</td><td>libreria (mobile)</td><td>estantería</td><td>bibliothèque</td><td>deriv. -ari</td></tr>
+<tr><td class="hl">lamp</td><td>lampada</td><td>lámpara</td><td>lampe</td><td>gr. LAMPAS</td></tr>
+<tr><td class="hl">miroir</td><td>specchio</td><td>espejo</td><td>miroir</td><td>← FR miroir</td></tr>
+<tr><td class="hl">tapet</td><td>tappeto</td><td>alfombra</td><td>tapis</td><td>gr. TAPETON</td></tr>
+<tr><td class="hl">cortina</td><td>tenda/curtina</td><td>cortina</td><td>rideau</td><td>lat. CORTINA</td></tr>
+<tr><td class="hl">clau</td><td>chiave</td><td>llave</td><td>clé</td><td>lat. CLAVIS</td></tr>
+</tbody></table>
+</div>
+
+<div id="casa-h4" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">vestit</td><td>vestito/abito</td><td>vestido/traje</td><td>habit/robe</td><td>lat. VESTITUS</td></tr>
+<tr><td class="hl">camis</td><td>camicia</td><td>camisa</td><td>chemise</td><td>lat. tardo CAMISIA</td></tr>
+<tr><td class="hl">pantalon</td><td>pantaloni</td><td>pantalón</td><td>pantalon</td><td>← IT Pantalone</td></tr>
+<tr><td class="hl">jupa</td><td>gonna</td><td>falda</td><td>jupe</td><td>← FR jupe</td></tr>
+<tr><td class="hl">jaquet</td><td>giacca</td><td>chaqueta</td><td>veste/jacket</td><td>← FR jaquette</td></tr>
+<tr><td class="hl">mantel</td><td>cappotto/mantello</td><td>abrigo/manto</td><td>manteau</td><td>lat. MANTELLUM</td></tr>
+<tr><td class="hl">scarpa</td><td>scarpe (pl.)</td><td>zapatos</td><td>chaussures</td><td>germ. SKARPJO (pl.)</td></tr>
+<tr><td class="hl">botas</td><td>stivali</td><td>botas</td><td>bottes</td><td>← ES/FR bota/botte</td></tr>
+<tr><td class="hl">capel</td><td>cappello</td><td>sombrero</td><td>chapeau</td><td>lat. tardo CAPPA</td></tr>
+<tr><td class="hl">cintir</td><td>cintura/cinghia</td><td>cinturón</td><td>ceinture</td><td>lat. CINCTURA</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<!-- NATURA E AMBIENTE -->
+<div id="natura" style="display:none">
+<div class="sub-btns">
+  <button class="sub-btn active" onclick="showSub('natura','n1')">Paesaggio</button>
+  <button class="sub-btn" onclick="showSub('natura','n2')">Animali</button>
+  <button class="sub-btn" onclick="showSub('natura','n3')">Piante e flora</button>
+  <button class="sub-btn" onclick="showSub('natura','n4')">Meteo e clima</button>
+</div>
+
+<div id="natura-n1">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">montanha</td><td>montagna</td><td>montaña</td><td>montagne</td><td>lat. MONTANEA</td></tr>
+<tr><td class="hl">val</td><td>valle</td><td>valle</td><td>vallée</td><td>lat. VALLIS</td></tr>
+<tr><td class="hl">riu</td><td>fiume</td><td>río</td><td>rivière/fleuve</td><td>lat. RIVUS</td></tr>
+<tr><td class="hl">lac</td><td>lago</td><td>lago</td><td>lac</td><td>lat. LACUS</td></tr>
+<tr><td class="hl">mar</td><td>mare</td><td>mar</td><td>mer</td><td>lat. MARE</td></tr>
+<tr><td class="hl">ocean</td><td>oceano</td><td>océano</td><td>océan</td><td>gr. OKEANOS</td></tr>
+<tr><td class="hl">forest</td><td>foresta/bosco</td><td>bosque/selva</td><td>forêt</td><td>lat. mediev. FORESTA</td></tr>
+<tr><td class="hl">camp</td><td>campo/campagna</td><td>campo</td><td>champ</td><td>lat. CAMPUS</td></tr>
+<tr><td class="hl">desert</td><td>deserto</td><td>desierto</td><td>désert</td><td>lat. DESERTUM</td></tr>
+<tr><td class="hl">costh</td><td>costa/riva</td><td>costa</td><td>côte</td><td>lat. COSTA</td></tr>
+<tr><td class="hl">isola</td><td>isola</td><td>isla</td><td>île</td><td>lat. INSULA</td></tr>
+<tr><td class="hl">cim</td><td>cima/vetta</td><td>cima/cumbre</td><td>sommet/cime</td><td>lat. CYMA</td></tr>
+<tr><td class="hl">ped</td><td>piede (del monte)</td><td>pie (de monte)</td><td>pied</td><td>lat. PEDEM</td></tr>
+<tr><td class="hl">planura</td><td>pianura</td><td>llanura</td><td>plaine</td><td>lat. PLANURA</td></tr>
+</tbody></table>
+</div>
+
+<div id="natura-n2" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">animal</td><td>animale</td><td>animal</td><td>animal</td><td>lat. ANIMALE</td></tr>
+<tr><td class="hl">can</td><td>cane</td><td>perro</td><td>chien</td><td>lat. CANIS</td></tr>
+<tr><td class="hl">gat</td><td>gatto</td><td>gato</td><td>chat</td><td>lat. tardo CATTUS</td></tr>
+<tr><td class="hl">caval</td><td>cavallo</td><td>caballo</td><td>cheval</td><td>lat. CABALLUS</td></tr>
+<tr><td class="hl">vaca</td><td>vacca/mucca</td><td>vaca</td><td>vache</td><td>lat. VACCA</td></tr>
+<tr><td class="hl">porc</td><td>maiale/porco</td><td>cerdo/puerco</td><td>porc/cochon</td><td>lat. PORCUS</td></tr>
+<tr><td class="hl">galina</td><td>gallina</td><td>gallina</td><td>poule</td><td>lat. GALLINA</td></tr>
+<tr><td class="hl">oisel</td><td>uccello</td><td>pájaro</td><td>oiseau</td><td>lat. AUCELLUS</td></tr>
+<tr><td class="hl">peis</td><td>pesce</td><td>pez/pescado</td><td>poisson</td><td>lat. PISCIS</td></tr>
+<tr><td class="hl">serp</td><td>serpente</td><td>serpiente</td><td>serpent</td><td>lat. SERPENS</td></tr>
+<tr><td class="hl">formig</td><td>formica</td><td>hormiga</td><td>fourmi</td><td>lat. FORMICA</td></tr>
+<tr><td class="hl">papalhon</td><td>farfalla</td><td>mariposa</td><td>papillon</td><td>← FR papillon</td></tr>
+<tr><td class="hl">leon</td><td>leone</td><td>león</td><td>lion</td><td>lat. LEO</td></tr>
+<tr><td class="hl">lop</td><td>lupo</td><td>lobo</td><td>loup</td><td>lat. LUPUS</td></tr>
+</tbody></table>
+</div>
+
+<div id="natura-n3" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">arbre</td><td>albero</td><td>árbol</td><td>arbre</td><td>lat. ARBOR</td></tr>
+<tr><td class="hl">flor</td><td>fiore</td><td>flor</td><td>fleur</td><td>lat. FLOS</td></tr>
+<tr><td class="hl">herba</td><td>erba</td><td>hierba</td><td>herbe</td><td>lat. HERBA</td></tr>
+<tr><td class="hl">fulha</td><td>foglia</td><td>hoja</td><td>feuille</td><td>lat. FOLIA</td></tr>
+<tr><td class="hl">radiz</td><td>radice</td><td>raíz</td><td>racine</td><td>lat. RADIX</td></tr>
+<tr><td class="hl">fruita</td><td>frutta/frutto</td><td>fruta/fruto</td><td>fruit</td><td>lat. FRUCTUS</td></tr>
+<tr><td class="hl">sem</td><td>seme</td><td>semilla</td><td>graine</td><td>lat. SEMEN</td></tr>
+<tr><td class="hl">boscatge</td><td>boschetto/macchia</td><td>matorral</td><td>bocage</td><td>deriv. bosc + -atge</td></tr>
+<tr><td class="hl">roz</td><td>rosa</td><td>rosa</td><td>rose</td><td>lat. ROSA</td></tr>
+<tr><td class="hl">pin</td><td>pino</td><td>pino</td><td>pin</td><td>lat. PINUS</td></tr>
+</tbody></table>
+</div>
+
+<div id="natura-n4" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">temp</td><td>tempo (meteo)</td><td>tiempo</td><td>temps</td><td>lat. TEMPUS</td></tr>
+<tr><td class="hl">sol</td><td>sole</td><td>sol</td><td>soleil</td><td>lat. SOL</td></tr>
+<tr><td class="hl">ploiva</td><td>pioggia</td><td>lluvia</td><td>pluie</td><td>lat. PLUVIA</td></tr>
+<tr><td class="hl">nev</td><td>neve</td><td>nieve</td><td>neige</td><td>lat. NIVE</td></tr>
+<tr><td class="hl">ventil</td><td>vento</td><td>viento</td><td>vent</td><td>lat. VENTULUS</td></tr>
+<tr><td class="hl">nubol</td><td>nuvola</td><td>nube</td><td>nuage</td><td>lat. NUBILUS</td></tr>
+<tr><td class="hl">tonadr</td><td>tuono</td><td>trueno</td><td>tonnerre</td><td>deriv. tonar + -adr</td></tr>
+<tr><td class="hl">lamp</td><td>lampo/fulmine</td><td>relámpago</td><td>éclair</td><td>lat. LAMPAS (luce)</td></tr>
+<tr><td class="hl">bruma</td><td>nebbia/foschia</td><td>niebla/bruma</td><td>brume</td><td>lat. BRUMA</td></tr>
+<tr><td class="hl">glaç</td><td>ghiaccio</td><td>hielo</td><td>glace</td><td>lat. GLACIES</td></tr>
+<tr><td class="hl">calor</td><td>caldo/calore</td><td>calor</td><td>chaleur</td><td>lat. CALOR</td></tr>
+<tr><td class="hl">fre</td><td>freddo</td><td>frío</td><td>froid</td><td>lat. FRIGIDUS</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<!-- TEMPO E CALENDARIO -->
+<div id="tempo" style="display:none">
+<div class="sub-btns">
+  <button class="sub-btn active" onclick="showSub('tempo','t1')">Ore e momenti</button>
+  <button class="sub-btn" onclick="showSub('tempo','t2')">Giorni e settimana</button>
+  <button class="sub-btn" onclick="showSub('tempo','t3')">Mesi e stagioni</button>
+  <button class="sub-btn" onclick="showSub('tempo','t4')">Durata e sequenza</button>
+</div>
+
+<div id="tempo-t1">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">ora</td><td>ora</td><td>hora</td><td>heure</td><td>lat. HORA</td></tr>
+<tr><td class="hl">minut</td><td>minuto</td><td>minuto</td><td>minute</td><td>lat. MINUTUS</td></tr>
+<tr><td class="hl">segond</td><td>secondo</td><td>segundo</td><td>seconde</td><td>lat. SECUNDUS</td></tr>
+<tr><td class="hl">matin</td><td>mattino</td><td>mañana</td><td>matin</td><td>lat. MATUTINUM</td></tr>
+<tr><td class="hl">mitat dia</td><td>mezzogiorno</td><td>mediodía</td><td>midi</td><td>composto mitat+dia</td></tr>
+<tr><td class="hl">vespre</td><td>sera/vespro</td><td>tarde</td><td>soir</td><td>lat. VESPER</td></tr>
+<tr><td class="hl">noit</td><td>notte</td><td>noche</td><td>nuit</td><td>lat. NOCTEM</td></tr>
+<tr><td class="hl">mitat noit</td><td>mezzanotte</td><td>medianoche</td><td>minuit</td><td>composto mitat+noit</td></tr>
+<tr><td class="hl">alb</td><td>alba</td><td>alba/amanecer</td><td>aube</td><td>lat. ALBA</td></tr>
+<tr><td class="hl">crepuscl</td><td>crepuscolo</td><td>crepúsculo</td><td>crépuscule</td><td>lat. CREPUSCULUM</td></tr>
+</tbody></table>
+<div class="note">Ore: <b>a tres ores e mitat</b> (alle tre e mezza) · <b>a catar ores men quinz</b> (alle quattro meno un quarto) · <b>ez son las dez ores</b> (sono le dieci).</div>
+</div>
+
+<div id="tempo-t2" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">dia</td><td>giorno</td><td>día</td><td>jour</td><td>lat. DIES</td></tr>
+<tr><td class="hl">setmana</td><td>settimana</td><td>semana</td><td>semaine</td><td>lat. SEPTIMANA</td></tr>
+<tr><td class="hl">lundes</td><td>lunedì</td><td>lunes</td><td>lundi</td><td>LUNA + dies</td></tr>
+<tr><td class="hl">martes</td><td>martedì</td><td>martes</td><td>mardi</td><td>MARS + dies</td></tr>
+<tr><td class="hl">mercres</td><td>mercoledì</td><td>miércoles</td><td>mercredi</td><td>MERCURIUS + dies</td></tr>
+<tr><td class="hl">joves</td><td>giovedì</td><td>jueves</td><td>jeudi</td><td>JOVE + dies</td></tr>
+<tr><td class="hl">vendres</td><td>venerdì</td><td>viernes</td><td>vendredi</td><td>VENUS + dies</td></tr>
+<tr><td class="hl">sabbat</td><td>sabato</td><td>sábado</td><td>samedi</td><td>ebr. SHABBAT</td></tr>
+<tr><td class="hl">dominh</td><td>domenica</td><td>domingo</td><td>dimanche</td><td>lat. DOMINICUS</td></tr>
+</tbody></table>
+<div class="note">I giorni feriali seguono la tradizione planetaria pan-romanza (lunedì=luna, martedì=Marte…). Sabbat e dominh riflettono le forme ecclesiastiche latine.</div>
+</div>
+
+<div id="tempo-t3" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">januar</td><td>gennaio</td><td>enero</td><td>janvier</td><td>JANUS</td></tr>
+<tr><td class="hl">februar</td><td>febbraio</td><td>febrero</td><td>février</td><td>FEBRUA</td></tr>
+<tr><td class="hl">marz</td><td>marzo</td><td>marzo</td><td>mars</td><td>MARS</td></tr>
+<tr><td class="hl">abril</td><td>aprile</td><td>abril</td><td>avril</td><td>lat. APRILIS</td></tr>
+<tr><td class="hl">mai</td><td>maggio</td><td>mayo</td><td>mai</td><td>MAIUS</td></tr>
+<tr><td class="hl">jun</td><td>giugno</td><td>junio</td><td>juin</td><td>JUNIUS</td></tr>
+<tr><td class="hl">julh</td><td>luglio</td><td>julio</td><td>juillet</td><td>JULIUS</td></tr>
+<tr><td class="hl">agost</td><td>agosto</td><td>agosto</td><td>août</td><td>AUGUSTUS</td></tr>
+<tr><td class="hl">setembre</td><td>settembre</td><td>septiembre</td><td>septembre</td><td>SEPTEM</td></tr>
+<tr><td class="hl">octobre</td><td>ottobre</td><td>octubre</td><td>octobre</td><td>OCTO</td></tr>
+<tr><td class="hl">novembre</td><td>novembre</td><td>noviembre</td><td>novembre</td><td>NOVEM</td></tr>
+<tr><td class="hl">decembre</td><td>dicembre</td><td>diciembre</td><td>décembre</td><td>DECEM</td></tr>
+<tr><td class="hl">primavera</td><td>primavera</td><td>primavera</td><td>printemps</td><td>lat. PRIMA VERA</td></tr>
+<tr><td class="hl">estiu</td><td>estate</td><td>verano</td><td>été</td><td>lat. AESTIVUM</td></tr>
+<tr><td class="hl">autom</td><td>autunno</td><td>otoño</td><td>automne</td><td>lat. AUTUMNUS</td></tr>
+<tr><td class="hl">invern</td><td>inverno</td><td>invierno</td><td>hiver</td><td>lat. HIBERNUM</td></tr>
+</tbody></table>
+</div>
+
+<div id="tempo-t4" style="display:none">
+<table class="ct">
+<thead><tr><th>Solis</th><th>IT</th><th>ES</th><th>FR</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="hl">oi</td><td>oggi</td><td>hoy</td><td>aujourd'hui</td><td>lat. HOC DIE</td></tr>
+<tr><td class="hl">ier</td><td>ieri</td><td>ayer</td><td>hier</td><td>lat. HERI</td></tr>
+<tr><td class="hl">demà</td><td>domani</td><td>mañana</td><td>demain</td><td>lat. DE MANE</td></tr>
+<tr><td class="hl">avant-ier</td><td>l'altro ieri</td><td>anteayer</td><td>avant-hier</td><td>composto avant+ier</td></tr>
+<tr><td class="hl">passat-demà</td><td>dopodomani</td><td>pasado mañana</td><td>après-demain</td><td>composto passat+demà</td></tr>
+<tr><td class="hl">setmana passat</td><td>la settimana scorsa</td><td>la semana pasada</td><td>la semaine dernière</td><td>N + passat</td></tr>
+<tr><td class="hl">setmana que ven</td><td>la settimana prossima</td><td>la semana que viene</td><td>la semaine prochaine</td><td>N + que ven</td></tr>
+<tr><td class="hl">an</td><td>anno</td><td>año</td><td>an/année</td><td>lat. ANNUM</td></tr>
+<tr><td class="hl">mes</td><td>mese</td><td>mes</td><td>mois</td><td>lat. MENSEM</td></tr>
+<tr><td class="hl">secol</td><td>secolo</td><td>siglo</td><td>siècle</td><td>lat. SAECULUM</td></tr>
+<tr><td class="hl">instant</td><td>istante/attimo</td><td>instante</td><td>instant</td><td>lat. INSTANTEM</td></tr>
+<tr><td class="hl">durazion</td><td>durata</td><td>duración</td><td>durée</td><td>deriv. -zion</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<!-- NEOLOGISMI E CALCHI -->
+<div id="neo" style="display:none">
+<div class="rule">
+<div style="font-weight:500;font-size:13px;margin-bottom:6px">Regola esplicita per neologismi e calchi</div>
+<div class="rule-f">Priorità 1 → radice latina/greca + morfologia Solis</div>
+<div class="rule-f">Priorità 2 → calco interno (composizione/derivazione da lessico Solis)</div>
+<div class="rule-f">Priorità 3 → prestito adattato alla fonologia Solis (ultimo ricorso)</div>
+</div>
+
+<div class="label">Strategia 1 — Radice latina/greca + morfologia Solis</div>
+<table class="ct">
+<thead><tr><th>Concetto</th><th>Solis</th><th>Base</th><th>IT / ES confronto</th></tr></thead>
+<tbody>
+<tr><td>computer</td><td class="hl">computador</td><td>lat. COMPUTARE + -ador</td><td>IT computer · ES computadora</td></tr>
+<tr><td>elettricità</td><td class="hl">electricitat</td><td>gr. ELEKTRON + -itat</td><td>IT elettricità · ES electricidad</td></tr>
+<tr><td>telefono</td><td class="hl">telefon</td><td>gr. TELE + PHONE</td><td>pan-romanzo</td></tr>
+<tr><td>fotografia</td><td class="hl">fotografía</td><td>gr. PHOTOS + GRAPHEIN</td><td>pan-romanzo</td></tr>
+<tr><td>democrazia</td><td class="hl">democrazia</td><td>gr. DEMOS + KRATOS</td><td>pan-romanzo</td></tr>
+<tr><td>biologia</td><td class="hl">biologia</td><td>gr. BIOS + LOGOS</td><td>pan-romanzo</td></tr>
+<tr><td>psicologia</td><td class="hl">psicologia</td><td>gr. PSYCHE + LOGOS</td><td>pan-romanzo</td></tr>
+<tr><td>antibiotico</td><td class="hl">antibiotic</td><td>gr. ANTI + BIOS</td><td>pan-romanzo</td></tr>
+</tbody></table>
+
+<div class="label">Strategia 2 — Calco interno (composizione/derivazione Solis)</div>
+<table class="ct">
+<thead><tr><th>Concetto</th><th>Solis</th><th>Composizione</th><th>IT</th></tr></thead>
+<tbody>
+<tr><td>lavastoviglie</td><td class="hl">lavaplats</td><td>lavar + plats</td><td>lava + piatti</td></tr>
+<tr><td>grattacielo</td><td class="hl">rasc-cel</td><td>rascar + cel</td><td>gratta + cielo</td></tr>
+<tr><td>ferrovia</td><td class="hl">fervia</td><td>ferr(o) + via</td><td>ferro + via</td></tr>
+<tr><td>aeroporto</td><td class="hl">aeropuort</td><td>aer(o) + puort</td><td>aero + porto</td></tr>
+<tr><td>benvenuto</td><td class="hl">ben-vengut</td><td>ben + vengut (PP venir)</td><td>bene + venuto</td></tr>
+<tr><td>malumore</td><td class="hl">mal-humor</td><td>mal + humor</td><td>mal + umore</td></tr>
+<tr><td>portavoce</td><td class="hl">porta-voz</td><td>portar + voz</td><td>porta + voce</td></tr>
+<tr><td>capofamiglia</td><td class="hl">cap-de-familia</td><td>cap + de + familia</td><td>capo + famiglia</td></tr>
+</tbody></table>
+
+<div class="label">Strategia 3 — Prestito adattato (ultimo ricorso)</div>
+<table class="ct">
+<thead><tr><th>Prestito originale</th><th>Solis adattato</th><th>Adattamento</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>internet (EN)</td><td class="hl">internet</td><td>invariato (pan-romanzo)</td><td>già internazionale</td></tr>
+<tr><td>software (EN)</td><td class="hl">softwar</td><td>finale -e caduta</td><td>oppure: programari (calco)</td></tr>
+<tr><td>week-end (EN)</td><td class="hl">weekend / fin de setmana</td><td>prestito o calco</td><td>calco preferito in Core</td></tr>
+<tr><td>sport (EN)</td><td class="hl">sport</td><td>invariato</td><td>già pan-romanzo</td></tr>
+<tr><td>marketing (EN)</td><td class="hl">marketin</td><td>-g finale adattato</td><td>oppure: mercadizazion</td></tr>
+<tr><td>sandwich (EN)</td><td class="hl">sandvich</td><td>adattamento fonologico</td><td>alternativa: bocadil</td></tr>
+</tbody></table>
+<div class="note">Regola pratica: se esiste una radice latina o greca riconoscibile pan-romanzo, si usa quella. Se il concetto è componibile da lessico Solis esistente, si preferisce il calco interno. Il prestito diretto si usa solo quando il termine è già internazionalizzato e nessuna alternativa è più trasparente.</div>
+</div>
+
+<script>
+function showTab(id) {
+  ['corpo','casa','natura','tempo','neo'].forEach(d => document.getElementById(d).style.display='none');
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+const subs = {
+  corpo: ['c1','c2','c3','c4'],
+  casa:  ['h1','h2','h3','h4'],
+  natura:['n1','n2','n3','n4'],
+  tempo: ['t1','t2','t3','t4'],
+};
+
+function showSub(section, id) {
+  subs[section].forEach(s => {
+    const el = document.getElementById(section + '-' + s);
+    if (el) el.style.display = 'none';
+  });
+  const target = document.getElementById(section + '-' + id);
+  if (target) target.style.display = 'block';
+  event.target.closest('.sub-btns').querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>

@@ -1,0 +1,225 @@
+
+<style>
+.tab-btns{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{padding:5px 14px;font-size:12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.ct{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}
+.ct th{padding:5px 10px;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.ct td{padding:4px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.ct tr:last-child td{border-bottom:none}
+.ct tr:nth-child(even) td{background:var(--color-background-secondary)}
+.hl{color:#0F6E56;font-weight:500}
+.irr{color:#533AB7;font-weight:500}
+.lat{color:#BA7517;font-weight:500}
+.note{font-size:11px;color:var(--color-text-secondary);padding:6px 10px;background:var(--color-background-secondary);border-radius:6px;border-left:2px solid var(--color-border-secondary);margin:6px 0}
+.label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 6px;padding-bottom:3px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.rule{padding:10px 14px;border:0.5px solid var(--color-border-secondary);border-radius:8px;margin:8px 0;background:var(--color-background-secondary)}
+.rule-f{font-family:var(--font-mono);font-size:12px;color:#533AB7;margin:4px 0}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:12px;padding:8px 0;border-left:2px solid var(--color-border-secondary);padding-left:16px;position:relative}
+.tl-item::before{content:'';position:absolute;left:-5px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--color-border-primary)}
+.tl-date{font-size:11px;font-weight:500;color:var(--color-text-secondary);min-width:90px;padding-top:1px}
+.tl-body{font-size:12px;color:var(--color-text-primary);line-height:1.5}
+.tl-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:6px 0}
+.chain-item{padding:4px 10px;border-radius:16px;font-size:12px;font-weight:500}
+.c-lat{background:#FAEEDA;color:#BA7517;border:0.5px solid #EF9F27}
+.c-vlat{background:#E6F1FB;color:#185FA5;border:0.5px solid #378ADD}
+.c-prot{background:#EEEDFE;color:#3C3489;border:0.5px solid #534AB7}
+.c-sol{background:#E1F5EE;color:#085041;border:0.5px solid #1D9E75}
+.arrow{color:var(--color-text-secondary);font-size:14px}
+</style>
+
+<div class="tab-btns">
+  <button class="tab-btn active" onclick="show('linea')">Linea del tempo</button>
+  <button class="tab-btn" onclick="show('fonol')">Evoluzione fonologica</button>
+  <button class="tab-btn" onclick="show('morfo')">Evoluzione morfologica</button>
+  <button class="tab-btn" onclick="show('scelte')">Fonti per ogni scelta</button>
+  <button class="tab-btn" onclick="show('filol')">Filologia comparata</button>
+</div>
+
+<!-- LINEA DEL TEMPO -->
+<div id="linea">
+<div class="label">Dal latino classico a Solis — linea del tempo</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-date">III–I sec. a.C.</div>
+    <div class="tl-body"><span class="lat">Latino classico</span> — lingua dell'impero. Sistema casuale a 6 casi, declinazioni nominali, coniugazione sintetica. Vocali brevi/lunghe fonologicamente distinte.
+    <div class="tl-sub">AMICUM, AMICO, AMICI → distinzioni di caso che Solis abolisce.</div></div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">I–V sec. d.C.</div>
+    <div class="tl-body"><span class="lat">Latino volgare</span> — scomparsa delle quantità vocaliche, inizio della perdita dei casi. Accento di intensità sostituisce quello musicale. Nascono le perifrasi verbali (HABEO AMATUM → ho amato).</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">V–IX sec.</div>
+    <div class="tl-body"><span class="irr">Proto-romanzo</span> — le lingue romanze divergono. Caduta delle consonanti finali in alcune aree (FR), mantenimento in altre (ES, IT). Articolo si sviluppa da ILLE/ILLA.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">IX–XIII sec.</div>
+    <div class="tl-body">Nascita delle prime testimonianze scritte: <em>Serments de Strasbourg</em> (842, FR), <em>Placiti cassinesi</em> (960–963, IT), <em>Glosas Emilianenses</em> (c. 950, ES). Fioritura dell'occitano e del catalano medievale.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">XIX–XX sec.</div>
+    <div class="tl-body">Progetti di lingua romanza artificiale: <em>Interlingua</em> (IALA, 1951), <em>Latino sine flexione</em> (Peano, 1903), <em>Occidental/Interlingue</em> (de Wahl, 1922). Nessuno risolve il problema della naturalezza morfologica.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">Solis — progetto</div>
+    <div class="tl-body"><span class="hl">Solis Core</span> — sintesi deliberata. Non è la continuazione storica di nessuna lingua romanza, ma una ricostruzione selettiva che massimizza l'intercomprensione con IT/ES/PT/FR mantenendo la naturalezza morfologica.</div>
+  </div>
+</div>
+</div>
+
+<!-- EVOLUZIONE FONOLOGICA -->
+<div id="fonol" style="display:none">
+<div class="label">Catena evolutiva: latino classico → Solis</div>
+
+<div class="label">1. Vocali — perdita delle quantità, dittongazione accentuale</div>
+<table class="ct">
+<thead><tr><th>Latino cl.</th><th>Latino volg.</th><th>IT</th><th>ES</th><th>FR</th><th class="hl">Solis</th><th>Scelta</th></tr></thead>
+<tbody>
+<tr><td class="lat">Ē (lunga)</td><td>e chiusa</td><td>e</td><td>ie (tonica)</td><td>ie→e</td><td class="hl">e / ie (tonica)</td><td>dittongo come ES</td></tr>
+<tr><td class="lat">Ĕ (breve)</td><td>e aperta</td><td>ie (tonica)</td><td>ie (tonica)</td><td>ie→oi→wa</td><td class="hl">ie (tonica)</td><td>dittongo IT+ES</td></tr>
+<tr><td class="lat">Ō (lunga)</td><td>o chiusa</td><td>o/uo (tonica)</td><td>ue</td><td>o→eu</td><td class="hl">o / uo (tonica)</td><td>dittongo IT</td></tr>
+<tr><td class="lat">Ŏ (breve)</td><td>o aperta</td><td>uo (tonica)</td><td>ue (tonica)</td><td>ue→eu</td><td class="hl">uo (tonica)</td><td>dittongo IT</td></tr>
+<tr><td class="lat">A</td><td>a</td><td>a</td><td>a</td><td>a→e/ə</td><td class="hl">a</td><td>conservativo</td></tr>
+</tbody></table>
+<div class="note">Solis adotta la dittongazione <b>e→ie, o→uo</b> come fenomeno puramente accentuale (solo sotto accento sulla radice). Graficamente: <em>pierde</em> come ES, <em>truova</em> come IT antico. Il francese ha dittongato ulteriormente fino a forme non riconoscibili (PĔDEM → pied vs IT piede vs SOL pie).</div>
+
+<div class="label">2. Consonanti finali — conservazione selettiva</div>
+<table class="ct">
+<thead><tr><th>Latino</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th><th class="hl">Solis</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="lat">-M finale</td><td>caduta</td><td>caduta</td><td>caduta</td><td>caduta</td><td class="hl">caduta</td><td>AMICUM → amig(u)</td></tr>
+<tr><td class="lat">-S finale</td><td>caduta (toscano)</td><td>mantenuta</td><td>muta</td><td>mantenuta</td><td class="hl">mantenuta</td><td>marca il plurale</td></tr>
+<tr><td class="lat">-T finale</td><td>caduta</td><td>caduta</td><td>muta</td><td>caduta</td><td class="hl">mantenuta (PP)</td><td>caminAT, perdUT</td></tr>
+<tr><td class="lat">-N finale</td><td>caduta</td><td>mantenuta</td><td>nasalizza</td><td>mantenuta</td><td class="hl">mantenuta (3ª pl.)</td><td>caminEN, perdEN</td></tr>
+</tbody></table>
+<div class="note">La -S finale è conservata come in ES/PT — è la marca morfologica del plurale nominale e della 2ª persona verbale. La -T finale del PP (caminAT, perdUT) è conservata come memoria latina — scelta grafica/morfologica deliberata, non riflette una pronuncia occlusiva.</div>
+
+<div class="label">3. Consonanti intervocaliche — lenizione</div>
+<table class="ct">
+<thead><tr><th>Latino</th><th>IT</th><th>ES</th><th>FR</th><th class="hl">Solis</th></tr></thead>
+<tbody>
+<tr><td class="lat">-P- (RIPA)</td><td>riva</td><td>riba</td><td>rive</td><td class="hl">riba</td></tr>
+<tr><td class="lat">-T- (VITA)</td><td>vita</td><td>vida</td><td>vie</td><td class="hl">vida / vita</td></tr>
+<tr><td class="lat">-C- (AMICA)</td><td>amica</td><td>amiga</td><td>amie</td><td class="hl">amiga</td></tr>
+<tr><td class="lat">-D- (PEDEM)</td><td>piede</td><td>pie</td><td>pied</td><td class="hl">pe</td></tr>
+</tbody></table>
+<div class="note">La lenizione consonantica intervocalica (occlusiva sorda → sonora) è applicata in Solis come in ES/PT. L'italiano è il più conservativo (mantiene -t-, -p-). Solis segue la tendenza iberica per le forme più trasparenti.</div>
+</div>
+
+<!-- EVOLUZIONE MORFOLOGICA -->
+<div id="morfo" style="display:none">
+<div class="label">Perdita del sistema casuale latino</div>
+<table class="ct">
+<thead><tr><th>Caso latino</th><th>Funzione</th><th>Soluzione romanza</th><th class="hl">Solis</th></tr></thead>
+<tbody>
+<tr><td class="lat">Nominativo</td><td>soggetto</td><td>forma base</td><td class="hl">forma base (le om)</td></tr>
+<tr><td class="lat">Accusativo</td><td>oggetto diretto</td><td>forma base (= nom.)</td><td class="hl">OD = forma base</td></tr>
+<tr><td class="lat">Dativo</td><td>oggetto indiretto</td><td>prep. a/di + N</td><td class="hl">a + N (a le om)</td></tr>
+<tr><td class="lat">Genitivo</td><td>possesso</td><td>prep. de + N</td><td class="hl">de + N (de le om)</td></tr>
+<tr><td class="lat">Ablativo</td><td>strumento, luogo…</td><td>prep. varie</td><td class="hl">prep. varie (en/con/per…)</td></tr>
+<tr><td class="lat">Vocativo</td><td>apostrofe</td><td>forma base</td><td class="hl">forma base (= soggetto)</td></tr>
+</tbody></table>
+<div class="note">Il passaggio da sistema casuale sintetico a sistema preposizionale analitico è il cambiamento strutturale più grande dal latino al romanzo. Solis completa questa evoluzione: zero marche casuali nominali, tutte le relazioni espresse da preposizioni o ordine SVO.</div>
+
+<div class="label">Evoluzione del sistema verbale — dal sintetico all'analitico</div>
+<table class="ct">
+<thead><tr><th>Latino classico</th><th>Forma</th><th>Equivalente Solis</th><th>Struttura</th></tr></thead>
+<tbody>
+<tr><td class="lat">Perfetto sintetico</td><td>AMAVI</td><td class="hl">je vey amat</td><td>ausiliare + PP</td></tr>
+<tr><td class="lat">Piuccheperfetto</td><td>AMAVERAM</td><td class="hl">je avev amat</td><td>ausiliare imp. + PP</td></tr>
+<tr><td class="lat">Futuro I</td><td>AMABO</td><td class="hl">je amARÉ</td><td>AMARE + HABEO → -ré</td></tr>
+<tr><td class="lat">Condizionale (inesistente)</td><td>—</td><td class="hl">je amari</td><td>AMARE + HABEBAM → -ria</td></tr>
+<tr><td class="lat">Passivo sintetico</td><td>AMOR</td><td class="hl">je son amat</td><td>esser + PP</td></tr>
+<tr><td class="lat">Infinito</td><td>AMARE</td><td class="hl">amar</td><td>-ARE → -ar</td></tr>
+<tr><td class="lat">Gerundio (abl.)</td><td>AMANDO</td><td class="hl">amand</td><td>-ANDO → -and</td></tr>
+</tbody></table>
+<div class="note">Il futuro romanzo non è il futuro latino (AMABO) ma una nuova costruzione: AMARE + HABEO → amerò/amar-é. Il condizionale è ancora più recente: AMARE + HABEBAM → amerei/amaria. Solis eredita entrambe queste innovazioni pan-romanze.</div>
+
+<div class="label">Evoluzione dell'articolo — da pronome dimostrativo a articolo</div>
+<div class="chain">
+  <span class="chain-item c-lat">ILLE / ILLA (lat.)</span>
+  <span class="arrow">→</span>
+  <span class="chain-item c-vlat">el / ella (vlat.)</span>
+  <span class="arrow">→</span>
+  <span class="chain-item c-prot">lo / la (prot-rom.)</span>
+  <span class="arrow">→</span>
+  <span class="chain-item c-sol">le / la (Solis)</span>
+</div>
+<div class="note"><b>le</b> (masch. sing.) è una sintesi tra IT <em>il/lo</em> e FR <em>le</em>. La scelta di <em>le</em> invece di <em>el</em> (ES) o <em>il</em> (IT) privilegia la forma che massimizza il riconoscimento cross-romanzo.</div>
+</div>
+
+<!-- FONTI PER OGNI SCELTA -->
+<div id="scelte" style="display:none">
+<div class="label">Matrice delle scelte — fonte per ogni fenomeno</div>
+<table class="ct">
+<thead><tr><th>Fenomeno</th><th>Scelta Solis</th><th>Fonte primaria</th><th>Alternativa scartata</th><th>Motivo</th></tr></thead>
+<tbody>
+<tr><td>Articolo masch.</td><td class="hl">le</td><td>FR le</td><td>il (IT), el (ES)</td><td>più neutro, riconoscibile FR+CAT</td></tr>
+<tr><td>Plurale</td><td class="hl">-s</td><td>ES/PT/FR/CAT -s</td><td>-i (IT)</td><td>maggioranza romanza</td></tr>
+<tr><td>Pronome 1ª sing.</td><td class="hl">je</td><td>FR je / CAT jo</td><td>io (IT), yo (ES)</td><td>più breve, riconoscibile</td></tr>
+<tr><td>Pronome 3ª sing. m.</td><td class="hl">ez</td><td>costruzione originale</td><td>lui (IT), él (ES), il (FR)</td><td>simmetria ez/za; evita omonimia</td></tr>
+<tr><td>Ausiliare pass. pr.</td><td class="hl">ver (trans.) / ez (intrans.)</td><td>IT avere/essere</td><td>solo haber (ES)</td><td>distinzione semanticamente utile</td></tr>
+<tr><td>Condizionale</td><td class="hl">-aria/-eria/-iria</td><td>IT/ES/PT -ria</td><td>-ev (FR)</td><td>maggioranza romanza; -ev solo Fralis</td></tr>
+<tr><td>Dittongazione</td><td class="hl">e→ie, o→uo</td><td>IT uo + ES ie</td><td>FR (non sistematico)</td><td>massima riconoscibilità bi-laterale</td></tr>
+<tr><td>Cong. imperfetto</td><td class="hl">-ass-/-iss-</td><td>IT -asse/-isse + ES -ase</td><td>FR -ât (letterario)</td><td>vitalità IT+ES</td></tr>
+<tr><td>PP -AR</td><td class="hl">-at</td><td>CAT -at / OCC -at</td><td>-ato (IT), -ado (ES)</td><td>forma breve, memoria latina -ATUM</td></tr>
+<tr><td>PP -ER</td><td class="hl">-ut</td><td>FR -u / CAT -ut / OCC -ut</td><td>-uto (IT), -ido (ES)</td><td>forma breve, pan-romanza occidentale</td></tr>
+<tr><td>Infinito</td><td class="hl">-ar/-er/-ir</td><td>ES/PT/CAT</td><td>-are/-ere/-ire (IT)</td><td>forme brevi, maggioranza romanza</td></tr>
+<tr><td>Neg. mai</td><td class="hl">jamais</td><td>FR jamais / OCC jamai</td><td>mai (IT), nunca (ES)</td><td>evita omonimia con avv. IT «mai»</td></tr>
+<tr><td>Congiunzione e</td><td class="hl">e</td><td>IT e / ES y→e / PT e</td><td>et (FR/LAT)</td><td>forma breve pan-romanza</td></tr>
+<tr><td>Comp. maggioranza</td><td class="hl">plus … que</td><td>FR plus / CAT més / PT mais</td><td>más (ES), più (IT)</td><td>plus riconoscibile FR+CAT+PT</td></tr>
+</tbody></table>
+
+<div class="label">Fonti occitane e catalane — ruolo speciale</div>
+<div class="note">L'occitano medievale e il catalano moderno hanno un ruolo privilegiato in Solis perché rappresentano la zona di transizione geografica e tipologica tra IT e ES. Forme come <em>-at</em> (PP), <em>-ut</em> (PP -ER), <em>lo/la/los/las</em> (articoli), <em>je/jo</em> (1ª sing.), <em>que</em> (relativo) derivano direttamente dall'area occitano-catalana. Questo rende Solis particolarmente naturale per catalanofoni e occitanofoni.</div>
+</div>
+
+<!-- FILOLOGIA COMPARATA -->
+<div id="filol" style="display:none">
+<div class="label">Tavola comparativa — 20 lemmi fondamentali dal latino a Solis</div>
+<table class="ct">
+<thead><tr><th>Latino</th><th>IT</th><th>ES</th><th>FR</th><th>PT</th><th>CAT</th><th class="hl">Solis</th></tr></thead>
+<tbody>
+<tr><td class="lat">AQUAM</td><td>acqua</td><td>agua</td><td>eau</td><td>água</td><td>aigua</td><td class="hl">aiga</td></tr>
+<tr><td class="lat">PANEM</td><td>pane</td><td>pan</td><td>pain</td><td>pão</td><td>pa</td><td class="hl">pan</td></tr>
+<tr><td class="lat">TERRAM</td><td>terra</td><td>tierra</td><td>terre</td><td>terra</td><td>terra</td><td class="hl">terra</td></tr>
+<tr><td class="lat">HOMINEM</td><td>uomo</td><td>hombre</td><td>homme</td><td>homem</td><td>home</td><td class="hl">om</td></tr>
+<tr><td class="lat">FEMINAM</td><td>donna/femmina</td><td>mujer</td><td>femme</td><td>mulher</td><td>dona</td><td class="hl">femna</td></tr>
+<tr><td class="lat">FILIUM</td><td>figlio</td><td>hijo</td><td>fils</td><td>filho</td><td>fill</td><td class="hl">fiiol</td></tr>
+<tr><td class="lat">LINGUAM</td><td>lingua</td><td>lengua</td><td>langue</td><td>língua</td><td>llengua</td><td class="hl">lengv</td></tr>
+<tr><td class="lat">NOCTEM</td><td>notte</td><td>noche</td><td>nuit</td><td>noite</td><td>nit</td><td class="hl">noit</td></tr>
+<tr><td class="lat">PONTEM</td><td>ponte</td><td>puente</td><td>pont</td><td>ponte</td><td>pont</td><td class="hl">pont</td></tr>
+<tr><td class="lat">TEMPUS</td><td>tempo</td><td>tiempo</td><td>temps</td><td>tempo</td><td>temps</td><td class="hl">temp</td></tr>
+<tr><td class="lat">OCULUM</td><td>occhio</td><td>ojo</td><td>œil</td><td>olho</td><td>ull</td><td class="hl">ocl</td></tr>
+<tr><td class="lat">MANUM</td><td>mano</td><td>mano</td><td>main</td><td>mão</td><td>mà</td><td class="hl">man</td></tr>
+<tr><td class="lat">MULTUM</td><td>molto</td><td>mucho</td><td>beaucoup</td><td>muito</td><td>molt</td><td class="hl">molt</td></tr>
+<tr><td class="lat">BENE</td><td>bene</td><td>bien</td><td>bien</td><td>bem</td><td>bé</td><td class="hl">ben</td></tr>
+<tr><td class="lat">SEMPER</td><td>sempre</td><td>siempre</td><td>toujours</td><td>sempre</td><td>sempre</td><td class="hl">sempre</td></tr>
+<tr><td class="lat">FACERE</td><td>fare</td><td>hacer</td><td>faire</td><td>fazer</td><td>fer</td><td class="hl">far</td></tr>
+<tr><td class="lat">ESSE</td><td>essere</td><td>ser/estar</td><td>être</td><td>ser/estar</td><td>ser/estar</td><td class="hl">esser/estar</td></tr>
+<tr><td class="lat">HABERE</td><td>avere</td><td>haber/tener</td><td>avoir</td><td>haver/ter</td><td>haver/tenir</td><td class="hl">aver/tener</td></tr>
+<tr><td class="lat">POSSE</td><td>potere</td><td>poder</td><td>pouvoir</td><td>poder</td><td>poder</td><td class="hl">poder</td></tr>
+<tr><td class="lat">VENIRE</td><td>venire</td><td>venir</td><td>venir</td><td>vir</td><td>venir</td><td class="hl">venir</td></tr>
+</tbody></table>
+
+<div class="label">Distanza lessicale — Solis rispetto alle lingue sorgente</div>
+<table class="ct">
+<thead><tr><th>Lingua</th><th>Vicinanza stimata</th><th>Fenomeni condivisi principali</th></tr></thead>
+<tbody>
+<tr><td>Italiano</td><td class="hl">molto alta</td><td>dittongo uo, ausiliare essere/avere, congiuntivo, ordine SVO, lessico di base</td></tr>
+<tr><td>Spagnolo</td><td class="hl">molto alta</td><td>dittongo ie, plurale -s, infinito -ar/-er/-ir, tener que, pronomi riflessivi</td></tr>
+<tr><td>Portoghese</td><td class="hl">alta</td><td>PP -ut (≈ -udo), mais≈plus, formas verbais, irregolari meior/peior/maior</td></tr>
+<tr><td>Catalano</td><td class="hl">alta</td><td>PP -at/-ut, je≈jo, articolo lo/la≈le/la, molt, sempre, que relativo</td></tr>
+<tr><td>Occitano</td><td class="hl">alta</td><td>PP -at/-ut, sistema verbale, lessico medievale, dittongazione</td></tr>
+<tr><td>Francese</td><td class="hl">media</td><td>je, plus, jamais, condizionale Fralis -ev, lessico formale</td></tr>
+</tbody></table>
+<div class="note">Solis è intenzionalmente più vicino all'area IT/ES/CAT/OCC che al francese. Il francese ha subito le innovazioni fonologiche più radicali (perdita vocali finali, nasalizzazione, riduzione sillabica) che lo allontanano maggiormente dal latino e dal Solis.</div>
+</div>
+
+<script>
+function show(id){['linea','fonol','morfo','scelte','filol'].forEach(d=>document.getElementById(d).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+</script>
