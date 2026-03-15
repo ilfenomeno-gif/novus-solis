@@ -1,5 +1,33 @@
 # Changelog — Solis
 
+## [1.1.6] — Regola 2 — formalizzazione posizione accento (2026-03-15)
+
+### Regola precisa: dove cade l'accento compensatorio
+
+**Formula:**
+	...V CC V... → ...V C V̀...
+
+L'accento grave cade sulla vocale immediatamente **successiva**
+alla consonante ridotta (non su quella precedente).
+
+**Dimostrazione su tutti i casi:**
+
+| Etimologia     | Doppia | Riduzione | Accento su | Risultato   |
+|--------------- |--------|-----------|------------|-------------|
+| bello          | ll     | l         | o (dopo l) | belò        |
+| commun         | mm     | m         | u (dopo m) | comùn       |
+| errore         | rr     | r         | o (dopo r) | eròre       |
+| intelligente   | ll     | l         | i (dopo l) | intelìgent  |
+| differente     | ff     | f         | e (dopo f) | difèrent    |
+| innovazione    | nn     | n         | o (dopo n) | inòvation   |
+| scritta        | tt     | t         | a (dopo t) | scrità      |
+| annunziar      | nn     | n         | u (dopo n) | anùnziar    |
+
+**Motivazione fonetica:**
+In italiano la doppia "copre" la sillaba precedente (vocale breve).
+In Solis si elimina la doppia ma si marca la vocale seguente
+con accento grave — spostando il segnale a destra invece che a sinistra.
+
 ## [1.1.5] — Regole fonotattiche: cluster finali, doppie, -tion (2026-03-15)
 
 ### Tre regole fonotattiche codificate
