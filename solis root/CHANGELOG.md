@@ -1,5 +1,30 @@
 # Changelog — Solis
 
+## [1.1.5] — Regole fonotattiche: cluster finali, doppie, -tion (2026-03-15)
+
+### Tre regole fonotattiche codificate
+
+**Regola 1 — Nessun cluster C+r in posizione finale**
+- Terminazioni C+r illecite: *podr* (nudo) → illecito.
+- Valide: vocale+r → *amor*, *caminar*, *perder*, *ver*.
+- I futuri sincopati esistono solo nelle forme flesse (*podré*, *podres*…),
+	mai come forma isolata senza desinenza.
+- *mesm* → **mesmo** (cluster -sm finale; ← PT mesmo)
+
+
+**Regola 2 — Nessuna doppia consonante + accento grave compensatorio**
+- La doppia diventa consonante singola; l'accento grave cade sulla vocale
+	immediatamente successiva alla consonante ora singola.
+- L'accento si aggiunge SOLO dove l'etimologia aveva una doppia.
+- Esempi: *bello* → **belò** · *innovazione* → **inòvation**
+	· *commun* → **comùn** · *annunziar* → **anùnziar**
+
+
+**Regola 3 — Suffisso produttivo: -tion**
+- Scritto *-tion*, pronunciato /sjon/ (come ES *-ción*).
+- Sostituisce qualsiasi precedente uso di *-zion* nei sostantivi d'azione.
+- Esempi: *inòvation*, *constrution*, *operation*, *investigation*
+
 ## [1.1.3] — Hotfix: revert wrong -c corrections (2026-03-15)
 - kamp → camp (reverted: -mp ending, rule does not apply)
 - pok → poc (reverted: core adverb, protected word)
